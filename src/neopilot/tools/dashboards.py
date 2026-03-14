@@ -72,9 +72,10 @@ def get_dashboard_components(dashboard_id: str) -> str:
 
     lines = [f"**Components in dashboard `{dashboard_id}`:**\n"]
     for comp in components:
+        title = comp.title or "(untitled)"
         subtitle = f" — {comp.subtitle}" if comp.subtitle else ""
         comp_type = f" [{comp.component}]" if comp.component else ""
-        lines.append(f"- **{comp.title}**{subtitle}{comp_type} (id: `{comp.id}`)")
+        lines.append(f"- **{title}**{subtitle}{comp_type} (id: `{comp.id}`)")
 
     lines.append(
         "\nUse `get_component_data` with a component id, dashboard id, "

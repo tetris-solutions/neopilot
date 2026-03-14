@@ -39,14 +39,18 @@ class Dimension(BaseModel):
             raw = data.get("label", data.get("raw_label"))
             data["raw_label"] = raw
             if isinstance(raw, dict):
-                data["label"] = raw.get("pt-BR", raw.get("en-US", str(raw)))
+                resolved = raw.get("pt-BR") or raw.get("en-US")
+                data["label"] = resolved if resolved else data.get("id", "")
             elif raw is not None:
                 data["label"] = str(raw)
+            else:
+                data["label"] = data.get("id", "")
             # description and group can also be multilingual dicts
             for field in ("description", "group"):
                 val = data.get(field)
                 if isinstance(val, dict):
-                    data[field] = val.get("pt-BR", val.get("en-US", str(val)))
+                    resolved = val.get("pt-BR") or val.get("en-US")
+                    data[field] = resolved if resolved else None
         return data
 
     def resolve_label(self, language: str = "pt-BR") -> str:

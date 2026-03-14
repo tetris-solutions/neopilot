@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Any, Literal
+from typing import Any
 
 from pydantic import BaseModel, Field, model_validator
 
@@ -36,10 +36,8 @@ class Metric(BaseModel):
     label: str = ""
     raw_label: Any = None
     description: str | None = None
-    target: Literal["up", "down", "neutral"] | None = None
-    format: Literal[
-        "number", "default", "float", "currency", "percent", "time", "text", "duration",
-    ] = "number"
+    target: str | None = None
+    format: str = "number"
     group: str | None = None
     formula: str | None = None
     related_conversion: str | None = Field(default=None, alias="relatedConversion")
@@ -53,14 +51,21 @@ class Metric(BaseModel):
             raw = data.get("label", data.get("raw_label"))
             data["raw_label"] = raw
             if isinstance(raw, dict):
-                data["label"] = raw.get("pt-BR", raw.get("en-US", str(raw)))
+                resolved = raw.get("pt-BR") or raw.get("en-US")
+                data["label"] = resolved if resolved else data.get("id", "")
             elif raw is not None:
                 data["label"] = str(raw)
+            else:
+                data["label"] = data.get("id", "")
             # description and group can also be multilingual dicts
             for field in ("description", "group"):
                 val = data.get(field)
                 if isinstance(val, dict):
-                    data[field] = val.get("pt-BR", val.get("en-US", str(val)))
+                    resolved = val.get("pt-BR") or val.get("en-US")
+                    data[field] = resolved if resolved else None
+            # Normalize empty format to "number"
+            if not data.get("format"):
+                data["format"] = "number"
         return data
 
     def resolve_label(self, language: str = "pt-BR") -> str:
