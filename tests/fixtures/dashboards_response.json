@@ -1,0 +1,30 @@
+{
+  "campaigns": [
+    {
+      "id": "3000001",
+      "name": "Overview Geral",
+      "description": "Visão geral de todas as campanhas"
+    },
+    {
+      "id": "3000002",
+      "name": "Amazon Sales",
+      "description": "Desempenho do ecossistema Amazon"
+    },
+    {
+      "id": "3000003",
+      "name": "Google Ads Performance",
+      "description": "Métricas de Google Ads"
+    },
+    {
+      "id": "3000004",
+      "name": "Meta Campaigns",
+      "description": "Facebook and Instagram campaigns"
+    }
+  ],
+  "user": {
+    "default_language": "pt-BR",
+    "id": 42,
+    "name": "Test User"
+  },
+  "total_pages": 1
+}

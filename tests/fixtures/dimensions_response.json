@@ -1,0 +1,38 @@
+[
+  {
+    "id": "campanha",
+    "label": {"pt-BR": "Campanha", "en-US": "Campaign"},
+    "description": "Campaign name",
+    "group": "structure"
+  },
+  {
+    "id": "grupo_anuncio",
+    "label": {"pt-BR": "Grupo de Anúncio", "en-US": "Ad Group"},
+    "description": "Ad group name",
+    "group": "structure"
+  },
+  {
+    "id": "anuncio",
+    "label": {"pt-BR": "Anúncio", "en-US": "Ad"},
+    "description": "Ad creative name",
+    "group": "structure"
+  },
+  {
+    "id": "veiculo",
+    "label": {"pt-BR": "Veículo", "en-US": "Platform"},
+    "description": "Advertising platform",
+    "group": "source"
+  },
+  {
+    "id": "marca",
+    "label": {"pt-BR": "Marca", "en-US": "Brand"},
+    "description": "Brand name",
+    "group": "business"
+  },
+  {
+    "id": "pilar",
+    "label": {"pt-BR": "Pilar", "en-US": "Pillar"},
+    "description": "Business pillar / player",
+    "group": "business"
+  }
+]

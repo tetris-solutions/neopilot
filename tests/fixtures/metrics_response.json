@@ -1,0 +1,58 @@
+[
+  {
+    "id": "custo_total",
+    "label": {"pt-BR": "Custo Total", "en-US": "Total Cost"},
+    "description": {"pt-BR": "Investimento total em publicidade", "en-US": "Total advertising spend"},
+    "target": "down",
+    "format": "currency",
+    "group": {"pt-BR": "Métricas de Custo", "en-US": "Cost Metrics"}
+  },
+  {
+    "id": "impressoes",
+    "label": {"pt-BR": "Impressões", "en-US": "Impressions"},
+    "description": "Number of times ads were shown",
+    "target": "up",
+    "format": "number",
+    "group": "reach"
+  },
+  {
+    "id": "cliques",
+    "label": {"pt-BR": "Cliques", "en-US": "Clicks"},
+    "description": "Number of clicks on ads",
+    "target": "up",
+    "format": "number",
+    "group": "engagement"
+  },
+  {
+    "id": "ctr",
+    "label": {"pt-BR": "CTR", "en-US": "CTR"},
+    "description": "Click-through rate",
+    "target": "up",
+    "format": "percent",
+    "group": "engagement"
+  },
+  {
+    "id": "cpc",
+    "label": {"pt-BR": "CPC", "en-US": "CPC"},
+    "description": "Cost per click",
+    "target": "down",
+    "format": "currency",
+    "group": "cost"
+  },
+  {
+    "id": "conversoes",
+    "label": {"pt-BR": "Conversões", "en-US": "Conversions"},
+    "description": "Number of conversions",
+    "target": "up",
+    "format": "number",
+    "group": "conversion"
+  },
+  {
+    "id": "roi",
+    "label": {"pt-BR": "ROI", "en-US": "ROI"},
+    "description": "Return on investment",
+    "target": "up",
+    "format": "percent",
+    "group": "performance"
+  }
+]

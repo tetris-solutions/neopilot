@@ -1,0 +1,20 @@
+[
+  {
+    "id": "BigNumbers1751590872194968",
+    "title": "KPIs Gerais",
+    "subtitle": "Métricas principais do período",
+    "component": "BigNumbers"
+  },
+  {
+    "id": "ChartMetricSegmentDate1712768935121613",
+    "title": "Conversões por Veículo",
+    "subtitle": "Breakdown por plataforma",
+    "component": "Chart"
+  },
+  {
+    "id": "TableRangesDate1730902105207920",
+    "title": "Performance por Marca",
+    "subtitle": "Tabela comparativa",
+    "component": "TableRangesDate"
+  }
+]

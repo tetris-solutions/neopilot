@@ -1,0 +1,31 @@
+{
+  "componentData": {
+    "results": [
+      {
+        "veiculo": "Google Ads",
+        "conversoes": 150,
+        "custo_total": 4500.00,
+        "cpc": 1.25
+      },
+      {
+        "veiculo": "Meta Ads",
+        "conversoes": 230,
+        "custo_total": 6200.00,
+        "cpc": 0.95
+      },
+      {
+        "veiculo": "TikTok Ads",
+        "conversoes": 85,
+        "custo_total": 2100.00,
+        "cpc": 0.78
+      }
+    ],
+    "totals": {
+      "conversoes": 465,
+      "custo_total": 12800.00,
+      "cpc": 1.02
+    }
+  },
+  "metrics": ["conversoes", "custo_total", "cpc"],
+  "dimensions": ["veiculo"]
+}

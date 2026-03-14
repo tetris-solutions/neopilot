@@ -1,0 +1,42 @@
+[project]
+name = "neopilot"
+version = "0.1.0"
+description = "MCP server connecting LLMs to NeoDash marketing analytics."
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "mcp[cli]>=1.2.0",
+    "pydantic>=2.7.0",
+    "python-dotenv>=1.0.1",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0.0",
+    "pytest-asyncio>=0.24.0",
+    "mypy>=1.10.0",
+    "ruff>=0.4.0",
+]
+
+[project.scripts]
+neopilot = "neopilot.server:main"
+
+[tool.mypy]
+python_version = "3.11"
+mypy_path = ["src"]
+plugins = ["pydantic.mypy"]
+ignore_missing_imports = true
+warn_unused_configs = true
+files = ["src/neopilot", "tests"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]
+asyncio_mode = "auto"
+
+[build-system]
+requires = ["setuptools>=68.0"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["src"]
