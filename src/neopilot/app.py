@@ -8,6 +8,7 @@ without circular dependencies. The ``server`` module imports tool modules
 from __future__ import annotations
 
 from mcp.server.fastmcp import FastMCP
+from mcp.types import Icon
 
 mcp = FastMCP(
     name="NeoPilot",
@@ -16,4 +17,10 @@ mcp = FastMCP(
         "Query advertising data, get insights, and generate visualizations "
         "from your NeoDash dashboards."
     ),
+    icons=[
+        Icon(
+            src="https://raw.githubusercontent.com/tetris-solutions/neopilot/main/assets/icon.png",
+            mimeType="image/png",
+        ),
+    ],
 )
