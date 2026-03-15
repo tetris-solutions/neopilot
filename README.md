@@ -9,7 +9,7 @@ NeoPilot lets users conversationally query their advertising data, get insights,
 Run this in your terminal:
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/neoperformance/neopilot/main/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/tetris-solutions/neopilot/main/install.sh | bash
 ```
 
 This will:
@@ -84,7 +84,7 @@ Then restart Claude Desktop. NeoPilot will also notify you when updates are avai
 
 ## Multi-Instance Support
 
-NeoPilot supports connecting to multiple NeoDash instances simultaneously. Each instance is identified by its slug (e.g., `loreal`, `mdlz`, `tpv`).
+NeoPilot supports connecting to multiple NeoDash instances simultaneously. Each instance is identified by its slug. The slug is the word before `.neodash.ai` (e.g., `neoperformance.neodash.ai` will have the slug `neoperformance`).
 
 ```
 Connect to "loreal" with token "token_a"
@@ -114,7 +114,7 @@ Set `NEOPILOT_DEBUG=1` in the MCP server config to see the raw API URLs and resp
 
 ```bash
 # Clone the repo
-git clone https://github.com/neoperformance/neopilot.git
+git clone https://github.com/tetris-solutions/neopilot.git
 cd neopilot
 
 # Setup
@@ -126,7 +126,9 @@ pip install -e ".[dev]"
 python3 -m pytest tests/ -v --ignore=tests/test_integration.py
 
 # Run integration tests (requires real NeoDash credentials)
-NEODASH_TEST_SLUG=yourslug NEODASH_TEST_TOKEN=yourtoken python3 -m pytest tests/test_integration.py -v
+# First time: copy .env.test.example → .env.test and fill in your credentials
+cp .env.test.example .env.test   # then edit with your slug & token
+python3 -m pytest tests/test_integration.py -v
 
 # Lint
 ruff check src/ tests/
@@ -150,7 +152,7 @@ To push a forced update to all users, edit `version.json` in the repo:
 {
   "latest": "0.2.0",
   "minimum": "0.2.0",
-  "update_url": "https://github.com/neoperformance/neopilot#updating-neopilot",
+  "update_url": "https://github.com/tetris-solutions/neopilot#updating-neopilot",
   "message": "Important security fix. Please update."
 }
 ```

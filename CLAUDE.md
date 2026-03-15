@@ -54,9 +54,13 @@ tests/
 
 ```bash
 source .venv/bin/activate
-python3 -m pytest tests/ -v      # Tests
-ruff check src/ tests/            # Lint
-python3 -m neopilot.server        # Run server (stdio)
+python3 -m pytest tests/ -v --ignore=tests/test_integration.py   # Unit tests
+ruff check src/ tests/                                            # Lint
+python3 -m neopilot.server                                        # Run server (stdio)
+
+# Integration tests (hit real NeoDash API)
+# Setup: cp .env.test.example .env.test  (then fill in slug & token)
+python3 -m pytest tests/test_integration.py -v
 ```
 
 ## NeoDash API

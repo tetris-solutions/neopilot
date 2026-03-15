@@ -4,10 +4,10 @@
 # One-command setup for macOS users with Claude Desktop
 #
 # Usage:
-#   curl -fsSL https://raw.githubusercontent.com/neoperformance/neopilot/main/install.sh | bash
+#   curl -fsSL https://raw.githubusercontent.com/tetris-solutions/neopilot/main/install.sh | bash
 #
 # Or clone + run locally:
-#   git clone https://github.com/neoperformance/neopilot.git
+#   git clone https://github.com/tetris-solutions/neopilot.git
 #   cd neopilot && bash install.sh
 # ============================================================================
 
@@ -77,7 +77,7 @@ else
             git clone "$SCRIPT_DIR" "$INSTALL_DIR"
         fi
     else
-        git clone https://github.com/neoperformance/neopilot.git "$INSTALL_DIR"
+        git clone https://github.com/tetris-solutions/neopilot.git "$INSTALL_DIR"
     fi
     success "Cloned NeoPilot"
 fi

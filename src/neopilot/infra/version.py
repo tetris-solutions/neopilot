@@ -31,7 +31,7 @@ logger = logging.getLogger(__name__)
 #   "message": "Optional custom update message"
 # }
 _VERSION_CHECK_URL = (
-    "https://raw.githubusercontent.com/neoperformance/neopilot/main/version.json"
+    "https://raw.githubusercontent.com/tetris-solutions/neopilot/main/version.json"
 )
 
 _CHECK_TIMEOUT = 5  # seconds — fail fast, never block the user

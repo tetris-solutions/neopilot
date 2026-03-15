@@ -4,12 +4,17 @@ These tests validate that our Pydantic models can parse actual API responses
 without validation errors. They catch field-type mismatches (like multilingual
 dicts, unexpected enum values) that mock fixtures miss.
 
-Run with:
-    NEODASH_TEST_SLUG=yourslug NEODASH_TEST_TOKEN=yourtoken python3 -m pytest tests/test_integration.py -v
+Setup (one time):
+    1. Copy .env.test.example to .env.test
+    2. Fill in a real slug and API token
+    3. .env.test is in .gitignore — it will NOT be committed
 
-Set these env vars to enable:
-    NEODASH_TEST_SLUG   — instance slug (e.g., "loreal")
-    NEODASH_TEST_TOKEN  — API token for that instance
+Run:
+    python3 -m pytest tests/test_integration.py -v
+
+The credentials are loaded automatically from .env.test by conftest.py.
+You can also pass them directly via env vars:
+    NEODASH_TEST_SLUG=yourslug NEODASH_TEST_TOKEN=yourtoken python3 -m pytest tests/test_integration.py -v
 """
 
 from __future__ import annotations

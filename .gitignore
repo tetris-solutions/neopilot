@@ -20,6 +20,8 @@ coverage.xml
 # Environment & secrets
 .env
 .env.*
+!.env.example
+!.env.test.example
 *.pem
 *.key
 

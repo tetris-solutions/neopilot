@@ -1,27 +1,50 @@
 # NeoPilot Setup Guide
 
-## Installation
+## Quick Install (recommended)
 
-Open a terminal and run the following commands:
+Run this in your terminal:
 
 ```bash
-# 1. Navigate to the NeoPilot project folder
-cd /Users/beterraba/Documents/Workgit/neodash-ai/neopilot
+curl -fsSL https://raw.githubusercontent.com/tetris-solutions/neopilot/main/install.sh | bash
+```
 
-# 2. Create a Python virtual environment inside the project
-#    (on macOS, use "python3" — "python" alone may not exist)
+This will:
+1. Clone NeoPilot to `~/.neopilot/app/`
+2. Create a Python virtual environment and install dependencies
+3. Automatically configure Claude Desktop
+
+**After running, restart Claude Desktop** (quit and reopen).
+
+> **Requirements:** Python 3.11+ and git. macOS only for now.
+
+---
+
+## Manual Install
+
+### 1. Clone the repo
+
+```bash
+git clone https://github.com/tetris-solutions/neopilot.git
+cd neopilot
+```
+
+### 2. Create a virtual environment
+
+```bash
 python3 -m venv .venv
-
-# 3. Activate the virtual environment
 source .venv/bin/activate      # macOS / Linux
 # .venv\Scripts\activate       # Windows (PowerShell)
-
-# 4. Install NeoPilot and its dependencies into the virtual environment
 pip install -e ".[dev]"
 ```
 
-> **Note:** On macOS, the command is `python3`, not `python`.
-> After activating the virtual environment (step 3), both `python` and `python3` will work.
+> **Note:** On macOS, use `python3` — `python` alone may not exist.
+> After activating the venv, both `python` and `python3` will work.
+
+### 3. Configure your LLM client
+
+See the sections below for your specific tool.
+
+---
 
 ## Claude Desktop
 
@@ -38,7 +61,25 @@ Add to `~/Library/Application Support/Claude/claude_desktop_config.json` (macOS)
 }
 ```
 
-Restart Claude Desktop. You should see NeoPilot's tools available.
+Replace `/absolute/path/to/neopilot` with the actual path where you cloned the repo.
+
+To enable **debug mode** (shows raw API URLs and responses in tool output):
+
+```json
+{
+  "mcpServers": {
+    "neopilot": {
+      "command": "/absolute/path/to/neopilot/.venv/bin/python",
+      "args": ["-m", "neopilot.server"],
+      "env": {
+        "NEOPILOT_DEBUG": "1"
+      }
+    }
+  }
+}
+```
+
+Restart Claude Desktop after any config change.
 
 ## Claude Code
 
@@ -64,27 +105,12 @@ Gemini supports MCP through Google's AI Studio. Configure NeoPilot as an MCP too
 NeoPilot uses `stdio` transport. Any MCP-compatible client can connect by running:
 
 ```bash
-python -m neopilot.server
+python3 -m neopilot.server
 ```
 
 The server communicates via stdin/stdout using the MCP protocol.
 
-## MCP Inspector (Development)
-
-For interactive testing of tools:
-
-```bash
-mcp dev src/neopilot/server.py
-```
-
-This opens a web UI where you can call tools and see responses.
-
-## Environment Variables
-
-| Variable | Default | Description |
-|----------|---------|-------------|
-| `LOGLEVEL` | `INFO` | Logging level (DEBUG, INFO, WARNING, ERROR, CRITICAL) |
-| `NEOPILOT_DATA_DIR` | `~/.neopilot` | Where to store instances and user context |
+---
 
 ## First Connection
 
@@ -95,3 +121,64 @@ Once NeoPilot is running in your LLM tool:
 3. Use `list_metrics` and `list_dimensions` to understand the data
 4. Use `setup_user_context` for guided preference setup
 5. Start querying with `query_data` or `get_component_data`
+
+---
+
+## Environment Variables
+
+| Variable | Default | Description |
+|----------|---------|-------------|
+| `LOGLEVEL` | `INFO` | Logging level (DEBUG, INFO, WARNING, ERROR, CRITICAL) |
+| `NEOPILOT_DATA_DIR` | `~/.neopilot` | Where to store instances and user context |
+| `NEOPILOT_DEBUG` | _(off)_ | Set to `1` to show raw API URLs and responses in tool output |
+
+---
+
+## Development Setup
+
+### Running tests
+
+```bash
+source .venv/bin/activate
+
+# Unit tests (no credentials needed)
+python3 -m pytest tests/ -v --ignore=tests/test_integration.py
+
+# Lint
+ruff check src/ tests/
+```
+
+### Integration tests
+
+Integration tests hit the real NeoDash API to verify that our Pydantic models can parse actual responses. They require credentials for a NeoDash instance.
+
+**Setup:**
+
+```bash
+# 1. Copy the example file
+cp .env.test.example .env.test
+
+# 2. Edit .env.test with your real credentials
+#    NEODASH_TEST_SLUG=yourslug
+#    NEODASH_TEST_TOKEN=your_api_token_here
+```
+
+`.env.test` is in `.gitignore` — it will **never** be committed.
+
+Ask your team lead for a test slug and API token if you don't have one.
+
+**Run:**
+
+```bash
+python3 -m pytest tests/test_integration.py -v
+```
+
+Without `.env.test`, integration tests are automatically skipped.
+
+### MCP Inspector
+
+For interactive testing of tools in a web UI:
+
+```bash
+mcp dev src/neopilot/server.py
+```
