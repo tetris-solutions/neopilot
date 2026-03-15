@@ -1,6 +1,6 @@
 {
-  "latest": "0.2.0",
-  "minimum": "0.1.0",
+  "latest": "0.3.0",
+  "minimum": "0.3.0",
   "update_url": "https://github.com/tetris-solutions/neopilot#quick-start",
-  "message": "Minor Tweaks"
+  "message": "Mandatory update: NeoDash icon and improvements. Please update."
 }
