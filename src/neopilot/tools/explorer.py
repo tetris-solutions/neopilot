@@ -10,6 +10,7 @@ from neopilot.api.errors import FilterNotReadyError
 from neopilot.app import mcp
 from neopilot.infra.debug import debug_block
 from neopilot.infra.env import is_debug
+from neopilot.infra.version import enforce_version
 from neopilot.models.explorer import MAX_LIMIT, TIME_BREAKDOWNS, ExplorerQuery
 from neopilot.storage.local_store import InstanceStore
 
@@ -79,6 +80,11 @@ def query_data(
     compare_date_end:
         Optional comparison period end date (``YYYY-MM-DD``).
     """
+    # Block usage if version is below minimum
+    blocked = enforce_version()
+    if blocked:
+        return blocked
+
     if time_breakdown not in TIME_BREAKDOWNS:
         return (
             f"Invalid time_breakdown '{time_breakdown}'. "

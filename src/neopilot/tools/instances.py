@@ -2,8 +2,10 @@
 
 from __future__ import annotations
 
+from neopilot import __version__
 from neopilot.api.auth import detect_language, verify_connection
 from neopilot.app import mcp
+from neopilot.infra.version import update_notice
 from neopilot.storage.local_store import InstanceStore
 
 
@@ -37,13 +39,21 @@ def connect_instance(slug: str, api_token: str) -> str:
     store = _store()
     info = store.add_instance(slug, api_token, language=language)
 
-    return (
+    msg = (
         f"✅ Connected to **{slug}.neodash.ai** successfully!\n"
         f"- Language: {info.language}\n"
+        f"- NeoPilot version: v{__version__}\n"
         f"- This is now your active instance.\n\n"
         "You can now use tools like `list_dashboards`, `list_metrics`, "
         "`query_data`, etc."
     )
+
+    # Check for updates (non-blocking)
+    notice = update_notice()
+    if notice:
+        msg += notice
+
+    return msg
 
 
 @mcp.tool()
