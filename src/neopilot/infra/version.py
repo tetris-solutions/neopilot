@@ -14,7 +14,6 @@ import json
 import logging
 import urllib.error as urlerror
 import urllib.request as urlrequest
-from functools import lru_cache
 from typing import Any
 
 from neopilot import __version__
@@ -50,9 +49,8 @@ def parse_version(v: str) -> tuple[int, ...]:
         return (0, 0, 0)
 
 
-@lru_cache(maxsize=1)
 def _fetch_remote_version() -> dict[str, Any]:
-    """Fetch the remote version.json (cached for the server's lifetime).
+    """Fetch the remote version.json.
 
     Returns an empty dict on any failure — version checking should never
     break the tool.

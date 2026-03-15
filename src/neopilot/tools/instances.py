@@ -5,7 +5,7 @@ from __future__ import annotations
 from neopilot import __version__
 from neopilot.api.auth import detect_language, verify_connection
 from neopilot.app import mcp
-from neopilot.infra.version import update_notice
+from neopilot.infra.version import check_update, update_notice
 from neopilot.storage.local_store import InstanceStore
 
 
@@ -74,23 +74,30 @@ def disconnect_instance(slug: str) -> str:
 def list_instances() -> str:
     """List all saved NeoDash instances.
 
-    Shows which instances are connected and which one is currently active.
+    Shows which instances are connected, which one is currently active,
+    and the current NeoPilot version.
     """
     store = _store()
     instances = store.list_instances()
     if not instances:
         return (
+            f"NeoPilot v{__version__}\n\n"
             "No instances connected.\n"
             "Use `connect_instance` with a slug and API token to get started."
         )
 
-    lines = ["**Connected NeoDash Instances:**\n"]
+    lines = [f"**NeoPilot v{__version__}**\n", "**Connected NeoDash Instances:**\n"]
     for inst in instances:
         active = " ← active" if inst.is_active else ""
         lines.append(
             f"- **{inst.slug}**.neodash.ai "
             f"(lang: {inst.language}){active}"
         )
+
+    notice = update_notice()
+    if notice:
+        lines.append(notice)
+
     return "\n".join(lines)
 
 
@@ -122,3 +129,38 @@ def test_active_connection() -> str:
     if result.get("ok"):
         return f"✅ Connection to **{active.slug}.neodash.ai** is working."
     return f"❌ Connection to **{active.slug}.neodash.ai** failed."
+
+
+@mcp.tool()
+def check_neopilot_version() -> str:
+    """Check the current NeoPilot version and whether updates are available.
+
+    Use this when the user asks about the NeoPilot version, wants to know
+    if they are up to date, or asks about updates.
+    """
+    info = check_update()
+    lines = [
+        f"**NeoPilot v{info['current']}**\n",
+        f"- Latest available: v{info['latest']}",
+        f"- Minimum required: v{info['minimum']}",
+    ]
+
+    if info["force_update"]:
+        lines.append(
+            f"\n⛔ **Update required!** Your version is below the minimum "
+            f"(v{info['minimum']}). Please update to continue using NeoPilot."
+        )
+    elif info["update_available"]:
+        lines.append(
+            f"\n💡 **Update available:** v{info['current']} → v{info['latest']}"
+        )
+    else:
+        lines.append("\n✅ You are running the latest version.")
+
+    if info.get("message"):
+        lines.append(f"\n{info['message']}")
+
+    if info.get("update_url") and (info["force_update"] or info["update_available"]):
+        lines.append(f"\nUpdate instructions: {info['update_url']}")
+
+    return "\n".join(lines)
