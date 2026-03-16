@@ -1,6 +1,6 @@
 {
-  "latest": "0.3.2",
+  "latest": "0.3.3",
   "minimum": "0.3.1",
   "update_url": "https://github.com/tetris-solutions/neopilot#quick-start",
-  "message": "Optional update with minor improvements."
+  "message": "Fix version check reporting when network is unavailable."
 }

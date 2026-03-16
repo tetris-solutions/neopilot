@@ -77,26 +77,29 @@ def check_update() -> dict[str, Any]:
     dict with keys:
         - ``update_available``: bool
         - ``force_update``: bool — True if current version is below minimum
+        - ``check_failed``: bool — True if remote fetch failed
         - ``current``: str — current version
-        - ``latest``: str — latest version (or current if unknown)
-        - ``minimum``: str — minimum required version (or "0.0.0" if unknown)
+        - ``latest``: str — latest version (or "unknown" if check failed)
+        - ``minimum``: str — minimum required version (or "unknown" if check failed)
         - ``update_url``: str — where to get the update
         - ``message``: str | None — custom message from the server
     """
     remote = _fetch_remote_version()
+    check_failed = not remote
 
-    latest = remote.get("latest", __version__)
-    minimum = remote.get("minimum", "0.0.0")
+    latest = remote.get("latest", "unknown")
+    minimum = remote.get("minimum", "unknown")
     update_url = remote.get("update_url", "")
     message = remote.get("message")
 
     current = parse_version(__version__)
-    latest_parsed = parse_version(latest)
-    minimum_parsed = parse_version(minimum)
+    latest_parsed = parse_version(latest) if latest != "unknown" else current
+    minimum_parsed = parse_version(minimum) if minimum != "unknown" else (0, 0, 0)
 
     return {
         "update_available": current < latest_parsed,
         "force_update": current < minimum_parsed,
+        "check_failed": check_failed,
         "current": __version__,
         "latest": latest,
         "minimum": minimum,

@@ -139,11 +139,20 @@ def check_neopilot_version() -> str:
     if they are up to date, or asks about updates.
     """
     info = check_update()
-    lines = [
-        f"**NeoPilot v{info['current']}**\n",
+    lines = [f"**NeoPilot v{info['current']}**\n"]
+
+    if info["check_failed"]:
+        lines.append(
+            "⚠️ Could not reach the update server to check for new versions.\n"
+            "This may be a network issue. Your current version is "
+            f"**v{info['current']}**."
+        )
+        return "\n".join(lines)
+
+    lines.extend([
         f"- Latest available: v{info['latest']}",
         f"- Minimum required: v{info['minimum']}",
-    ]
+    ])
 
     if info["force_update"]:
         lines.append(
