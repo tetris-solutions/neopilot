@@ -45,8 +45,8 @@ def connect_instance(slug: str, api_token: str) -> str:
         f"- Language: {info.language}\n"
         f"- NeoPilot version: v{__version__}\n"
         f"- This is now your active instance.\n\n"
-        "You can now use tools like `list_dashboards`, `list_metrics`, "
-        "`query_data`, etc."
+        "**Next steps:** Call `list_metrics` and `list_dimensions` to discover "
+        "what data is available before using `query_data`."
     )
 
     # Check for updates (non-blocking)
@@ -117,7 +117,9 @@ def switch_instance(slug: str) -> str:
     info = store.set_active(slug)
     return (
         f"✅ Switched to **{info.slug}.neodash.ai**.\n"
-        f"All queries will now use this instance."
+        f"All queries will now use this instance.\n\n"
+        "**Important:** Call `list_metrics` and `list_dimensions` before querying "
+        "data — each instance has different available metrics and dimensions."
     )
 
 

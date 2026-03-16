@@ -1,6 +1,6 @@
 [project]
 name = "neopilot"
-version = "0.3.8"
+version = "0.3.9"
 description = "MCP server connecting LLMs to NeoDash marketing analytics."
 readme = "README.md"
 requires-python = ">=3.11"

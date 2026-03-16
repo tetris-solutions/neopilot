@@ -42,6 +42,10 @@ def query_data(
     dimensions to break down by, which metrics to retrieve, and the
     date range.
 
+    **CRITICAL: Before calling this tool, you MUST first call ``list_metrics``
+    and ``list_dimensions`` to get the exact IDs available in this instance.**
+    Do NOT guess metric or dimension IDs — they vary between instances.
+
     **Important rules:**
     - Date format: ``YYYY-MM-DD``
     - Always ask the user for the date range they want to analyze
@@ -55,10 +59,10 @@ def query_data(
     ----------
     dimensions:
         List of dimension IDs to break down by (e.g., ``["campanha", "grupo_anuncio"]``).
-        Use ``list_dimensions`` to see available dimensions.
+        **You MUST call ``list_dimensions`` first** to get the valid IDs.
     metrics:
         List of metric IDs to retrieve (e.g., ``["custo_total", "cliques", "ctr"]``).
-        Use ``list_metrics`` to see available metrics.
+        **You MUST call ``list_metrics`` first** to get the valid IDs.
     date_start:
         Start date in ``YYYY-MM-DD`` format.
     date_end:
