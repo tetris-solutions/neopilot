@@ -1,36 +1,39 @@
 {
-  "resultsInit": {
-    "results": [
-      {
-        "campanha": "Brand Awareness Q1",
-        "custo_total": 15000.00,
-        "impressoes": 2500000,
-        "cliques": 45000,
-        "ctr": 0.018,
-        "match": "brand_awareness_q1"
-      },
-      {
-        "campanha": "Retargeting Users",
-        "custo_total": 8500.00,
-        "impressoes": 1200000,
-        "cliques": 32000,
-        "ctr": 0.0267,
-        "match": "retargeting_users"
-      },
-      {
-        "campanha": "Product Launch",
-        "custo_total": 22000.00,
-        "impressoes": 3800000,
-        "cliques": 68000,
-        "ctr": 0.0179,
-        "match": "product_launch"
+  "retorno": {
+    "resultsInit": {
+      "results": [
+        {
+          "campanha": "Brand Awareness Q1",
+          "custo_total": 15000.00,
+          "impressoes": 2500000,
+          "cliques": 45000,
+          "ctr": 0.018,
+          "match": "brand_awareness_q1"
+        },
+        {
+          "campanha": "Retargeting Users",
+          "custo_total": 8500.00,
+          "impressoes": 1200000,
+          "cliques": 32000,
+          "ctr": 0.0267,
+          "match": "retargeting_users"
+        },
+        {
+          "campanha": "Product Launch",
+          "custo_total": 22000.00,
+          "impressoes": 3800000,
+          "cliques": 68000,
+          "ctr": 0.0179,
+          "match": "product_launch"
+        }
+      ],
+      "total": {
+        "custo_total": 45500.00,
+        "impressoes": 7500000,
+        "cliques": 145000,
+        "ctr": 0.0193
       }
-    ],
-    "total": {
-      "custo_total": 45500.00,
-      "impressoes": 7500000,
-      "cliques": 145000,
-      "ctr": 0.0193
-    }
+    },
+    "resultsCompare": null
   }
 }

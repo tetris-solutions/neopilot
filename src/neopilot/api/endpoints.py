@@ -165,8 +165,13 @@ class NeoDashEndpoints:
         if not isinstance(data, dict):
             return ExplorerResult()
 
-        # Parse main results
-        results_init = data.get("resultsInit", {})
+        # The API wraps everything in a "retorno" key
+        retorno = data.get("retorno", data)
+        if not isinstance(retorno, dict):
+            return ExplorerResult()
+
+        # Parse main results from retorno.resultsInit
+        results_init = retorno.get("resultsInit", {})
         results = []
         totals: dict[str, Any] = {}
         if isinstance(results_init, dict):
@@ -175,10 +180,10 @@ class NeoDashEndpoints:
             if isinstance(totals, list) and len(totals) == 1:
                 totals = totals[0]
 
-        # Parse comparison results
+        # Parse comparison results from retorno.resultsCompare
         comparison_results = None
         comparison_totals = None
-        results_compare = data.get("resultsCompare")
+        results_compare = retorno.get("resultsCompare")
         if isinstance(results_compare, dict):
             comparison_results = results_compare.get("results", [])
             ct = results_compare.get("total", results_compare.get("totals", {}))

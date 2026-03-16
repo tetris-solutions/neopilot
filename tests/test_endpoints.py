@@ -99,7 +99,7 @@ class TestNeoDashEndpoints:
             date_end="2025-01-31",
         )
 
-        with patch.object(self.client, "get", return_value={"resultsInit": {}}) as mock:
+        with patch.object(self.client, "get", return_value={"retorno": {"resultsInit": {}}}) as mock:
             self.endpoints.query_explorer(query)
             call_params = mock.call_args[1]["params"]
             assert call_params["showTotals"] == "true"
