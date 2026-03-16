@@ -7,7 +7,13 @@ NeoPilot lets users conversationally query their advertising data, get insights,
 Install, connect with your instance and ask:
 `What can NeoPilot do for me?`
 
-## Install (1 command)
+## Install for OpenClaw (1 command)
+Just say:
+```
+Please install this MCP for me: https://github.com/tetris-solutions/neopilot
+```
+
+## Install for Claude (1 command)
 
 Run this in your terminal:
 
