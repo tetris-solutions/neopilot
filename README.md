@@ -34,6 +34,8 @@ Once Claude Desktop is restarted with NeoPilot, just say:
 Connect to my NeoDash instance "yourslug" with API token "your_token_here"
 ```
 
+Follow the instructions in [this video](https://neod.ai/getneodashapitoken) to get your API token.
+
 Then try:
 ```
 List my dashboards
