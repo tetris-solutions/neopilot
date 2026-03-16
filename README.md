@@ -4,6 +4,9 @@ MCP server that connects LLMs (Claude, Gemini, OpenAI) to **NeoDash** marketing 
 
 NeoPilot lets users conversationally query their advertising data, get insights, list dashboards, explore metrics, and generate visualizations — all through their preferred AI tool.
 
+Install, connect with your instance and ask:
+`What can NeoPilot do for me?`
+
 ## Install (1 command)
 
 Run this in your terminal:
