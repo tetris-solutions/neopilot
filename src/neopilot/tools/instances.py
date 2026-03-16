@@ -5,6 +5,7 @@ from __future__ import annotations
 from neopilot import __version__
 from neopilot.api.auth import detect_language, verify_connection
 from neopilot.app import mcp
+from neopilot.infra.env import is_debug, set_debug
 from neopilot.infra.version import check_update, update_notice
 from neopilot.storage.local_store import InstanceStore
 
@@ -173,3 +174,33 @@ def check_neopilot_version() -> str:
         lines.append(f"\nUpdate instructions: {info['update_url']}")
 
     return "\n".join(lines)
+
+
+@mcp.tool()
+def toggle_debug(enabled: bool) -> str:
+    """Enable or disable NeoPilot debug mode.
+
+    When debug mode is on, all tool responses include the actual HTTP
+    request URL and raw API response from NeoDash. This is useful for
+    troubleshooting empty results or unexpected data.
+
+    Parameters
+    ----------
+    enabled:
+        ``True`` to activate debug mode, ``False`` to deactivate it.
+    """
+    set_debug(enabled)
+    if enabled:
+        return (
+            "🔧 **Debug mode activated.**\n"
+            "All data tools will now show the actual API request URL "
+            "and raw response at the end of their output."
+        )
+    return "🔧 **Debug mode deactivated.** Responses will be clean again."
+
+
+@mcp.tool()
+def debug_status() -> str:
+    """Check whether NeoPilot debug mode is currently on or off."""
+    status = "**ON**" if is_debug() else "**OFF**"
+    return f"🔧 Debug mode is {status}."
