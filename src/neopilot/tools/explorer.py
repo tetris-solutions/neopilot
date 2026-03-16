@@ -35,12 +35,14 @@ def query_data(
     order_sort: str = "desc",
     compare_date_start: str | None = None,
     compare_date_end: str | None = None,
+    confirmed: bool = False,
 ) -> str:
     """Query advertising data from NeoDash using the Explorer.
 
-    This is the most flexible way to retrieve data. You specify which
-    dimensions to break down by, which metrics to retrieve, and the
-    date range.
+    **This is a two-step tool:**
+    1. First call with ``confirmed=false`` (default) to preview the query.
+       Show the preview to the user and ask them to confirm.
+    2. Then call again with ``confirmed=true`` to execute the query.
 
     **CRITICAL: Before calling this tool, you MUST first call ``list_metrics``
     and ``list_dimensions`` to get the exact IDs available in this instance.**
@@ -51,9 +53,6 @@ def query_data(
     - Always ask the user for the date range they want to analyze
     - Totals are calculated by NeoDash — never calculate them yourself
     - If results are truncated, inform the user
-
-    **Filters on demand are not ready yet.** If the user needs to filter,
-    let them know this feature is coming in a future update.
 
     Parameters
     ----------
@@ -83,6 +82,9 @@ def query_data(
         Optional comparison period start date (``YYYY-MM-DD``).
     compare_date_end:
         Optional comparison period end date (``YYYY-MM-DD``).
+    confirmed:
+        Set to ``true`` to execute the query. Default ``false`` returns
+        a preview for user confirmation.
     """
     # Block usage if version is below minimum
     blocked = enforce_version()
@@ -98,6 +100,29 @@ def query_data(
     if limit > MAX_LIMIT:
         return f"Limit cannot exceed {MAX_LIMIT:,}. Please use a smaller value."
 
+    # --- Confirmation step ---
+    if not confirmed:
+        lines = ["**Query Preview — please confirm before executing:**\n"]
+        lines.append(f"- **Dimensions:** {', '.join(dimensions)}")
+        lines.append(f"- **Metrics:** {', '.join(metrics)}")
+        lines.append(f"- **Date range:** {date_start} to {date_end}")
+        if time_breakdown != "nao":
+            lines.append(f"- **Time breakdown:** {TIME_BREAKDOWNS[time_breakdown]}")
+        if order_by:
+            lines.append(f"- **Order by:** {order_by} ({order_sort})")
+        if compare_date_start and compare_date_end:
+            lines.append(
+                f"- **Comparison period:** {compare_date_start} to {compare_date_end}"
+            )
+        lines.append(f"- **Row limit:** {limit:,}")
+        lines.append(
+            "\nShow this to the user and ask them to confirm. "
+            "If confirmed, call `query_data` again with the same parameters "
+            "and `confirmed=true`."
+        )
+        return "\n".join(lines)
+
+    # --- Execute query ---
     endpoints, _language = _get_endpoints()
 
     query = ExplorerQuery(

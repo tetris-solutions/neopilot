@@ -129,6 +129,17 @@ class InstanceStore:
         logger.info("Switched active instance to '%s'.", slug)
         return active_inst  # type: ignore[return-value]  # guarded by `found` check above
 
+    def set_language(self, slug: str, language: str) -> InstanceInfo:
+        """Set the preferred language for an instance."""
+        data = self._load()
+        for inst in data.instances:
+            if inst.slug == slug:
+                inst.language = language
+                inst.language_confirmed = True
+                self._save(data)
+                return inst
+        raise InstanceNotFoundError(f"Instance '{slug}' not found.")
+
     def get_token(self, slug: str) -> str:
         """Return the API token for a slug."""
         data = self._load()

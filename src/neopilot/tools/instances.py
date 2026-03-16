@@ -3,9 +3,10 @@
 from __future__ import annotations
 
 from neopilot import __version__
-from neopilot.api.auth import detect_language, verify_connection
+from neopilot.api.auth import verify_connection
 from neopilot.app import mcp
 from neopilot.infra.env import is_debug, set_debug
+from neopilot.infra.i18n import SUPPORTED_LANGUAGES
 from neopilot.infra.version import check_update, update_notice
 from neopilot.storage.local_store import InstanceStore
 
@@ -18,8 +19,11 @@ def _store() -> InstanceStore:
 def connect_instance(slug: str, api_token: str) -> str:
     """Connect to a NeoDash instance.
 
-    Tests the connection, detects the user language, and saves the instance
-    as the active one. You can connect multiple instances and switch between them.
+    Tests the connection and saves the instance as the active one.
+    You can connect multiple instances and switch between them.
+
+    After connecting, the user **must** set their preferred language
+    before querying data.
 
     Parameters
     ----------
@@ -33,20 +37,20 @@ def connect_instance(slug: str, api_token: str) -> str:
     if not result.get("ok"):
         return f"❌ Connection failed for '{slug}'. Please check your slug and API token."
 
-    # Detect language
-    language = detect_language(slug, api_token)
-
-    # Save instance
+    # Save instance (language not yet confirmed)
     store = _store()
-    info = store.add_instance(slug, api_token, language=language)
+    store.add_instance(slug, api_token)
 
+    langs = ", ".join(f"`{lang}`" for lang in SUPPORTED_LANGUAGES)
     msg = (
         f"✅ Connected to **{slug}.neodash.ai** successfully!\n"
-        f"- Language: {info.language}\n"
         f"- NeoPilot version: v{__version__}\n"
         f"- This is now your active instance.\n\n"
-        "**Next steps:** Call `list_metrics` and `list_dimensions` to discover "
-        "what data is available before using `query_data`."
+        f"**Next step:** Please ask the user which language they prefer.\n"
+        f"Supported languages: {langs}\n"
+        "The language determines how metric and dimension labels are displayed.\n"
+        "Use `set_language` to set it, then call `list_metrics` and "
+        "`list_dimensions` to discover available data."
     )
 
     # Check for updates (non-blocking)
@@ -120,6 +124,35 @@ def switch_instance(slug: str) -> str:
         f"All queries will now use this instance.\n\n"
         "**Important:** Call `list_metrics` and `list_dimensions` before querying "
         "data — each instance has different available metrics and dimensions."
+    )
+
+
+@mcp.tool()
+def set_language(language: str) -> str:
+    """Set the preferred language for the active NeoDash instance.
+
+    This controls how metric and dimension labels are displayed.
+    **Must be called before listing metrics/dimensions or querying data.**
+
+    Only two languages are supported: ``pt-BR`` (Portuguese) and ``en-US`` (English).
+
+    Parameters
+    ----------
+    language:
+        Language code: ``pt-BR`` or ``en-US``.
+    """
+    if language not in SUPPORTED_LANGUAGES:
+        langs = ", ".join(f"`{lang}`" for lang in SUPPORTED_LANGUAGES)
+        return f"❌ Unsupported language '{language}'. Supported: {langs}"
+
+    store = _store()
+    active = store.get_active()
+    info = store.set_language(active.slug, language)
+    return (
+        f"✅ Language set to **{info.language}** for **{info.slug}.neodash.ai**.\n"
+        "Metric and dimension labels will be shown in this language.\n\n"
+        "**Next:** Call `list_metrics` and `list_dimensions` to discover "
+        "available data before using `query_data`."
     )
 
 

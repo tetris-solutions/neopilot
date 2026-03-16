@@ -11,6 +11,7 @@ class InstanceInfo(BaseModel):
     slug: str
     api_token: str
     language: str = "pt-BR"
+    language_confirmed: bool = False
     last_connected: str | None = None
     is_active: bool = False
 

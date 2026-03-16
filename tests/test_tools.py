@@ -15,21 +15,20 @@ class TestInstanceTools:
         with (
             patch("neopilot.tools.instances._store") as mock_store_fn,
             patch("neopilot.tools.instances.verify_connection") as mock_test,
-            patch("neopilot.tools.instances.detect_language") as mock_lang,
         ):
             from neopilot.tools.instances import connect_instance
 
             mock_test.return_value = {"ok": True, "slug": "loreal"}
-            mock_lang.return_value = "pt-BR"
             mock_store = MagicMock()
             mock_store.add_instance.return_value = InstanceInfo(
-                slug="loreal", api_token="token", language="pt-BR", is_active=True,
+                slug="loreal", api_token="token", is_active=True,
             )
             mock_store_fn.return_value = mock_store
 
             result = connect_instance("loreal", "test_token")
             assert "loreal.neodash.ai" in result
             assert "successfully" in result.lower()
+            assert "set_language" in result
 
     def test_list_instances_empty(self, tmp_data_dir):
         with patch("neopilot.tools.instances._store") as mock_store_fn:
