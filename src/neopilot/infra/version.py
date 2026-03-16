@@ -12,6 +12,7 @@ from __future__ import annotations
 
 import json
 import logging
+import time
 import urllib.error as urlerror
 import urllib.request as urlrequest
 from typing import Any
@@ -56,10 +57,15 @@ def _fetch_remote_version() -> dict[str, Any]:
     break the tool.
     """
     try:
+        # Add cache-busting param — raw.githubusercontent.com caches aggressively
+        url = f"{_VERSION_CHECK_URL}?_={int(time.time())}"
         req = urlrequest.Request(  # noqa: S310
-            _VERSION_CHECK_URL,
+            url,
             method="GET",
-            headers={"Accept": "application/json"},
+            headers={
+                "Accept": "application/json",
+                "Cache-Control": "no-cache",
+            },
         )
         with urlrequest.urlopen(req, timeout=_CHECK_TIMEOUT) as resp:  # noqa: S310
             body = resp.read().decode("utf-8")
