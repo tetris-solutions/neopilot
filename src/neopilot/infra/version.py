@@ -10,9 +10,9 @@ Update the remote file to push version requirements to all users.
 
 from __future__ import annotations
 
+import base64
 import json
 import logging
-import time
 import urllib.error as urlerror
 import urllib.request as urlrequest
 from typing import Any
@@ -21,17 +21,10 @@ from neopilot import __version__
 
 logger = logging.getLogger(__name__)
 
-# Remote JSON file containing version info.
-# Host this on your own infrastructure or a GitHub raw URL.
-# Expected format:
-# {
-#   "latest": "0.2.0",
-#   "minimum": "0.1.0",
-#   "update_url": "https://github.com/your-org/neopilot",
-#   "message": "Optional custom update message"
-# }
+# GitHub API endpoint for version.json — no CDN caching (unlike raw.githubusercontent.com
+# which caches for up to 5 minutes and ignores cache-busting query params).
 _VERSION_CHECK_URL = (
-    "https://raw.githubusercontent.com/tetris-solutions/neopilot/main/version.json"
+    "https://api.github.com/repos/tetris-solutions/neopilot/contents/version.json?ref=main"
 )
 
 _CHECK_TIMEOUT = 5  # seconds — fail fast, never block the user
@@ -57,19 +50,17 @@ def _fetch_remote_version() -> dict[str, Any]:
     break the tool.
     """
     try:
-        # Add cache-busting param — raw.githubusercontent.com caches aggressively
-        url = f"{_VERSION_CHECK_URL}?_={int(time.time())}"
         req = urlrequest.Request(  # noqa: S310
-            url,
+            _VERSION_CHECK_URL,
             method="GET",
-            headers={
-                "Accept": "application/json",
-                "Cache-Control": "no-cache",
-            },
+            headers={"Accept": "application/vnd.github.v3+json"},
         )
         with urlrequest.urlopen(req, timeout=_CHECK_TIMEOUT) as resp:  # noqa: S310
             body = resp.read().decode("utf-8")
-            return json.loads(body)
+            api_resp = json.loads(body)
+            # GitHub API returns base64-encoded file content
+            content = base64.b64decode(api_resp["content"]).decode("utf-8")
+            return json.loads(content)
     except (urlerror.URLError, TimeoutError, json.JSONDecodeError, OSError) as exc:
         logger.debug("Version check failed (non-fatal): %s", exc)
         return {}
