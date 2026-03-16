@@ -11,6 +11,29 @@ from neopilot.infra.i18n import SUPPORTED_LANGUAGES
 from neopilot.models.instance import InstanceInfo
 from neopilot.storage.local_store import InstanceStore
 
+# Standard NeoDash dimension hierarchy and matching guide.
+# This helps the model correctly map user requests to dimension IDs.
+_DIMENSION_GUIDE = """
+---
+**Dimension Matching Guide (standard NeoDash hierarchy):**
+
+When the user mentions any of the words below, map to the corresponding ID.
+
+| ID | Hierarchy | pt-BR keywords | en-US keywords |
+|----|-----------|----------------|----------------|
+| `canal` | Groups multiple vehicles | Canal | Channel |
+| `veiculo` | Where ads run (child of canal) | Plataforma, Veículo | Platform, Vehicle |
+| `campanha_externa_nome` | Campaign name (from ad platforms / utm_campaign) | Campanha | Campaign |
+| `adset_name` | Ad group / ad set (from ad platforms / utm_term) | Adgroup, Adset, Line Item, Grupo de Anúncios | Adgroup, Adset, Line Item |
+| `ad_name` | Individual ad / creative (from ad platforms / utm_content) | Ad, Anúncio, Criativo | Ad, Creative |
+
+**Hierarchy:** `canal` → `veiculo` → `campanha_externa_nome` → `adset_name` → `ad_name`
+
+Examples:
+- Google Search and Google PMAX are **vehicles** under **channel** Google
+- Facebook and Instagram are **vehicles** under **channel** Meta
+"""
+
 
 def _get_active() -> InstanceInfo:
     """Return the active instance."""
@@ -120,6 +143,8 @@ def list_dimensions() -> str:
         label = d.resolve_label(active.language)
         desc = f" — {d.description}" if d.description else ""
         lines.append(f"- **{label}** → ID: `{d.id}`{desc}")
+
+    lines.append(_DIMENSION_GUIDE)
 
     if is_debug():
         lines.append(debug_block(endpoints._client))
