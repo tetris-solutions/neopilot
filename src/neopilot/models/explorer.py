@@ -25,6 +25,14 @@ MAX_LIMIT = 50_000
 DEFAULT_LIMIT = 500
 
 
+def _flip_date(date_str: str) -> str:
+    """Convert YYYY-MM-DD to DD-MM-YYYY for NeoDash frontend links."""
+    parts = date_str.split("-")
+    if len(parts) == 3:
+        return f"{parts[2]}-{parts[1]}-{parts[0]}"
+    return date_str
+
+
 class ExplorerQuery(BaseModel):
     """Parameters for the Explorer data query (/get/exploradorResults).
 
@@ -78,6 +86,42 @@ class ExplorerQuery(BaseModel):
             params["dtfc"] = self.compare_date_end
 
         return params
+
+    def to_neodash_link(self, slug: str) -> str:
+        """Build a link to the NeoDash Explorer frontend for this query.
+
+        The link opens the same data view in the NeoDash web interface.
+        Dates are converted from YYYY-MM-DD to DD-MM-YYYY format.
+        """
+        # Build template.params — the json payload for the frontend
+        template_params: dict[str, Any] = {
+            "segmentos": ",".join(self.dimensions),
+            "metricas": ",".join(self.metrics),
+            "segmentarPor": self.time_breakdown,
+            "order": self.order_sort,
+            "filtros": {},
+            "openGraphExplorador": 0,
+            "totalPercent": 1,
+            "showMetricsTotal": 1,
+        }
+
+        if self.order_by:
+            template_params["orderBy"] = self.order_by
+
+        template = {"params": template_params}
+        template_json = json.dumps(template, ensure_ascii=False, separators=(",", ":"))
+
+        # Build URL with DD-MM-YYYY dates
+        url = f"https://{slug}.neodash.ai/explorador/100"
+        url += f"?dti={_flip_date(self.date_start)}"
+        url += f"&dtf={_flip_date(self.date_end)}"
+
+        if self.compare_date_start and self.compare_date_end:
+            url += f"&dtic={_flip_date(self.compare_date_start)}"
+            url += f"&dtfc={_flip_date(self.compare_date_end)}"
+
+        url += f"&template={template_json}"
+        return url
 
 
 class ExplorerResult(BaseModel):

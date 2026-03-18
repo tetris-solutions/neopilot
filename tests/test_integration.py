@@ -188,6 +188,53 @@ class TestExplorerParsing:
         assert isinstance(result.results, list)
 
 
+    def test_query_with_comparison_dates(self, endpoints: NeoDashEndpoints) -> None:
+        """Validate that comparison date queries parse resultsCompare correctly."""
+        metrics = endpoints.get_metrics()
+        dimensions = endpoints.get_dimensions()
+
+        query = ExplorerQuery(
+            dimensions=[dimensions[0].id],
+            metrics=[metrics[0].id],
+            date_start="2025-01-08",
+            date_end="2025-01-14",
+            compare_date_start="2025-01-01",
+            compare_date_end="2025-01-07",
+            limit=10,
+        )
+        result = endpoints.query_explorer(query)
+
+        # Main results should parse
+        assert isinstance(result.results, list)
+        assert isinstance(result.totals, dict)
+
+        # Comparison results should be present
+        if result.comparison_results is not None:
+            assert isinstance(result.comparison_results, list)
+        if result.comparison_totals is not None:
+            assert isinstance(result.comparison_totals, dict)
+
+    def test_query_comparison_with_time_breakdown(self, endpoints: NeoDashEndpoints) -> None:
+        """Validate comparison + time breakdown combination."""
+        metrics = endpoints.get_metrics()
+        dimensions = endpoints.get_dimensions()
+
+        query = ExplorerQuery(
+            dimensions=[dimensions[0].id],
+            metrics=[metrics[0].id],
+            date_start="2025-01-08",
+            date_end="2025-01-14",
+            compare_date_start="2025-01-01",
+            compare_date_end="2025-01-07",
+            time_breakdown="dia",
+            limit=10,
+        )
+        result = endpoints.query_explorer(query)
+
+        assert isinstance(result.results, list)
+        assert isinstance(result.row_count, int)
+
+
 @skip_no_creds
 class TestComponentsParsing:
     """Validate that /ai/allComponents and /ai/component responses parse."""

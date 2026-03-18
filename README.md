@@ -27,11 +27,6 @@ If you need to update:
 
 After installing a new Python version, you may need to re-run the NeoPilot installer.
 
-## Install for OpenClaw (1 command)
-Just say:
-```
-Please install this MCP for me: https://github.com/tetris-solutions/neopilot
-```
 
 ## Install for Claude (1 command)
 
@@ -61,7 +56,7 @@ Connect to my NeoDash instance "yourslug" with API token "your_token_here"
 ```
 
 Follow the instructions in [this video](https://neod.ai/getneodashapitoken) to get your API token.
-The same token will work for all of your NeoDash instances.
+You need a token for each instance.
 
 Then try:
 ```

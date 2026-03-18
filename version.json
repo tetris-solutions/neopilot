@@ -1,6 +1,6 @@
 {
-  "latest": "0.4.2",
-  "minimum": "0.4.2",
+  "latest": "0.5.0",
+  "minimum": "0.5.0",
   "update_url": "https://github.com/tetris-solutions/neopilot?tab=readme-ov-file#updating-neopilot",
-  "message": "Mandatory: fixes API token encoding for tokens with special characters."
+  "message": "Mandatory: NeoDash deep links, comparison date queries."
 }

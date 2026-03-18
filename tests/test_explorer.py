@@ -4,7 +4,13 @@ from __future__ import annotations
 
 import json
 
-from neopilot.models.explorer import DEFAULT_LIMIT, MAX_LIMIT, ExplorerQuery, ExplorerResult
+from neopilot.models.explorer import (
+    DEFAULT_LIMIT,
+    MAX_LIMIT,
+    ExplorerQuery,
+    ExplorerResult,
+    _flip_date,
+)
 
 
 class TestExplorerQueryConstruction:
@@ -151,3 +157,90 @@ class TestExplorerTruncation:
         assert result.comparison_results is not None
         assert len(result.comparison_results) == 1
         assert result.comparison_totals["custo_total"] == 90
+
+
+class TestFlipDate:
+    def test_basic(self):
+        assert _flip_date("2026-03-17") == "17-03-2026"
+
+    def test_single_digit(self):
+        assert _flip_date("2026-01-05") == "05-01-2026"
+
+    def test_passthrough_on_bad_format(self):
+        # Non-3-part strings pass through unchanged
+        assert _flip_date("invalid") == "invalid"
+        assert _flip_date("2026-03") == "2026-03"
+
+
+class TestNeoDashLinkBuilder:
+    def test_simple_link(self):
+        query = ExplorerQuery(
+            dimensions=["canal"],
+            metrics=["custo_total", "cpa"],
+            date_start="2026-03-11",
+            date_end="2026-03-17",
+        )
+        link = query.to_neodash_link("tpv")
+
+        assert link.startswith("https://tpv.neodash.ai/explorador/100?")
+        assert "dti=11-03-2026" in link
+        assert "dtf=17-03-2026" in link
+        assert "template=" in link
+
+        # Parse the template param
+        template_str = link.split("template=", 1)[1]
+        template = json.loads(template_str)
+        params = template["params"]
+
+        assert params["segmentos"] == "canal"
+        assert params["metricas"] == "custo_total,cpa"
+        assert params["segmentarPor"] == "nao"
+        assert params["order"] == "desc"
+        assert params["filtros"] == {}
+        assert params["openGraphExplorador"] == 0
+        assert params["totalPercent"] == 1
+        assert params["showMetricsTotal"] == 1
+
+    def test_link_with_time_breakdown(self):
+        query = ExplorerQuery(
+            dimensions=["veiculo"],
+            metrics=["custo_total"],
+            date_start="2026-03-01",
+            date_end="2026-03-17",
+            time_breakdown="dia",
+            order_sort="asc",
+        )
+        link = query.to_neodash_link("tpv")
+        template_str = link.split("template=", 1)[1]
+        params = json.loads(template_str)["params"]
+
+        assert params["segmentarPor"] == "dia"
+        assert params["order"] == "asc"
+
+    def test_link_with_comparison_dates(self):
+        query = ExplorerQuery(
+            dimensions=["canal"],
+            metrics=["custo_total"],
+            date_start="2026-03-11",
+            date_end="2026-03-17",
+            compare_date_start="2026-03-04",
+            compare_date_end="2026-03-10",
+        )
+        link = query.to_neodash_link("tpv")
+
+        assert "dtic=04-03-2026" in link
+        assert "dtfc=10-03-2026" in link
+
+    def test_link_with_order_by(self):
+        query = ExplorerQuery(
+            dimensions=["canal"],
+            metrics=["custo_total", "cpa"],
+            date_start="2026-03-11",
+            date_end="2026-03-17",
+            order_by="custo_total",
+        )
+        link = query.to_neodash_link("tpv")
+        template_str = link.split("template=", 1)[1]
+        params = json.loads(template_str)["params"]
+
+        assert params["orderBy"] == "custo_total"

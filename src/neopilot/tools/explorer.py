@@ -12,15 +12,22 @@ from neopilot.infra.debug import debug_block
 from neopilot.infra.env import is_debug
 from neopilot.infra.version import enforce_version
 from neopilot.models.explorer import MAX_LIMIT, TIME_BREAKDOWNS, ExplorerQuery
+from neopilot.models.instance import InstanceInfo
 from neopilot.storage.local_store import InstanceStore
 
+# Localized label for the "See data on NeoDash" link
+_NEODASH_LINK_LABEL = {
+    "pt-BR": "Ver dados no NeoDash",
+    "en-US": "See data on NeoDash",
+}
 
-def _get_endpoints() -> tuple[NeoDashEndpoints, str]:
-    """Return endpoints and the active instance language."""
+
+def _get_active_and_endpoints() -> tuple[InstanceInfo, NeoDashEndpoints]:
+    """Return the active instance and its endpoints."""
     store = InstanceStore()
     active = store.get_active()
     client = NeoDashClient(active.slug, active.api_token)
-    return NeoDashEndpoints(client), active.language
+    return active, NeoDashEndpoints(client)
 
 
 @mcp.tool()
@@ -123,7 +130,7 @@ def query_data(
         return "\n".join(lines)
 
     # --- Execute query ---
-    endpoints, _language = _get_endpoints()
+    active, endpoints = _get_active_and_endpoints()
 
     query = ExplorerQuery(
         dimensions=dimensions,
@@ -184,6 +191,12 @@ def query_data(
         lines.append(
             f"```json\n{json.dumps(result.comparison_results, indent=2, ensure_ascii=False)}\n```"
         )
+
+    # NeoDash link
+    neodash_link = query.to_neodash_link(active.slug)
+    link_label = _NEODASH_LINK_LABEL.get(active.language, _NEODASH_LINK_LABEL["en-US"])
+    lines.append("")
+    lines.append(f"[{link_label}]({neodash_link})")
 
     if is_debug():
         lines.append(debug_block(endpoints._client))
