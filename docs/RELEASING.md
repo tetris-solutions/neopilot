@@ -17,9 +17,14 @@ install from.
 
 ## How Users Install
 
-Users run:
+**macOS / Linux:**
 ```bash
 curl -fsSL https://raw.githubusercontent.com/tetris-solutions/neopilot/main/install.sh | bash
+```
+
+**Windows (PowerShell):**
+```powershell
+irm https://raw.githubusercontent.com/tetris-solutions/neopilot/main/install.ps1 | iex
 ```
 
 This clones the GitHub repo to `~/.neopilot/app/` and configures Claude Desktop.
@@ -77,16 +82,18 @@ which is what users install from.
 
 ### 5. Users update
 
-Users can update by running:
+**macOS / Linux:**
 ```bash
 cd ~/.neopilot/app && git pull && .venv/bin/pip install -e .
 ```
 
-Then restart Claude Desktop. Or they can re-run the install script which also
-handles updates:
-```bash
-curl -fsSL https://raw.githubusercontent.com/tetris-solutions/neopilot/main/install.sh | bash
+**Windows (PowerShell):**
+```powershell
+cd $env:USERPROFILE\.neopilot\app; git pull; .venv\Scripts\pip.exe install -e .
 ```
+
+Then restart Claude Desktop. Or they can re-run the install script which also
+handles updates.
 
 ## Update Types
 

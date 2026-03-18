@@ -30,10 +30,14 @@ After installing a new Python version, you may need to re-run the NeoPilot insta
 
 ## Install for Claude (1 command)
 
-Run this in your terminal:
-
+**macOS / Linux:**
 ```bash
 curl -fsSL https://raw.githubusercontent.com/tetris-solutions/neopilot/main/install.sh | bash
+```
+
+**Windows (PowerShell):**
+```powershell
+irm https://raw.githubusercontent.com/tetris-solutions/neopilot/main/install.ps1 | iex
 ```
 
 This will:
@@ -67,8 +71,14 @@ What metrics are available?
 
 ## Updating NeoPilot
 
+**macOS / Linux:**
 ```bash
 cd ~/.neopilot/app && git pull && .venv/bin/pip install -e .
+```
+
+**Windows (PowerShell):**
+```powershell
+cd $env:USERPROFILE\.neopilot\app; git pull; .venv\Scripts\pip.exe install -e .
 ```
 
 Then restart Claude Desktop. NeoPilot will also notify you when updates are available.
@@ -212,8 +222,12 @@ After fixing, restart Claude Desktop.
 ### NeoPilot tools not showing in Claude Desktop
 
 1. Make sure you ran the install script and restarted Claude Desktop
-2. Check that the config exists: `cat ~/Library/Application\ Support/Claude/claude_desktop_config.json`
-3. Verify the Python path is correct in the config — it should point to `~/.neopilot/app/.venv/bin/python`
+2. Check that the config exists:
+   - **macOS:** `cat ~/Library/Application\ Support/Claude/claude_desktop_config.json`
+   - **Windows:** `type $env:APPDATA\Claude\claude_desktop_config.json`
+3. Verify the Python path is correct in the config:
+   - **macOS / Linux:** `~/.neopilot/app/.venv/bin/python`
+   - **Windows:** `C:\Users\<you>\.neopilot\app\.venv\Scripts\python.exe`
 
 ### "No NeoDash instance connected" error
 

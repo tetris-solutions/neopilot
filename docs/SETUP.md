@@ -2,10 +2,14 @@
 
 ## Quick Install (recommended)
 
-Run this in your terminal:
-
+**macOS / Linux:**
 ```bash
 curl -fsSL https://raw.githubusercontent.com/tetris-solutions/neopilot/main/install.sh | bash
+```
+
+**Windows (PowerShell):**
+```powershell
+irm https://raw.githubusercontent.com/tetris-solutions/neopilot/main/install.ps1 | iex
 ```
 
 This will:
@@ -15,7 +19,7 @@ This will:
 
 **After running, restart Claude Desktop** (quit and reopen).
 
-> **Requirements:** Python 3.11+ and git. macOS only for now.
+> **Requirements:** Python 3.11+ and git.
 
 ---
 
@@ -48,8 +52,11 @@ See the sections below for your specific tool.
 
 ## Claude Desktop
 
-Add to `~/Library/Application Support/Claude/claude_desktop_config.json` (macOS) or `%APPDATA%\Claude\claude_desktop_config.json` (Windows):
+Config file location:
+- **macOS:** `~/Library/Application Support/Claude/claude_desktop_config.json`
+- **Windows:** `%APPDATA%\Claude\claude_desktop_config.json`
 
+**macOS / Linux:**
 ```json
 {
   "mcpServers": {
@@ -61,15 +68,27 @@ Add to `~/Library/Application Support/Claude/claude_desktop_config.json` (macOS)
 }
 ```
 
-Replace `/absolute/path/to/neopilot` with the actual path where you cloned the repo.
+**Windows:**
+```json
+{
+  "mcpServers": {
+    "neopilot": {
+      "command": "C:\\Users\\<you>\\.neopilot\\app\\.venv\\Scripts\\python.exe",
+      "args": ["-m", "neopilot.server"]
+    }
+  }
+}
+```
 
-To enable **debug mode** (shows raw API URLs and responses in tool output):
+Replace the path with the actual path where you cloned the repo.
+
+To enable **debug mode** (shows raw API URLs and responses in tool output), add an `env` key:
 
 ```json
 {
   "mcpServers": {
     "neopilot": {
-      "command": "/absolute/path/to/neopilot/.venv/bin/python",
+      "command": "...python path...",
       "args": ["-m", "neopilot.server"],
       "env": {
         "NEOPILOT_DEBUG": "1"
@@ -85,11 +104,24 @@ Restart Claude Desktop after any config change.
 
 Add to your project's `.mcp.json`:
 
+**macOS / Linux:**
 ```json
 {
   "mcpServers": {
     "neopilot": {
       "command": "/absolute/path/to/neopilot/.venv/bin/python",
+      "args": ["-m", "neopilot.server"]
+    }
+  }
+}
+```
+
+**Windows:**
+```json
+{
+  "mcpServers": {
+    "neopilot": {
+      "command": "C:\\Users\\<you>\\.neopilot\\app\\.venv\\Scripts\\python.exe",
       "args": ["-m", "neopilot.server"]
     }
   }
@@ -138,9 +170,18 @@ Once NeoPilot is running in your LLM tool:
 
 ### Running tests
 
+**macOS / Linux:**
 ```bash
 source .venv/bin/activate
+```
 
+**Windows (PowerShell):**
+```powershell
+.venv\Scripts\Activate.ps1
+```
+
+Then:
+```bash
 # Unit tests (no credentials needed)
 python3 -m pytest tests/ -v --ignore=tests/test_integration.py
 
