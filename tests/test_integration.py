@@ -236,6 +236,45 @@ class TestExplorerParsing:
 
 
 @skip_no_creds
+class TestShortLinkCreation:
+    """Validate that /share/geturl creates short links successfully."""
+
+    def test_create_short_link_simple(self, endpoints: NeoDashEndpoints) -> None:
+        """Create a short link from a basic Explorer URL."""
+        long_url = (
+            f"https://{_SLUG}.neodash.ai/explorador/100"
+            f"?dti=11-03-2026&dtf=17-03-2026"
+            f'&template={{"params":{{"segmentos":"veiculo","metricas":"custo_total","segmentarPor":"nao","order":"desc","filtros":{{}},"openGraphExplorador":0,"totalPercent":1,"showMetricsTotal":1}}}}'
+        )
+        short_url = endpoints.create_short_link(long_url)
+        assert short_url, "Expected a non-empty short URL"
+        assert short_url.startswith("http"), f"Expected a valid URL, got: {short_url}"
+
+    def test_create_short_link_with_multiple_metrics(self, endpoints: NeoDashEndpoints) -> None:
+        """Create a short link from an Explorer URL with multiple metrics and dimensions."""
+        long_url = (
+            f"https://{_SLUG}.neodash.ai/explorador/100"
+            f"?dti=01-01-2026&dtf=31-01-2026"
+            f'&template={{"params":{{"segmentos":"veiculo,campanha","metricas":"custo_total,impressoes,cliques,ctr","segmentarPor":"dia","order":"desc","filtros":{{}},"openGraphExplorador":0,"totalPercent":1,"showMetricsTotal":1}}}}'
+        )
+        short_url = endpoints.create_short_link(long_url)
+        assert short_url.startswith("http"), f"Expected a valid URL, got: {short_url}"
+
+    def test_create_short_link_from_query(self, endpoints: NeoDashEndpoints) -> None:
+        """Build an Explorer query, generate a NeoDash link, then shorten it."""
+        query = ExplorerQuery(
+            dimensions=["veiculo"],
+            metrics=["custo_total"],
+            date_start="2026-03-01",
+            date_end="2026-03-17",
+            limit=100,
+        )
+        neodash_link = query.to_neodash_link(_SLUG)
+        short_url = endpoints.create_short_link(neodash_link)
+        assert short_url.startswith("http"), f"Expected a valid URL, got: {short_url}"
+
+
+@skip_no_creds
 class TestComponentsParsing:
     """Validate that /ai/allComponents and /ai/component responses parse."""
 

@@ -212,6 +212,41 @@ class NeoDashEndpoints:
             truncation_message=truncation_message,
         )
 
+    def create_short_link(self, url: str) -> str:
+        """Create a short link via ``/share/geturl``.
+
+        Parameters
+        ----------
+        url:
+            The full NeoDash URL to shorten.
+
+        Returns
+        -------
+        str
+            The shortened URL.
+
+        Raises
+        ------
+        NeoDashAPIError
+            If the API returns a non-success status.
+        """
+        from neopilot.api.errors import NeoDashAPIError
+
+        data = self._client.post_multipart("/share/geturl", {"url": url})
+        if not isinstance(data, dict):
+            raise NeoDashAPIError("Unexpected response from /share/geturl")
+
+        url_node = data.get("url", data)
+        if isinstance(url_node, dict):
+            status = url_node.get("status", "")
+            if status == "success":
+                return url_node["shorturl"]
+            raise NeoDashAPIError(
+                f"Short link creation failed: {url_node.get('message', status)}"
+            )
+
+        raise NeoDashAPIError("Unexpected response format from /share/geturl")
+
     def get_dataset(self) -> DatasetInfo:
         """Fetch dataset metadata from ``/get/dataset?extended=1``."""
         data = self._client.get("/get/dataset", params={"extended": "1"})

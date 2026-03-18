@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import json
 import logging
+import os
 import urllib.error as urlerror
 import urllib.parse as urlparse
 import urllib.request as urlrequest
@@ -70,6 +71,42 @@ class NeoDashClient:
         logger.debug("GET %s", self.last_url)
 
         req = urlrequest.Request(url, method="GET", headers=_HEADERS)  # noqa: S310
+        return self._execute(req)
+
+    def post_multipart(self, path: str, fields: dict[str, str]) -> Any:
+        """Make an authenticated POST request with multipart/form-data body.
+
+        Parameters
+        ----------
+        path:
+            API path appended to base_url (e.g., ``/share/geturl``).
+        fields:
+            Form fields to include in the multipart body.
+
+        Returns
+        -------
+        Any
+            Parsed JSON response.
+        """
+        url = f"{self.base_url}{path}"
+        url = f"{url}?{urlparse.urlencode({'api_token': self.api_token}, quote_via=urlparse.quote_plus)}"
+
+        self.last_url = url.replace(self.api_token, "***")
+        logger.debug("POST %s", self.last_url)
+
+        boundary = f"----NeopilotBoundary{os.getpid()}"
+        body_parts: list[bytes] = []
+        for key, value in fields.items():
+            body_parts.append(f"--{boundary}\r\n".encode())
+            body_parts.append(
+                f'Content-Disposition: form-data; name="{key}"\r\n\r\n'.encode()
+            )
+            body_parts.append(f"{value}\r\n".encode())
+        body_parts.append(f"--{boundary}--\r\n".encode())
+        body = b"".join(body_parts)
+
+        headers = {**_HEADERS, "Content-Type": f"multipart/form-data; boundary={boundary}"}
+        req = urlrequest.Request(url, data=body, method="POST", headers=headers)  # noqa: S310
         return self._execute(req)
 
     def _execute(self, req: urlrequest.Request) -> Any:

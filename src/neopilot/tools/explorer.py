@@ -211,6 +211,35 @@ def query_data(
 
 
 @mcp.tool()
+def create_short_link(url: str) -> str:
+    """Create a compressed/short link from a NeoDash URL for easy sharing.
+
+    Use this tool when the user asks for a "compressed link", "short link",
+    "link to share", "link encurtado", "link curto", or "link para compartilhar".
+
+    Parameters
+    ----------
+    url:
+        The full NeoDash URL to shorten (e.g., an Explorer link).
+    """
+    blocked = enforce_version()
+    if blocked:
+        return blocked
+
+    active, endpoints = _get_active_and_endpoints()
+
+    short_url = endpoints.create_short_link(url)
+
+    label = {
+        "pt-BR": "Link encurtado",
+        "en-US": "Short link",
+    }
+    link_label = label.get(active.language, label["en-US"])
+
+    return f"**{link_label}:** {short_url}"
+
+
+@mcp.tool()
 def list_time_breakdowns() -> str:
     """List all available time breakdown options for the Explorer.
 
