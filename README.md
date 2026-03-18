@@ -10,7 +10,7 @@ Install, connect with your instance and ask:
 ## Requirements
 
 - **Python 3.11 or newer** — Check with `python3 --version` (macOS/Linux) or `python --version` (Windows)
-- **Git** — macOS includes it by default; Windows users: download from [git-scm.com](https://git-scm.com/download/win)
+- **Git** — macOS includes it by default; Windows users: download from [git-scm.com](https://git-scm.com/download/win) (keep "Add Git to PATH" checked during install, then restart PowerShell)
 
 If you need to install or update Python:
 
