@@ -64,7 +64,10 @@ $InstallDir = Join-Path $env:USERPROFILE ".neopilot\app"
 if (Test-Path (Join-Path $InstallDir ".git")) {
     Info "NeoPilot already installed. Updating..."
     Push-Location $InstallDir
-    $pullOutput = git pull --ff-only origin main 2>&1
+    $prevPref = $ErrorActionPreference
+    $ErrorActionPreference = "Continue"
+    git pull --ff-only origin main 2>$null | Out-Null
+    $ErrorActionPreference = $prevPref
     if ($LASTEXITCODE -eq 0) {
         Success "Updated to latest version"
     } else {
