@@ -238,11 +238,13 @@ class NeoDashEndpoints:
 
         url_node = data.get("url", data)
         if isinstance(url_node, dict):
-            status = url_node.get("status", "")
-            if status == "success":
-                return url_node["shorturl"]
+            # The API returns "success" for new links, but also returns the
+            # shorturl when the URL already exists (with a different status).
+            short = url_node.get("shorturl")
+            if short:
+                return short
             raise NeoDashAPIError(
-                f"Short link creation failed: {url_node.get('message', status)}"
+                f"Short link creation failed: {url_node.get('message', url_node.get('status', ''))}"
             )
 
         raise NeoDashAPIError("Unexpected response format from /share/geturl")

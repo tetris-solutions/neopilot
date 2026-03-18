@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+import urllib.parse
 from typing import Any, Literal
 
 from pydantic import BaseModel, Field
@@ -120,7 +121,7 @@ class ExplorerQuery(BaseModel):
             url += f"&dtic={_flip_date(self.compare_date_start)}"
             url += f"&dtfc={_flip_date(self.compare_date_end)}"
 
-        url += f"&template={template_json}"
+        url += f"&template={urllib.parse.quote(template_json, safe='')}"
         return url
 
 

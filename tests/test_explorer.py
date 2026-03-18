@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+import urllib.parse
 
 from neopilot.models.explorer import (
     DEFAULT_LIMIT,
@@ -187,8 +188,8 @@ class TestNeoDashLinkBuilder:
         assert "dtf=17-03-2026" in link
         assert "template=" in link
 
-        # Parse the template param
-        template_str = link.split("template=", 1)[1]
+        # Parse the template param (URL-encoded)
+        template_str = urllib.parse.unquote(link.split("template=", 1)[1])
         template = json.loads(template_str)
         params = template["params"]
 
@@ -211,7 +212,7 @@ class TestNeoDashLinkBuilder:
             order_sort="asc",
         )
         link = query.to_neodash_link("tpv")
-        template_str = link.split("template=", 1)[1]
+        template_str = urllib.parse.unquote(link.split("template=", 1)[1])
         params = json.loads(template_str)["params"]
 
         assert params["segmentarPor"] == "dia"
@@ -240,7 +241,7 @@ class TestNeoDashLinkBuilder:
             order_by="custo_total",
         )
         link = query.to_neodash_link("tpv")
-        template_str = link.split("template=", 1)[1]
+        template_str = urllib.parse.unquote(link.split("template=", 1)[1])
         params = json.loads(template_str)["params"]
 
         assert params["orderBy"] == "custo_total"
