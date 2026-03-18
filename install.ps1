@@ -64,10 +64,10 @@ $InstallDir = Join-Path $env:USERPROFILE ".neopilot\app"
 if (Test-Path (Join-Path $InstallDir ".git")) {
     Info "NeoPilot already installed. Updating..."
     Push-Location $InstallDir
-    try {
-        git pull --ff-only origin main 2>$null
+    $pullOutput = git pull --ff-only origin main 2>&1
+    if ($LASTEXITCODE -eq 0) {
         Success "Updated to latest version"
-    } catch {
+    } else {
         Warn "Could not auto-update. Try: cd $InstallDir; git pull"
     }
     Pop-Location
@@ -127,9 +127,11 @@ $ClaudeConfigDir = Join-Path $env:APPDATA "Claude"
 $ClaudeConfig = Join-Path $ClaudeConfigDir "claude_desktop_config.json"
 
 if (-not (Test-Path $ClaudeConfigDir)) {
-    Warn "Claude Desktop config directory not found. Is Claude Desktop installed?"
-    Warn "You can manually add NeoPilot later. See: $InstallDir\docs\SETUP.md"
-} else {
+    Info "Creating Claude Desktop config directory..."
+    New-Item -ItemType Directory -Path $ClaudeConfigDir -Force | Out-Null
+}
+
+if (Test-Path $ClaudeConfigDir) {
     Info "Configuring Claude Desktop..."
 
     # Build the neopilot config entry — use forward slashes in JSON for safety
