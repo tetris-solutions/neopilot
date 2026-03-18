@@ -19,7 +19,7 @@ function Fail($msg)    { Write-Host "X  $msg" -ForegroundColor Red; exit 1 }
 
 Write-Host ""
 Write-Host "+======================================+" -ForegroundColor Blue
-Write-Host "|       NeoPilot Installer             |" -ForegroundColor Blue
+Write-Host "|       NeoPilot Installer v2          |" -ForegroundColor Blue
 Write-Host "|  NeoDash AI Connector for Claude     |" -ForegroundColor Blue
 Write-Host "+======================================+" -ForegroundColor Blue
 Write-Host ""
