@@ -7,6 +7,26 @@ NeoPilot lets users conversationally query their advertising data, get insights,
 Install, connect with your instance and ask:
 `What can NeoPilot do for me?`
 
+## Requirements
+
+NeoPilot requires **Python 3.11 or newer**.
+
+Check your version:
+```bash
+python3 --version
+```
+
+If you need to update:
+
+| OS | Command |
+|----|---------|
+| **macOS** (Homebrew) | `brew install python@3.13` |
+| **macOS** (installer) | Download from [python.org](https://www.python.org/downloads/) |
+| **Ubuntu/Debian** | `sudo apt update && sudo apt install python3.13` |
+| **Windows** | Download from [python.org](https://www.python.org/downloads/) |
+
+After installing a new Python version, you may need to re-run the NeoPilot installer.
+
 ## Install for OpenClaw (1 command)
 Just say:
 ```
@@ -41,6 +61,7 @@ Connect to my NeoDash instance "yourslug" with API token "your_token_here"
 ```
 
 Follow the instructions in [this video](https://neod.ai/getneodashapitoken) to get your API token.
+The same token will work for all of your NeoDash instances.
 
 Then try:
 ```
@@ -114,12 +135,14 @@ Instance connections and user preferences are stored locally in `~/.neopilot/`:
 - **Labels, not IDs**: Metrics and dimensions are always shown with their human-readable labels
 - **Totals by NeoDash**: Totals are always calculated by NeoDash, never by NeoPilot
 - **Truncation warnings**: When query results hit the row limit, NeoPilot warns you
-- **Bilingual**: Supports pt-BR and en-US labels (auto-detected from user settings)
+- **Bilingual**: Supports pt-BR and en-US labels (set via `set_language`)
 - **Filters**: Custom filters on demand are coming in a future update
 
 ## Debug Mode
 
-Set `NEOPILOT_DEBUG=1` in the MCP server config to see the raw API URLs and responses in tool output. Useful for troubleshooting queries that return unexpected results.
+Just say "Activate debug mode" in your chat. NeoPilot will show the actual API request URLs and raw responses in every tool output. Say "Deactivate debug mode" to turn it off.
+
+Alternatively, set `NEOPILOT_DEBUG=1` in the MCP server env config to enable it permanently.
 
 ## Development
 
