@@ -10,7 +10,7 @@
 #   cd neopilot; .\install.ps1
 # ============================================================================
 
-$ErrorActionPreference = "Stop"
+$ErrorActionPreference = "Continue"
 
 function Info($msg)    { Write-Host "i  $msg" -ForegroundColor Blue }
 function Success($msg) { Write-Host "OK $msg" -ForegroundColor Green }
@@ -64,11 +64,8 @@ $InstallDir = Join-Path $env:USERPROFILE ".neopilot\app"
 if (Test-Path (Join-Path $InstallDir ".git")) {
     Info "NeoPilot already installed. Updating..."
     Push-Location $InstallDir
-    $env:GIT_REDIRECT_STDERR = '2>&1'
-    $pullResult = cmd /c "git pull --ff-only origin main 2>&1"
-    $pullExitCode = $LASTEXITCODE
-    Remove-Item Env:\GIT_REDIRECT_STDERR -ErrorAction SilentlyContinue
-    if ($pullExitCode -eq 0) {
+    git pull --ff-only origin main 2>&1 | Out-Null
+    if ($LASTEXITCODE -eq 0) {
         Success "Updated to latest version"
     } else {
         Warn "Could not auto-update. Try: cd $InstallDir; git pull"
