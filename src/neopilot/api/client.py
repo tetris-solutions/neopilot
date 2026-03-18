@@ -64,7 +64,7 @@ class NeoDashClient:
 
         url = f"{self.base_url}{path}"
         if all_params:
-            url = f"{url}?{urlparse.urlencode(all_params, quote_via=urlparse.quote)}"
+            url = f"{url}?{urlparse.urlencode(all_params, quote_via=urlparse.quote_plus)}"
 
         self.last_url = url.replace(self.api_token, "***")
         logger.debug("GET %s", self.last_url)
