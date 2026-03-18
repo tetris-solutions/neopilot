@@ -123,19 +123,35 @@ Success "NeoPilot v$NeopilotVersion ready"
 # -------------------------------------------------------------------
 # 4. Configure Claude Desktop
 # -------------------------------------------------------------------
-$ClaudeConfigDir = Join-Path $env:APPDATA "Claude"
-$ClaudeConfig = Join-Path $ClaudeConfigDir "claude_desktop_config.json"
+# Detect config path: Microsoft Store version uses a sandboxed path
+$ClaudeConfigDirs = @()
 
-if (-not (Test-Path $ClaudeConfigDir)) {
-    Info "Creating Claude Desktop config directory..."
-    New-Item -ItemType Directory -Path $ClaudeConfigDir -Force | Out-Null
+# Microsoft Store path (check first — takes priority if both exist)
+$msStorePattern = Join-Path $env:LOCALAPPDATA "Packages\Claude_*\LocalCache\Roaming\Claude"
+$msStoreDirs = @(Get-ChildItem -Path (Join-Path $env:LOCALAPPDATA "Packages") -Filter "Claude_*" -Directory -ErrorAction SilentlyContinue)
+foreach ($d in $msStoreDirs) {
+    $candidate = Join-Path $d.FullName "LocalCache\Roaming\Claude"
+    if (Test-Path $candidate) {
+        $ClaudeConfigDirs += $candidate
+    }
 }
 
-if (Test-Path $ClaudeConfigDir) {
-    Info "Configuring Claude Desktop..."
+# Standard (standalone installer) path
+$standardDir = Join-Path $env:APPDATA "Claude"
+if (Test-Path $standardDir) {
+    $ClaudeConfigDirs += $standardDir
+}
 
-    # Build the neopilot config entry — use forward slashes in JSON for safety
-    $PythonPathJson = $VenvPython -replace '\\', '\\\\'
+# If neither found, create the standard path as fallback
+if ($ClaudeConfigDirs.Count -eq 0) {
+    Info "Creating Claude Desktop config directory..."
+    New-Item -ItemType Directory -Path $standardDir -Force | Out-Null
+    $ClaudeConfigDirs = @($standardDir)
+}
+
+foreach ($ClaudeConfigDir in $ClaudeConfigDirs) {
+    $ClaudeConfig = Join-Path $ClaudeConfigDir "claude_desktop_config.json"
+    Info "Configuring Claude Desktop at $ClaudeConfigDir ..."
 
     $pyScript = @"
 import json, os
@@ -158,9 +174,9 @@ with open(config_path, 'w', encoding='utf-8') as f:
     & $VenvPython -c $pyScript
 
     if (Test-Path $ClaudeConfig) {
-        Success "Claude Desktop configured with NeoPilot"
+        Success "Claude Desktop configured ($ClaudeConfigDir)"
     } else {
-        Warn "Could not write Claude Desktop config"
+        Warn "Could not write config to $ClaudeConfigDir"
     }
 }
 
