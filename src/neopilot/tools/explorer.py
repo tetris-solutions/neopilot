@@ -192,11 +192,17 @@ def query_data(
             f"```json\n{json.dumps(result.comparison_results, indent=2, ensure_ascii=False)}\n```"
         )
 
-    # NeoDash link
+    # NeoDash link — with explicit instruction for the LLM to always show it
     neodash_link = query.to_neodash_link(active.slug)
     link_label = _NEODASH_LINK_LABEL.get(active.language, _NEODASH_LINK_LABEL["en-US"])
     lines.append("")
     lines.append(f"[{link_label}]({neodash_link})")
+    lines.append("")
+    lines.append(
+        "IMPORTANT: You MUST always include the NeoDash link above in your "
+        "response to the user, even when summarizing or formatting the data "
+        "as a report. The link lets the user see this exact query on NeoDash."
+    )
 
     if is_debug():
         lines.append(debug_block(endpoints._client))
