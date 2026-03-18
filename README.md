@@ -9,14 +9,10 @@ Install, connect with your instance and ask:
 
 ## Requirements
 
-NeoPilot requires **Python 3.11 or newer**.
+- **Python 3.11 or newer** — Check with `python3 --version` (macOS/Linux) or `python --version` (Windows)
+- **Git** — macOS includes it by default; Windows users: download from [git-scm.com](https://git-scm.com/download/win)
 
-Check your version:
-```bash
-python3 --version
-```
-
-If you need to update:
+If you need to install or update Python:
 
 | OS | Command |
 |----|---------|
