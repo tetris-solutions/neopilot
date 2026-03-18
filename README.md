@@ -191,6 +191,48 @@ To push a forced update to all users, edit `version.json` in the repo:
 }
 ```
 
+## Troubleshooting
+
+### SSL Certificate Error when connecting
+
+If you see an error like `SSL: CERTIFICATE_VERIFY_FAILED` when connecting to your NeoDash instance, this is a Python certificates issue (common on macOS), not a server problem.
+
+**Fix for macOS (python.org installer):**
+```bash
+/Applications/Python\ 3.*/Install\ Certificates.command
+```
+
+**Fix for any system (install certificates in the venv):**
+```bash
+~/.neopilot/app/.venv/bin/pip install certifi
+```
+
+**Fix for macOS (Homebrew):**
+```bash
+brew install ca-certificates
+```
+
+After fixing, restart Claude Desktop.
+
+### NeoPilot tools not showing in Claude Desktop
+
+1. Make sure you ran the install script and restarted Claude Desktop
+2. Check that the config exists: `cat ~/Library/Application\ Support/Claude/claude_desktop_config.json`
+3. Verify the Python path is correct in the config — it should point to `~/.neopilot/app/.venv/bin/python`
+
+### "No NeoDash instance connected" error
+
+You need to connect first. Say:
+```
+Connect to my NeoDash instance "yourslug" with API token "your_token_here"
+```
+
+### Empty query results
+
+1. Say "Activate debug mode" to see the actual API request and response
+2. Make sure you called `list_metrics` and `list_dimensions` first — NeoPilot needs the exact IDs from your instance
+3. Check that your date range has data in NeoDash
+
 ## Architecture
 
 See [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) for technical details.
