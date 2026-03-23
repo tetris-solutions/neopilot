@@ -8,6 +8,8 @@ from typing import Any, Literal
 
 from pydantic import BaseModel, Field
 
+from neopilot.models.filters import Filters
+
 # Valid time breakdown slugs
 TIME_BREAKDOWNS = {
     "nao": "No time breakdown",
@@ -50,6 +52,7 @@ class ExplorerQuery(BaseModel):
     limit: int = DEFAULT_LIMIT
     order_by: str | None = None
     order_sort: Literal["asc", "desc"] = "desc"
+    filters: Filters = Field(default_factory=Filters)
 
     def to_api_params(self) -> dict[str, str]:
         """Convert to query parameters for the NeoDash API.
@@ -58,7 +61,7 @@ class ExplorerQuery(BaseModel):
         -----
         - ``showTotals`` is always ``true`` — NeoPilot NEVER calculates totals itself.
         - ``no-cache`` is always ``false`` unless the user explicitly requests a cache bypass.
-        - ``filtros`` is always empty — filter on demand is deferred.
+        - ``filtros`` is serialized from the ``filters`` model; empty dict when no filters.
         """
         capped_limit = min(self.limit, MAX_LIMIT)
 
@@ -66,7 +69,7 @@ class ExplorerQuery(BaseModel):
             "segmentos": ",".join(self.dimensions),
             "metricas": ",".join(self.metrics),
             "segmentarPor": self.time_breakdown,
-            "filtros": {},
+            "filtros": self.filters.to_api_dict(),
         }
 
         params: dict[str, str] = {
@@ -100,7 +103,7 @@ class ExplorerQuery(BaseModel):
             "metricas": ",".join(self.metrics),
             "segmentarPor": self.time_breakdown,
             "order": self.order_sort,
-            "filtros": {},
+            "filtros": self.filters.to_api_dict(),
             "openGraphExplorador": 0,
             "totalPercent": 1,
             "showMetricsTotal": 1,

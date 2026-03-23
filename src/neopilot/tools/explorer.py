@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+from typing import Any
 
 from neopilot.api.client import NeoDashClient
 from neopilot.api.endpoints import NeoDashEndpoints
@@ -12,6 +13,7 @@ from neopilot.infra.debug import debug_block
 from neopilot.infra.env import is_debug
 from neopilot.infra.version import enforce_version
 from neopilot.models.explorer import MAX_LIMIT, TIME_BREAKDOWNS, ExplorerQuery
+from neopilot.models.filters import FilterExpression, FilterGroup, Filters
 from neopilot.models.instance import InstanceInfo
 from neopilot.storage.local_store import InstanceStore
 
@@ -30,6 +32,128 @@ def _get_active_and_endpoints() -> tuple[InstanceInfo, NeoDashEndpoints]:
     return active, NeoDashEndpoints(client)
 
 
+def _parse_filters(
+    segment_filters: list[dict[str, Any]] | None,
+    metric_filters: list[dict[str, Any]] | None,
+) -> Filters:
+    """Parse user-provided filter dicts into a ``Filters`` model.
+
+    Each filter dict has:
+    - ``dimension`` or ``metric``: the field ID (e.g., ``"campanha_externa_nome"``)
+    - ``operator``: comparison operator (e.g., ``"c"``, ``"="``, ``">"``)
+    - ``value``: comparison value (string, number-as-string, or list of strings)
+    - ``field_comparison`` (optional): ``true`` when comparing metric vs metric
+    - ``group`` (optional): ``"or"`` to OR with next filter in same group,
+      default ``"and"``
+
+    Returns a ``Filters`` object ready for ``ExplorerQuery``.
+    """
+    filters = Filters()
+
+    if segment_filters:
+        # Group consecutive filters by their group_type
+        and_exprs: list[list[list[FilterExpression]]] = []
+        or_exprs: list[list[list[FilterExpression]]] = []
+        current_is_or = False
+
+        for i, f in enumerate(segment_filters):
+            expr = FilterExpression(
+                chave=f["dimension"],
+                operador=f["operator"],
+                valor=f["value"],
+                estrutura="segmento",
+            )
+            is_or = f.get("group", "and").lower() == "or"
+
+            if i == 0:
+                current_is_or = is_or
+
+            if is_or == current_is_or:
+                # Same group logic — add as another branch
+                if current_is_or:
+                    or_exprs.append([[expr]])
+                else:
+                    and_exprs.append([[expr]])
+            else:
+                # Logic changed — flush current group, start new
+                if current_is_or and or_exprs:
+                    filters.segment.append(
+                        FilterGroup(group_type="or_group", expressions=or_exprs)
+                    )
+                    or_exprs = []
+                elif not current_is_or and and_exprs:
+                    filters.segment.append(
+                        FilterGroup(group_type="and_group", expressions=and_exprs)
+                    )
+                    and_exprs = []
+                current_is_or = is_or
+                if is_or:
+                    or_exprs.append([[expr]])
+                else:
+                    and_exprs.append([[expr]])
+
+        # Flush remaining
+        if or_exprs:
+            filters.segment.append(
+                FilterGroup(group_type="or_group", expressions=or_exprs)
+            )
+        if and_exprs:
+            filters.segment.append(
+                FilterGroup(group_type="and_group", expressions=and_exprs)
+            )
+
+    if metric_filters:
+        and_exprs_m: list[list[list[FilterExpression]]] = []
+        or_exprs_m: list[list[list[FilterExpression]]] = []
+        current_is_or_m = False
+
+        for i, f in enumerate(metric_filters):
+            expr = FilterExpression(
+                chave=f["metric"],
+                operador=f["operator"],
+                valor=f["value"],
+                estrutura="metrica",
+                tipo="field" if f.get("field_comparison") else None,
+            )
+            is_or = f.get("group", "and").lower() == "or"
+
+            if i == 0:
+                current_is_or_m = is_or
+
+            if is_or == current_is_or_m:
+                if current_is_or_m:
+                    or_exprs_m.append([[expr]])
+                else:
+                    and_exprs_m.append([[expr]])
+            else:
+                if current_is_or_m and or_exprs_m:
+                    filters.metric.append(
+                        FilterGroup(group_type="or_group", expressions=or_exprs_m)
+                    )
+                    or_exprs_m = []
+                elif not current_is_or_m and and_exprs_m:
+                    filters.metric.append(
+                        FilterGroup(group_type="and_group", expressions=and_exprs_m)
+                    )
+                    and_exprs_m = []
+                current_is_or_m = is_or
+                if is_or:
+                    or_exprs_m.append([[expr]])
+                else:
+                    and_exprs_m.append([[expr]])
+
+        if or_exprs_m:
+            filters.metric.append(
+                FilterGroup(group_type="or_group", expressions=or_exprs_m)
+            )
+        if and_exprs_m:
+            filters.metric.append(
+                FilterGroup(group_type="and_group", expressions=and_exprs_m)
+            )
+
+    return filters
+
+
 @mcp.tool()
 def query_data(
     dimensions: list[str],
@@ -42,6 +166,8 @@ def query_data(
     order_sort: str = "desc",
     compare_date_start: str | None = None,
     compare_date_end: str | None = None,
+    segment_filters: list[dict[str, Any]] | None = None,
+    metric_filters: list[dict[str, Any]] | None = None,
     confirmed: bool = False,
 ) -> str:
     """Query advertising data from NeoDash using the Explorer.
@@ -89,6 +215,35 @@ def query_data(
         Optional comparison period start date (``YYYY-MM-DD``).
     compare_date_end:
         Optional comparison period end date (``YYYY-MM-DD``).
+    segment_filters:
+        Optional list of dimension filters. Each filter is a dict with:
+
+        - ``dimension``: dimension ID (e.g., ``"campanha_externa_nome"``)
+        - ``operator``: one of ``"c"`` (contains), ``"!c"`` (not contains),
+          ``"="`` (equals), ``"!="`` (not equals), ``"in"`` (one of),
+          ``"!in"`` (not one of), ``"or"`` (contains one of),
+          ``"!or"`` (not contains any), ``"allc"`` (contains all),
+          ``"!allc"`` (not contains all), ``"vazio"`` (empty),
+          ``"!vazio"`` (not empty)
+        - ``value``: string or list of strings to compare against
+        - ``group`` (optional): ``"or"`` to OR with other filters,
+          default ``"and"``
+
+        Example: ``[{"dimension": "campanha_externa_nome", "operator": "c", "value": "amz"}]``
+    metric_filters:
+        Optional list of metric filters. Each filter is a dict with:
+
+        - ``metric``: metric ID (e.g., ``"cpc"``, ``"custo_total"``)
+        - ``operator``: one of ``"="``, ``"!="``, ``">"``, ``">="``,
+          ``"<"``, ``"<="``, ``"between"``, ``"!between"``
+        - ``value``: number as string, or another metric ID when
+          ``field_comparison=true``
+        - ``field_comparison`` (optional): set ``true`` to compare
+          metric vs metric (e.g., Spend > Clicks)
+        - ``group`` (optional): ``"or"`` to OR with other filters,
+          default ``"and"``
+
+        Example: ``[{"metric": "cpc", "operator": ">", "value": "3"}]``
     confirmed:
         Set to ``true`` to execute the query. Default ``false`` returns
         a preview for user confirmation.
@@ -107,6 +262,9 @@ def query_data(
     if limit > MAX_LIMIT:
         return f"Limit cannot exceed {MAX_LIMIT:,}. Please use a smaller value."
 
+    # --- Parse filters ---
+    filters = _parse_filters(segment_filters, metric_filters)
+
     # --- Confirmation step ---
     if not confirmed:
         lines = ["**Query Preview — please confirm before executing:**\n"]
@@ -121,6 +279,8 @@ def query_data(
             lines.append(
                 f"- **Comparison period:** {compare_date_start} to {compare_date_end}"
             )
+        if not filters.is_empty():
+            lines.append(f"- **Filters:** {filters.to_summary()}")
         lines.append(f"- **Row limit:** {limit:,}")
         lines.append(
             "\nShow this to the user and ask them to confirm. "
@@ -143,6 +303,7 @@ def query_data(
         order_sort=order_sort,
         compare_date_start=compare_date_start,
         compare_date_end=compare_date_end,
+        filters=filters,
     )
 
     result = endpoints.query_explorer(query)
@@ -159,6 +320,8 @@ def query_data(
     lines.append(f"- Metrics: {', '.join(metrics)}")
     if time_breakdown != "nao":
         lines.append(f"- Time breakdown: {TIME_BREAKDOWNS[time_breakdown]}")
+    if not filters.is_empty():
+        lines.append(f"- Filters: {filters.to_summary()}")
     lines.append("")
 
     # Truncation warning

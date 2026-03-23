@@ -98,8 +98,8 @@ class TestExplorerQueryConstruction:
         params = query.to_api_params()
         assert params["showTotals"] == "true"
 
-    def test_filters_always_empty(self):
-        """Filters are deferred — always empty dict."""
+    def test_filters_empty_by_default(self):
+        """Without filters, filtros is an empty dict."""
         query = ExplorerQuery(
             dimensions=["campanha"],
             metrics=["custo_total"],
@@ -197,7 +197,7 @@ class TestNeoDashLinkBuilder:
         assert params["metricas"] == "custo_total,cpa"
         assert params["segmentarPor"] == "nao"
         assert params["order"] == "desc"
-        assert params["filtros"] == {}
+        assert params["filtros"] == {}  # empty when no filters set
         assert params["openGraphExplorador"] == 0
         assert params["totalPercent"] == 1
         assert params["showMetricsTotal"] == 1
