@@ -1,3 +1,10 @@
+# Node
+node_modules/
+*.mcpb
+
+# Docker local data
+data/
+
 # Python
 .venv/
 __pycache__/

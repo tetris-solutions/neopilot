@@ -1,0 +1,14 @@
+services:
+  neopilot:
+    build: .
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./data:/data
+    environment:
+      MCP_TRANSPORT: streamable-http
+      MCP_HOST: 0.0.0.0
+      MCP_PORT: "8000"
+      LOGLEVEL: INFO
+      NEOPILOT_DEBUG: "0"
+    restart: unless-stopped

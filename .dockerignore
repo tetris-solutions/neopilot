@@ -1,0 +1,16 @@
+node_modules/
+*.mcpb
+data/
+.venv/
+__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+tests/
+.env
+.env.test
+*.egg-info/
+dist/
+build/

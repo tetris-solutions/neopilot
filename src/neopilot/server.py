@@ -31,7 +31,18 @@ logger.info("NeoPilot v%s starting.", __version__)
 
 def main() -> None:
     """Run the NeoPilot MCP server."""
-    mcp.run(transport="stdio")
+    import os
+
+    transport = os.environ.get("MCP_TRANSPORT", "stdio")
+    if transport in ("sse", "streamable-http"):
+        host = os.environ.get("MCP_HOST", "0.0.0.0")
+        port = int(os.environ.get("MCP_PORT", "8000"))
+        logger.info("Starting HTTP transport on %s:%s", host, port)
+        mcp.settings.host = host
+        mcp.settings.port = port
+        mcp.run(transport=transport)
+    else:
+        mcp.run(transport="stdio")
 
 
 if __name__ == "__main__":
