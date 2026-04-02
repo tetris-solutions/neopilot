@@ -1,0 +1,3213 @@
+[
+  {
+    "number": 1,
+    "title": "Simple equals (dimension = value)",
+    "user_input": "Show me Spend and Clicks by External Campaign for the last 7 days, only for the AOC brand.",
+    "filtros": {
+      "segment": {
+        "filters": [
+          {
+            "groupType": "and_group",
+            "expressions": [
+              [
+                [
+                  {
+                    "chave": "slug_dimensao",
+                    "connective": "e",
+                    "estrutura": "segmento",
+                    "operador": "=",
+                    "needConvertToString": false,
+                    "valor": "AOC"
+                  }
+                ]
+              ]
+            ]
+          }
+        ]
+      }
+    },
+    "neodash_link": "https://tpv.neodash.ai/explorador/100?dti=16-03-2026&dtf=22-03-2026&template=%7B%22params%22%3A%7B%22segmentos%22%3A%22campanha_externa_nome%22%2C%22metricas%22%3A%22custo_total%2Ccliques%22%2C%22segmentarPor%22%3A%22nao%22%2C%22order%22%3A%22desc%22%2C%22filtros%22%3A%7B%22segment%22%3A%7B%22filters%22%3A%5B%7B%22groupType%22%3A%22and_group%22%2C%22expressions%22%3A%5B%5B%5B%7B%22chave%22%3A%22slug_dimensao%22%2C%22connective%22%3A%22e%22%2C%22estrutura%22%3A%22segmento%22%2C%22operador%22%3A%22%3D%22%2C%22needConvertToString%22%3Afalse%2C%22valor%22%3A%22AOC%22%7D%5D%5D%5D%7D%5D%7D%7D%2C%22openGraphExplorador%22%3A0%2C%22totalPercent%22%3A1%2C%22showMetricsTotal%22%3A1%2C%22orderBy%22%3A%22custo_total%22%7D%7D",
+    "result": {
+      "row_count": 17,
+      "totals": [
+        {
+          "custo_total": 47466.73,
+          "cliques": 48705
+        }
+      ],
+      "first_5_rows": [
+        {
+          "match": "NP_MONIT_AOC-ALL_AON_CONV_SP|",
+          "campanha_externa_nome": "np_monit_aoc-all_aon_conv_sp",
+          "custo_total": 11682.23,
+          "cliques": 12381
+        },
+        {
+          "match": "NP_AMZ_MONIT_AOC-ALL_PT_AON_ROAS_DISPLAY_CONV_PERF_PLUS|",
+          "campanha_externa_nome": "np_amz_monit_aoc-all_pt_aon_roas_display_conv_perf_plus",
+          "custo_total": 9441.37,
+          "cliques": 3244
+        },
+        {
+          "match": "ADS_AOC_MONITORES_MAR26_PADS|",
+          "campanha_externa_nome": "ADS_AOC_MONITORES_MAR26_PADS",
+          "custo_total": 5849,
+          "cliques": 1888
+        },
+        {
+          "match": "NP_AMZ_MONIT_AOC-ALL_PT_AON_ROAS_CONV_SP_AUTO_ROAS|",
+          "campanha_externa_nome": "np_amz_monit_aoc-all_pt_aon_roas_conv_sp_auto_roas",
+          "custo_total": 5298.35,
+          "cliques": 2557
+        },
+        {
+          "match": "NP_MELI_MONIT_AOC-ALL_PT_AON_ROAS_SCA_CONV_DADS_DC|",
+          "campanha_externa_nome": "np_meli_monit_aoc-all_pt_aon_roas_sca_conv_dads_dc",
+          "custo_total": 3374.14,
+          "cliques": 2674
+        }
+      ],
+      "all_rows": [
+        {
+          "match": "NP_MONIT_AOC-ALL_AON_CONV_SP|",
+          "campanha_externa_nome": "np_monit_aoc-all_aon_conv_sp",
+          "custo_total": 11682.23,
+          "cliques": 12381
+        },
+        {
+          "match": "NP_AMZ_MONIT_AOC-ALL_PT_AON_ROAS_DISPLAY_CONV_PERF_PLUS|",
+          "campanha_externa_nome": "np_amz_monit_aoc-all_pt_aon_roas_display_conv_perf_plus",
+          "custo_total": 9441.37,
+          "cliques": 3244
+        },
+        {
+          "match": "ADS_AOC_MONITORES_MAR26_PADS|",
+          "campanha_externa_nome": "ADS_AOC_MONITORES_MAR26_PADS",
+          "custo_total": 5849,
+          "cliques": 1888
+        },
+        {
+          "match": "NP_AMZ_MONIT_AOC-ALL_PT_AON_ROAS_CONV_SP_AUTO_ROAS|",
+          "campanha_externa_nome": "np_amz_monit_aoc-all_pt_aon_roas_conv_sp_auto_roas",
+          "custo_total": 5298.35,
+          "cliques": 2557
+        },
+        {
+          "match": "NP_MELI_MONIT_AOC-ALL_PT_AON_ROAS_SCA_CONV_DADS_DC|",
+          "campanha_externa_nome": "np_meli_monit_aoc-all_pt_aon_roas_sca_conv_dads_dc",
+          "custo_total": 3374.14,
+          "cliques": 2674
+        },
+        {
+          "match": "NP_MONIT_AOC_AON_CONSI_SB_GEN|",
+          "campanha_externa_nome": "np_monit_aoc_aon_consi_sb_gen",
+          "custo_total": 2560.46,
+          "cliques": 655
+        },
+        {
+          "match": "NP_MELI_MONIT_AOC-ALL_PT_AON_ROAS_SCA_CONV_DADS_DP|",
+          "campanha_externa_nome": "np_meli_monit_aoc-all_pt_aon_roas_sca_conv_dads_dp",
+          "custo_total": 2255.2,
+          "cliques": 1205
+        },
+        {
+          "match": "NP_MELI_MONIT_AOC_ALL_PT_AON_NTB_SCA_AW_DADS|",
+          "campanha_externa_nome": "np_meli_monit_aoc_all_pt_aon_ntb_sca_aw_dads",
+          "custo_total": 1451.91,
+          "cliques": 207
+        },
+        {
+          "match": "NP_AMZ_MONIT_AOC_ALL_PT_AON_ROAS_CONV_SP_BRAN_ROAS|",
+          "campanha_externa_nome": "np_amz_monit_aoc_all_pt_aon_roas_conv_sp_bran_roas",
+          "custo_total": 1324.93,
+          "cliques": 370
+        },
+        {
+          "match": "NP_AMZ_MONIT_AOC-ALL_PT_AON_CPC_CONSID_SB_BRAN_CPC_INST|",
+          "campanha_externa_nome": "np_amz_monit_aoc-all_pt_aon_cpc_consid_sb_bran_cpc_inst",
+          "custo_total": 1144.69,
+          "cliques": 345
+        },
+        {
+          "match": "ADS_AOC_MONITORES_MAR26_DISPLAY_TESTEA|",
+          "campanha_externa_nome": "ADS_AOC_MONITORES_MAR26_DISPLAY_TESTEA",
+          "custo_total": 791.5,
+          "cliques": 31
+        },
+        {
+          "match": "NP_AMZ_MONIT_AOC-ALL_PT_AON_NTB_DISPLAY_AW|",
+          "campanha_externa_nome": "np_amz_monit_aoc-all_pt_aon_ntb_display_aw",
+          "custo_total": 762.66,
+          "cliques": 22798
+        },
+        {
+          "match": "NP_AMZ_MONIT_AOC-ALL_PT_AON_CPC_CONSID_SB_BRAN_CPC_GENERIC|",
+          "campanha_externa_nome": "np_amz_monit_aoc-all_pt_aon_cpc_consid_sb_bran_cpc_generic",
+          "custo_total": 695.87,
+          "cliques": 147
+        },
+        {
+          "match": "NP_AMZ_MONIT_AOC-ALL_PT_AON_ROAS_CONV_SP_AUTO_ROAS_DEALS_3_3|",
+          "campanha_externa_nome": "np_amz_monit_aoc-all_pt_aon_roas_conv_sp_auto_roas_deals_3_3",
+          "custo_total": 371.37,
+          "cliques": 181
+        },
+        {
+          "match": "ADS_AOC_MONITORES_MAR26_DISPLAY_TESTEB|",
+          "campanha_externa_nome": "ADS_AOC_MONITORES_MAR26_DISPLAY_TESTEB",
+          "custo_total": 366.7,
+          "cliques": 20
+        },
+        {
+          "match": "ADS_AOC_MONITORES_MAR26_AWARENESS|",
+          "campanha_externa_nome": "ADS_AOC_MONITORES_MAR26_AWARENESS",
+          "custo_total": 96.36,
+          "cliques": 2
+        },
+        {
+          "match": "MONITORES-1|",
+          "campanha_externa_nome": "Monitores-1",
+          "custo_total": 0,
+          "cliques": 0
+        }
+      ]
+    },
+    "dimensions": [
+      "campanha_externa_nome"
+    ],
+    "metrics": [
+      "custo_total",
+      "cliques"
+    ],
+    "time_breakdown": "nao",
+    "order_by": "custo_total"
+  },
+  {
+    "number": 2,
+    "title": "Contains (dimension contains value)",
+    "user_input": "Show me Spend and CPC by External Campaign for the last 7 days, only campaigns containing 'amz'.",
+    "filtros": {
+      "segment": {
+        "filters": [
+          {
+            "groupType": "and_group",
+            "expressions": [
+              [
+                [
+                  {
+                    "chave": "campanha_externa_nome",
+                    "connective": "e",
+                    "estrutura": "segmento",
+                    "operador": "c",
+                    "needConvertToString": false,
+                    "valor": "amz"
+                  }
+                ]
+              ]
+            ]
+          }
+        ]
+      }
+    },
+    "neodash_link": "https://tpv.neodash.ai/explorador/100?dti=16-03-2026&dtf=22-03-2026&template=%7B%22params%22%3A%7B%22segmentos%22%3A%22campanha_externa_nome%22%2C%22metricas%22%3A%22custo_total%2Ccpc%22%2C%22segmentarPor%22%3A%22nao%22%2C%22order%22%3A%22desc%22%2C%22filtros%22%3A%7B%22segment%22%3A%7B%22filters%22%3A%5B%7B%22groupType%22%3A%22and_group%22%2C%22expressions%22%3A%5B%5B%5B%7B%22chave%22%3A%22campanha_externa_nome%22%2C%22connective%22%3A%22e%22%2C%22estrutura%22%3A%22segmento%22%2C%22operador%22%3A%22c%22%2C%22needConvertToString%22%3Afalse%2C%22valor%22%3A%22amz%22%7D%5D%5D%5D%7D%5D%7D%7D%2C%22openGraphExplorador%22%3A0%2C%22totalPercent%22%3A1%2C%22showMetricsTotal%22%3A1%2C%22orderBy%22%3A%22custo_total%22%7D%7D",
+    "result": {
+      "row_count": 20,
+      "totals": [
+        {
+          "custo_total": 53206.29,
+          "cpc": 1.3
+        }
+      ],
+      "first_5_rows": [
+        {
+          "match": "NP_AMZ_TV_PHILIPS-ALL_PT_AON_ROAS_DISPLAY_CONV_PERF_PLUS|",
+          "campanha_externa_nome": "np_amz_tv_philips-all_pt_aon_roas_display_conv_perf_plus",
+          "custo_total": 14752.86,
+          "cpc": 3.85
+        },
+        {
+          "match": "NP_AMZ_MONIT_AOC-ALL_PT_AON_ROAS_DISPLAY_CONV_PERF_PLUS|",
+          "campanha_externa_nome": "np_amz_monit_aoc-all_pt_aon_roas_display_conv_perf_plus",
+          "custo_total": 9441.37,
+          "cpc": 2.91
+        },
+        {
+          "match": "NP_AMZ_TV_PHILIPS-ALL_PT_AON_ROAS_CONV_SP_BRAN_ROAS|",
+          "campanha_externa_nome": "np_amz_tv_philips-all_pt_aon_roas_conv_sp_bran_roas",
+          "custo_total": 8081.28,
+          "cpc": 2.25
+        },
+        {
+          "match": "NP_AMZ_MONIT_AOC-ALL_PT_AON_ROAS_CONV_SP_AUTO_ROAS|",
+          "campanha_externa_nome": "np_amz_monit_aoc-all_pt_aon_roas_conv_sp_auto_roas",
+          "custo_total": 5298.35,
+          "cpc": 2.07
+        },
+        {
+          "match": "NP_AMZ_AVA_PHILIPS-MIX_PT_AON_ROAS_DISPLAY_CONV_PERF_PLUS|",
+          "campanha_externa_nome": "np_amz_ava_philips-mix_pt_aon_roas_display_conv_perf_plus",
+          "custo_total": 3145.94,
+          "cpc": 1.89
+        }
+      ],
+      "all_rows": [
+        {
+          "match": "NP_AMZ_TV_PHILIPS-ALL_PT_AON_ROAS_DISPLAY_CONV_PERF_PLUS|",
+          "campanha_externa_nome": "np_amz_tv_philips-all_pt_aon_roas_display_conv_perf_plus",
+          "custo_total": 14752.86,
+          "cpc": 3.85
+        },
+        {
+          "match": "NP_AMZ_MONIT_AOC-ALL_PT_AON_ROAS_DISPLAY_CONV_PERF_PLUS|",
+          "campanha_externa_nome": "np_amz_monit_aoc-all_pt_aon_roas_display_conv_perf_plus",
+          "custo_total": 9441.37,
+          "cpc": 2.91
+        },
+        {
+          "match": "NP_AMZ_TV_PHILIPS-ALL_PT_AON_ROAS_CONV_SP_BRAN_ROAS|",
+          "campanha_externa_nome": "np_amz_tv_philips-all_pt_aon_roas_conv_sp_bran_roas",
+          "custo_total": 8081.28,
+          "cpc": 2.25
+        },
+        {
+          "match": "NP_AMZ_MONIT_AOC-ALL_PT_AON_ROAS_CONV_SP_AUTO_ROAS|",
+          "campanha_externa_nome": "np_amz_monit_aoc-all_pt_aon_roas_conv_sp_auto_roas",
+          "custo_total": 5298.35,
+          "cpc": 2.07
+        },
+        {
+          "match": "NP_AMZ_AVA_PHILIPS-MIX_PT_AON_ROAS_DISPLAY_CONV_PERF_PLUS|",
+          "campanha_externa_nome": "np_amz_ava_philips-mix_pt_aon_roas_display_conv_perf_plus",
+          "custo_total": 3145.94,
+          "cpc": 1.89
+        },
+        {
+          "match": "NP_AMZ_TV_PHILIPS-ALL_PT_AON_CPC_CONSID_SB_BRAN_CPC_INST|",
+          "campanha_externa_nome": "np_amz_tv_philips-all_pt_aon_cpc_consid_sb_bran_cpc_inst",
+          "custo_total": 2065.85,
+          "cpc": 4.36
+        },
+        {
+          "match": "NP_AMZ_TV_PHILIPS-ALL_PT_AON_ROAS_CONV_SP_AUTO_ROAS|",
+          "campanha_externa_nome": "np_amz_tv_philips-all_pt_aon_roas_conv_sp_auto_roas",
+          "custo_total": 1995.57,
+          "cpc": 6.07
+        },
+        {
+          "match": "NP_AMZ_AVA_PHILIPS-MIX_PT_AON_ROAS_CONV_SP_BRAN_ROAS|",
+          "campanha_externa_nome": "np_amz_ava_philips-mix_pt_aon_roas_conv_sp_bran_roas",
+          "custo_total": 1372.18,
+          "cpc": 3.66
+        },
+        {
+          "match": "NP_AMZ_MONIT_AOC_ALL_PT_AON_ROAS_CONV_SP_BRAN_ROAS|",
+          "campanha_externa_nome": "np_amz_monit_aoc_all_pt_aon_roas_conv_sp_bran_roas",
+          "custo_total": 1324.93,
+          "cpc": 3.58
+        },
+        {
+          "match": "NP_AMZ_MONIT_AOC-ALL_PT_AON_CPC_CONSID_SB_BRAN_CPC_INST|",
+          "campanha_externa_nome": "np_amz_monit_aoc-all_pt_aon_cpc_consid_sb_bran_cpc_inst",
+          "custo_total": 1144.69,
+          "cpc": 3.32
+        },
+        {
+          "match": "NP_AMZ_TV_PHILIPS-ALL_PT_AON_CPC_CONSID_SB_BRAN_CPC_GENERIC|",
+          "campanha_externa_nome": "np_amz_tv_philips-all_pt_aon_cpc_consid_sb_bran_cpc_generic",
+          "custo_total": 774.96,
+          "cpc": 5.58
+        },
+        {
+          "match": "NP_AMZ_MONIT_AOC-ALL_PT_AON_NTB_DISPLAY_AW|",
+          "campanha_externa_nome": "np_amz_monit_aoc-all_pt_aon_ntb_display_aw",
+          "custo_total": 762.66,
+          "cpc": 0.03
+        },
+        {
+          "match": "NP_AMZ_MONIT_AOC-ALL_PT_AON_CPC_CONSID_SB_BRAN_CPC_GENERIC|",
+          "campanha_externa_nome": "np_amz_monit_aoc-all_pt_aon_cpc_consid_sb_bran_cpc_generic",
+          "custo_total": 695.87,
+          "cpc": 4.73
+        },
+        {
+          "match": "NP_AMZ_AVA_PHILIPS-ALL_PT_AON_CPC_CONSID_SB_BRAN_CPC_GENERIC|",
+          "campanha_externa_nome": "np_amz_ava_philips-all_pt_aon_cpc_consid_sb_bran_cpc_generic",
+          "custo_total": 479.78,
+          "cpc": 3.81
+        },
+        {
+          "match": "NP_AMZ_AVA_PHILIPS-ALL_PT_AON_CPC_CONSID_SB_BRAN_CPC_INST|",
+          "campanha_externa_nome": "np_amz_ava_philips-all_pt_aon_cpc_consid_sb_bran_cpc_inst",
+          "custo_total": 434.07,
+          "cpc": 4.77
+        },
+        {
+          "match": "NP_AMZ_MONIT_PHILIPS-ALL_PT_AON_ROAS_CONV_SP_AUTO_ROAS|",
+          "campanha_externa_nome": "np_amz_monit_philips-all_pt_aon_roas_conv_sp_auto_roas",
+          "custo_total": 381.59,
+          "cpc": 1.2
+        },
+        {
+          "match": "NP_AMZ_MONIT_AOC-ALL_PT_AON_ROAS_CONV_SP_AUTO_ROAS_DEALS_3_3|",
+          "campanha_externa_nome": "np_amz_monit_aoc-all_pt_aon_roas_conv_sp_auto_roas_deals_3_3",
+          "custo_total": 371.37,
+          "cpc": 2.05
+        },
+        {
+          "match": "NP_AMZ_TV_PHILIPS-ALL_PT_AON_ROAS_CONV_SP_AUTO_ROAS_DEALS_3_3|",
+          "campanha_externa_nome": "np_amz_tv_philips-all_pt_aon_roas_conv_sp_auto_roas_deals_3_3",
+          "custo_total": 337.92,
+          "cpc": 4.45
+        },
+        {
+          "match": "NP_AMZ_AVA_PHILIPS-MIX_PT_AON_ROAS_CONV_SP_AUTO_ROAS|",
+          "campanha_externa_nome": "np_amz_ava_philips-mix_pt_aon_roas_conv_sp_auto_roas",
+          "custo_total": 256.03,
+          "cpc": 1.74
+        },
+        {
+          "match": "NP_AMZ_AVA_PHILIPS-MIX_PT_AON_ROAS_CONV_SP_AUTO_ROAS_DEALS_3_3|",
+          "campanha_externa_nome": "np_amz_ava_philips-mix_pt_aon_roas_conv_sp_auto_roas_deals_3_3",
+          "custo_total": 89.03,
+          "cpc": 2.62
+        }
+      ]
+    },
+    "dimensions": [
+      "campanha_externa_nome"
+    ],
+    "metrics": [
+      "custo_total",
+      "cpc"
+    ],
+    "time_breakdown": "nao",
+    "order_by": "custo_total"
+  },
+  {
+    "number": 3,
+    "title": "Does not contain (dimension !c value)",
+    "user_input": "Show me Spend and Clicks by External Campaign, excluding all Amazon campaigns (campaigns containing 'amz').",
+    "filtros": {
+      "segment": {
+        "filters": [
+          {
+            "groupType": "and_group",
+            "expressions": [
+              [
+                [
+                  {
+                    "chave": "campanha_externa_nome",
+                    "connective": "e",
+                    "estrutura": "segmento",
+                    "operador": "!c",
+                    "needConvertToString": false,
+                    "valor": "amz"
+                  }
+                ]
+              ]
+            ]
+          }
+        ]
+      }
+    },
+    "neodash_link": "https://tpv.neodash.ai/explorador/100?dti=16-03-2026&dtf=22-03-2026&template=%7B%22params%22%3A%7B%22segmentos%22%3A%22campanha_externa_nome%22%2C%22metricas%22%3A%22custo_total%2Ccliques%22%2C%22segmentarPor%22%3A%22nao%22%2C%22order%22%3A%22desc%22%2C%22filtros%22%3A%7B%22segment%22%3A%7B%22filters%22%3A%5B%7B%22groupType%22%3A%22and_group%22%2C%22expressions%22%3A%5B%5B%5B%7B%22chave%22%3A%22campanha_externa_nome%22%2C%22connective%22%3A%22e%22%2C%22estrutura%22%3A%22segmento%22%2C%22operador%22%3A%22%21c%22%2C%22needConvertToString%22%3Afalse%2C%22valor%22%3A%22amz%22%7D%5D%5D%5D%7D%5D%7D%7D%2C%22openGraphExplorador%22%3A0%2C%22totalPercent%22%3A1%2C%22showMetricsTotal%22%3A1%2C%22orderBy%22%3A%22custo_total%22%7D%7D",
+    "result": {
+      "row_count": 23,
+      "totals": [
+        {
+          "custo_total": 49847.53,
+          "cliques": 32070
+        }
+      ],
+      "first_5_rows": [
+        {
+          "match": "NP_MONIT_AOC-ALL_AON_CONV_SP|",
+          "campanha_externa_nome": "np_monit_aoc-all_aon_conv_sp",
+          "custo_total": 11682.23,
+          "cliques": 12381
+        },
+        {
+          "match": "ADS_AOC_MONITORES_MAR26_PADS|",
+          "campanha_externa_nome": "ADS_AOC_MONITORES_MAR26_PADS",
+          "custo_total": 5849,
+          "cliques": 1888
+        },
+        {
+          "match": "NP_MELI_ALL_PHILIPS-ALL_PT_AON_ROAS_SCA_CONV_DADS_DCA|",
+          "campanha_externa_nome": "np_meli_all_philips-all_pt_aon_roas_sca_conv_dads_dca",
+          "custo_total": 3571.87,
+          "cliques": 1471
+        },
+        {
+          "match": "NP_MELI_MONIT_AOC-ALL_PT_AON_ROAS_SCA_CONV_DADS_DC|",
+          "campanha_externa_nome": "np_meli_monit_aoc-all_pt_aon_roas_sca_conv_dads_dc",
+          "custo_total": 3374.14,
+          "cliques": 2674
+        },
+        {
+          "match": "NP_TV_PHILIPS-ALL_AON_CONV_SP|",
+          "campanha_externa_nome": "np_tv_philips-all_aon_conv_sp",
+          "custo_total": 3355.57,
+          "cliques": 3495
+        }
+      ],
+      "all_rows": [
+        {
+          "match": "NP_MONIT_AOC-ALL_AON_CONV_SP|",
+          "campanha_externa_nome": "np_monit_aoc-all_aon_conv_sp",
+          "custo_total": 11682.23,
+          "cliques": 12381
+        },
+        {
+          "match": "ADS_AOC_MONITORES_MAR26_PADS|",
+          "campanha_externa_nome": "ADS_AOC_MONITORES_MAR26_PADS",
+          "custo_total": 5849,
+          "cliques": 1888
+        },
+        {
+          "match": "NP_MELI_ALL_PHILIPS-ALL_PT_AON_ROAS_SCA_CONV_DADS_DCA|",
+          "campanha_externa_nome": "np_meli_all_philips-all_pt_aon_roas_sca_conv_dads_dca",
+          "custo_total": 3571.87,
+          "cliques": 1471
+        },
+        {
+          "match": "NP_MELI_MONIT_AOC-ALL_PT_AON_ROAS_SCA_CONV_DADS_DC|",
+          "campanha_externa_nome": "np_meli_monit_aoc-all_pt_aon_roas_sca_conv_dads_dc",
+          "custo_total": 3374.14,
+          "cliques": 2674
+        },
+        {
+          "match": "NP_TV_PHILIPS-ALL_AON_CONV_SP|",
+          "campanha_externa_nome": "np_tv_philips-all_aon_conv_sp",
+          "custo_total": 3355.57,
+          "cliques": 3495
+        },
+        {
+          "match": "NP_MELI_ALL_PHILIPS-ALL_PT_AON_ROAS_SCA_CONV_DADS_DP|",
+          "campanha_externa_nome": "np_meli_all_philips-all_pt_aon_roas_sca_conv_dads_dp",
+          "custo_total": 3188.85,
+          "cliques": 724
+        },
+        {
+          "match": "NP_MELI_TV_PHILIPS-ALL_PT_AON_ROAS_SCA_CONV_DADS_DCA|",
+          "campanha_externa_nome": "np_meli_tv_philips-all_pt_aon_roas_sca_conv_dads_dca",
+          "custo_total": 2848.82,
+          "cliques": 817
+        },
+        {
+          "match": "NP_MONIT_AOC_AON_CONSI_SB_GEN|",
+          "campanha_externa_nome": "np_monit_aoc_aon_consi_sb_gen",
+          "custo_total": 2560.46,
+          "cliques": 655
+        },
+        {
+          "match": "NP_TV_PHILIPS-ALL_AON_CONV_SP_|",
+          "campanha_externa_nome": "np_tv_philips-all_aon_conv_sp_",
+          "custo_total": 2434,
+          "cliques": 1751
+        },
+        {
+          "match": "NP_MELI_MONIT_AOC-ALL_PT_AON_ROAS_SCA_CONV_DADS_DP|",
+          "campanha_externa_nome": "np_meli_monit_aoc-all_pt_aon_roas_sca_conv_dads_dp",
+          "custo_total": 2255.2,
+          "cliques": 1205
+        },
+        {
+          "match": "NP_MELI_AVA_PHILIPS-ALL_PT_BB_ROAS_SCA_CONV_DADS_DC|",
+          "campanha_externa_nome": "np_meli_ava_philips-all_pt_bb_roas_sca_conv_dads_dc",
+          "custo_total": 2020.1,
+          "cliques": 833
+        },
+        {
+          "match": "NP_AVA_PHILIPS-ALL_BB_CONV_SP|",
+          "campanha_externa_nome": "np_ava_philips-all_bb_conv_sp",
+          "custo_total": 1707.97,
+          "cliques": 1092
+        },
+        {
+          "match": "NP_MELI_MONIT_AOC_ALL_PT_AON_NTB_SCA_AW_DADS|",
+          "campanha_externa_nome": "np_meli_monit_aoc_all_pt_aon_ntb_sca_aw_dads",
+          "custo_total": 1451.91,
+          "cliques": 207
+        },
+        {
+          "match": "NP_TV_PHILIPS-ALL_AON_CONSI_SB|",
+          "campanha_externa_nome": "np_tv_philips-all_aon_consi_sb",
+          "custo_total": 998.62,
+          "cliques": 250
+        },
+        {
+          "match": "NP_AVA_PHILIPS-ALL_AON_CONV_SP|",
+          "campanha_externa_nome": "np_ava_philips-all_aon_conv_sp",
+          "custo_total": 845.42,
+          "cliques": 2434
+        },
+        {
+          "match": "ADS_AOC_MONITORES_MAR26_DISPLAY_TESTEA|",
+          "campanha_externa_nome": "ADS_AOC_MONITORES_MAR26_DISPLAY_TESTEA",
+          "custo_total": 791.5,
+          "cliques": 31
+        },
+        {
+          "match": "NP_MELI_AVA_PHILIPS-ALL_PT_AON_ROAS_SCA_CONV_DADS_DC|",
+          "campanha_externa_nome": "np_meli_ava_philips-all_pt_aon_roas_sca_conv_dads_dc",
+          "custo_total": 443.32,
+          "cliques": 139
+        },
+        {
+          "match": "ADS_AOC_MONITORES_MAR26_DISPLAY_TESTEB|",
+          "campanha_externa_nome": "ADS_AOC_MONITORES_MAR26_DISPLAY_TESTEB",
+          "custo_total": 366.7,
+          "cliques": 20
+        },
+        {
+          "match": "ADS_AOC_MONITORES_MAR26_AWARENESS|",
+          "campanha_externa_nome": "ADS_AOC_MONITORES_MAR26_AWARENESS",
+          "custo_total": 96.36,
+          "cliques": 2
+        },
+        {
+          "match": "NP_AVA_PHILIPS_AON_CONSI_SB|",
+          "campanha_externa_nome": "np_ava_philips_aon_consi_sb",
+          "custo_total": 5.49,
+          "cliques": 1
+        },
+        {
+          "match": "TV-1|",
+          "campanha_externa_nome": "TV-1",
+          "custo_total": 0,
+          "cliques": 0
+        },
+        {
+          "match": "AVA-1|",
+          "campanha_externa_nome": "AVA-1",
+          "custo_total": 0,
+          "cliques": 0
+        },
+        {
+          "match": "MONITORES-1|",
+          "campanha_externa_nome": "Monitores-1",
+          "custo_total": 0,
+          "cliques": 0
+        }
+      ]
+    },
+    "dimensions": [
+      "campanha_externa_nome"
+    ],
+    "metrics": [
+      "custo_total",
+      "cliques"
+    ],
+    "time_breakdown": "nao",
+    "order_by": "custo_total"
+  },
+  {
+    "number": 4,
+    "title": "Metric filter (metric > value)",
+    "user_input": "Show me all campaigns where CPC is greater than R$3 in the last 7 days.",
+    "filtros": {
+      "metric": {
+        "filters": [
+          {
+            "groupType": "and_group",
+            "expressions": [
+              [
+                [
+                  {
+                    "chave": "cpc",
+                    "connective": "e",
+                    "estrutura": "metrica",
+                    "operador": ">",
+                    "needConvertToString": false,
+                    "valor": "3"
+                  }
+                ]
+              ]
+            ]
+          }
+        ]
+      }
+    },
+    "neodash_link": "https://tpv.neodash.ai/explorador/100?dti=16-03-2026&dtf=22-03-2026&template=%7B%22params%22%3A%7B%22segmentos%22%3A%22campanha_externa_nome%22%2C%22metricas%22%3A%22custo_total%2Ccliques%2Ccpc%22%2C%22segmentarPor%22%3A%22nao%22%2C%22order%22%3A%22desc%22%2C%22filtros%22%3A%7B%22metric%22%3A%7B%22filters%22%3A%5B%7B%22groupType%22%3A%22and_group%22%2C%22expressions%22%3A%5B%5B%5B%7B%22chave%22%3A%22cpc%22%2C%22connective%22%3A%22e%22%2C%22estrutura%22%3A%22metrica%22%2C%22operador%22%3A%22%3E%22%2C%22needConvertToString%22%3Afalse%2C%22valor%22%3A%223%22%7D%5D%5D%5D%7D%5D%7D%7D%2C%22openGraphExplorador%22%3A0%2C%22totalPercent%22%3A1%2C%22showMetricsTotal%22%3A1%2C%22orderBy%22%3A%22cpc%22%7D%7D",
+    "result": {
+      "row_count": 22,
+      "totals": [
+        {
+          "custo_total": 43979.71,
+          "cliques": 11040,
+          "cpc": 3.98
+        }
+      ],
+      "first_5_rows": [
+        {
+          "match": "NP_AMZ_TV_PHILIPS-ALL_PT_AON_ROAS_DISPLAY_CONV_PERF_PLUS|",
+          "campanha_externa_nome": "np_amz_tv_philips-all_pt_aon_roas_display_conv_perf_plus",
+          "custo_total": 14752.86,
+          "cliques": 3834,
+          "cpc": 3.85
+        },
+        {
+          "match": "ADS_AOC_MONITORES_MAR26_PADS|",
+          "campanha_externa_nome": "ADS_AOC_MONITORES_MAR26_PADS",
+          "custo_total": 5849,
+          "cliques": 1888,
+          "cpc": 3.1
+        },
+        {
+          "match": "NP_MELI_ALL_PHILIPS-ALL_PT_AON_ROAS_SCA_CONV_DADS_DP|",
+          "campanha_externa_nome": "np_meli_all_philips-all_pt_aon_roas_sca_conv_dads_dp",
+          "custo_total": 3188.85,
+          "cliques": 724,
+          "cpc": 4.4
+        },
+        {
+          "match": "NP_MELI_TV_PHILIPS-ALL_PT_AON_ROAS_SCA_CONV_DADS_DCA|",
+          "campanha_externa_nome": "np_meli_tv_philips-all_pt_aon_roas_sca_conv_dads_dca",
+          "custo_total": 2848.82,
+          "cliques": 817,
+          "cpc": 3.49
+        },
+        {
+          "match": "NP_MONIT_AOC_AON_CONSI_SB_GEN|",
+          "campanha_externa_nome": "np_monit_aoc_aon_consi_sb_gen",
+          "custo_total": 2560.46,
+          "cliques": 655,
+          "cpc": 3.91
+        }
+      ],
+      "all_rows": [
+        {
+          "match": "NP_AMZ_TV_PHILIPS-ALL_PT_AON_ROAS_DISPLAY_CONV_PERF_PLUS|",
+          "campanha_externa_nome": "np_amz_tv_philips-all_pt_aon_roas_display_conv_perf_plus",
+          "custo_total": 14752.86,
+          "cliques": 3834,
+          "cpc": 3.85
+        },
+        {
+          "match": "ADS_AOC_MONITORES_MAR26_PADS|",
+          "campanha_externa_nome": "ADS_AOC_MONITORES_MAR26_PADS",
+          "custo_total": 5849,
+          "cliques": 1888,
+          "cpc": 3.1
+        },
+        {
+          "match": "NP_MELI_ALL_PHILIPS-ALL_PT_AON_ROAS_SCA_CONV_DADS_DP|",
+          "campanha_externa_nome": "np_meli_all_philips-all_pt_aon_roas_sca_conv_dads_dp",
+          "custo_total": 3188.85,
+          "cliques": 724,
+          "cpc": 4.4
+        },
+        {
+          "match": "NP_MELI_TV_PHILIPS-ALL_PT_AON_ROAS_SCA_CONV_DADS_DCA|",
+          "campanha_externa_nome": "np_meli_tv_philips-all_pt_aon_roas_sca_conv_dads_dca",
+          "custo_total": 2848.82,
+          "cliques": 817,
+          "cpc": 3.49
+        },
+        {
+          "match": "NP_MONIT_AOC_AON_CONSI_SB_GEN|",
+          "campanha_externa_nome": "np_monit_aoc_aon_consi_sb_gen",
+          "custo_total": 2560.46,
+          "cliques": 655,
+          "cpc": 3.91
+        },
+        {
+          "match": "NP_AMZ_TV_PHILIPS-ALL_PT_AON_CPC_CONSID_SB_BRAN_CPC_INST|",
+          "campanha_externa_nome": "np_amz_tv_philips-all_pt_aon_cpc_consid_sb_bran_cpc_inst",
+          "custo_total": 2065.85,
+          "cliques": 474,
+          "cpc": 4.36
+        },
+        {
+          "match": "NP_AMZ_TV_PHILIPS-ALL_PT_AON_ROAS_CONV_SP_AUTO_ROAS|",
+          "campanha_externa_nome": "np_amz_tv_philips-all_pt_aon_roas_conv_sp_auto_roas",
+          "custo_total": 1995.57,
+          "cliques": 329,
+          "cpc": 6.07
+        },
+        {
+          "match": "NP_MELI_MONIT_AOC_ALL_PT_AON_NTB_SCA_AW_DADS|",
+          "campanha_externa_nome": "np_meli_monit_aoc_all_pt_aon_ntb_sca_aw_dads",
+          "custo_total": 1451.91,
+          "cliques": 207,
+          "cpc": 7.01
+        },
+        {
+          "match": "NP_AMZ_AVA_PHILIPS-MIX_PT_AON_ROAS_CONV_SP_BRAN_ROAS|",
+          "campanha_externa_nome": "np_amz_ava_philips-mix_pt_aon_roas_conv_sp_bran_roas",
+          "custo_total": 1372.18,
+          "cliques": 375,
+          "cpc": 3.66
+        },
+        {
+          "match": "NP_AMZ_MONIT_AOC_ALL_PT_AON_ROAS_CONV_SP_BRAN_ROAS|",
+          "campanha_externa_nome": "np_amz_monit_aoc_all_pt_aon_roas_conv_sp_bran_roas",
+          "custo_total": 1324.93,
+          "cliques": 370,
+          "cpc": 3.58
+        },
+        {
+          "match": "NP_AMZ_MONIT_AOC-ALL_PT_AON_CPC_CONSID_SB_BRAN_CPC_INST|",
+          "campanha_externa_nome": "np_amz_monit_aoc-all_pt_aon_cpc_consid_sb_bran_cpc_inst",
+          "custo_total": 1144.69,
+          "cliques": 345,
+          "cpc": 3.32
+        },
+        {
+          "match": "NP_TV_PHILIPS-ALL_AON_CONSI_SB|",
+          "campanha_externa_nome": "np_tv_philips-all_aon_consi_sb",
+          "custo_total": 998.62,
+          "cliques": 250,
+          "cpc": 3.99
+        },
+        {
+          "match": "ADS_AOC_MONITORES_MAR26_DISPLAY_TESTEA|",
+          "campanha_externa_nome": "ADS_AOC_MONITORES_MAR26_DISPLAY_TESTEA",
+          "custo_total": 791.5,
+          "cliques": 31,
+          "cpc": 25.53
+        },
+        {
+          "match": "NP_AMZ_TV_PHILIPS-ALL_PT_AON_CPC_CONSID_SB_BRAN_CPC_GENERIC|",
+          "campanha_externa_nome": "np_amz_tv_philips-all_pt_aon_cpc_consid_sb_bran_cpc_generic",
+          "custo_total": 774.96,
+          "cliques": 139,
+          "cpc": 5.58
+        },
+        {
+          "match": "NP_AMZ_MONIT_AOC-ALL_PT_AON_CPC_CONSID_SB_BRAN_CPC_GENERIC|",
+          "campanha_externa_nome": "np_amz_monit_aoc-all_pt_aon_cpc_consid_sb_bran_cpc_generic",
+          "custo_total": 695.87,
+          "cliques": 147,
+          "cpc": 4.73
+        },
+        {
+          "match": "NP_AMZ_AVA_PHILIPS-ALL_PT_AON_CPC_CONSID_SB_BRAN_CPC_GENERIC|",
+          "campanha_externa_nome": "np_amz_ava_philips-all_pt_aon_cpc_consid_sb_bran_cpc_generic",
+          "custo_total": 479.78,
+          "cliques": 126,
+          "cpc": 3.81
+        },
+        {
+          "match": "NP_MELI_AVA_PHILIPS-ALL_PT_AON_ROAS_SCA_CONV_DADS_DC|",
+          "campanha_externa_nome": "np_meli_ava_philips-all_pt_aon_roas_sca_conv_dads_dc",
+          "custo_total": 443.32,
+          "cliques": 139,
+          "cpc": 3.19
+        },
+        {
+          "match": "NP_AMZ_AVA_PHILIPS-ALL_PT_AON_CPC_CONSID_SB_BRAN_CPC_INST|",
+          "campanha_externa_nome": "np_amz_ava_philips-all_pt_aon_cpc_consid_sb_bran_cpc_inst",
+          "custo_total": 434.07,
+          "cliques": 91,
+          "cpc": 4.77
+        },
+        {
+          "match": "ADS_AOC_MONITORES_MAR26_DISPLAY_TESTEB|",
+          "campanha_externa_nome": "ADS_AOC_MONITORES_MAR26_DISPLAY_TESTEB",
+          "custo_total": 366.7,
+          "cliques": 20,
+          "cpc": 18.33
+        },
+        {
+          "match": "NP_AMZ_TV_PHILIPS-ALL_PT_AON_ROAS_CONV_SP_AUTO_ROAS_DEALS_3_3|",
+          "campanha_externa_nome": "np_amz_tv_philips-all_pt_aon_roas_conv_sp_auto_roas_deals_3_3",
+          "custo_total": 337.92,
+          "cliques": 76,
+          "cpc": 4.45
+        },
+        {
+          "match": "ADS_AOC_MONITORES_MAR26_AWARENESS|",
+          "campanha_externa_nome": "ADS_AOC_MONITORES_MAR26_AWARENESS",
+          "custo_total": 96.36,
+          "cliques": 2,
+          "cpc": 48.18
+        },
+        {
+          "match": "NP_AVA_PHILIPS_AON_CONSI_SB|",
+          "campanha_externa_nome": "np_ava_philips_aon_consi_sb",
+          "custo_total": 5.49,
+          "cliques": 1,
+          "cpc": 5.49
+        }
+      ]
+    },
+    "dimensions": [
+      "campanha_externa_nome"
+    ],
+    "metrics": [
+      "custo_total",
+      "cliques",
+      "cpc"
+    ],
+    "time_breakdown": "nao",
+    "order_by": "cpc"
+  },
+  {
+    "number": 5,
+    "title": "One of these (dimension in [values])",
+    "user_input": "Show me Spend and Impressions by Vehicle for last 7 days, only for AMAZON DSP and AMAZON PRODUCTS.",
+    "filtros": {
+      "segment": {
+        "filters": [
+          {
+            "groupType": "and_group",
+            "expressions": [
+              [
+                [
+                  {
+                    "chave": "veiculo",
+                    "connective": "e",
+                    "estrutura": "segmento",
+                    "operador": "in",
+                    "needConvertToString": false,
+                    "valor": [
+                      "AMAZON DSP",
+                      "AMAZON PRODUCTS"
+                    ]
+                  }
+                ]
+              ]
+            ]
+          }
+        ]
+      }
+    },
+    "neodash_link": "https://tpv.neodash.ai/explorador/100?dti=16-03-2026&dtf=22-03-2026&template=%7B%22params%22%3A%7B%22segmentos%22%3A%22veiculo%22%2C%22metricas%22%3A%22custo_total%2Cimpressoes%22%2C%22segmentarPor%22%3A%22nao%22%2C%22order%22%3A%22desc%22%2C%22filtros%22%3A%7B%22segment%22%3A%7B%22filters%22%3A%5B%7B%22groupType%22%3A%22and_group%22%2C%22expressions%22%3A%5B%5B%5B%7B%22chave%22%3A%22veiculo%22%2C%22connective%22%3A%22e%22%2C%22estrutura%22%3A%22segmento%22%2C%22operador%22%3A%22in%22%2C%22needConvertToString%22%3Afalse%2C%22valor%22%3A%5B%22AMAZON%20DSP%22%2C%22AMAZON%20PRODUCTS%22%5D%7D%5D%5D%5D%7D%5D%7D%7D%2C%22openGraphExplorador%22%3A0%2C%22totalPercent%22%3A1%2C%22showMetricsTotal%22%3A1%2C%22orderBy%22%3A%22custo_total%22%7D%7D",
+    "result": {
+      "row_count": 2,
+      "totals": [
+        {
+          "custo_total": 47611.07,
+          "impressoes": 13104914
+        }
+      ],
+      "first_5_rows": [
+        {
+          "match": "AMAZON DSP|",
+          "veiculo": "AMAZON DSP",
+          "custo_total": 28102.82,
+          "impressoes": 11708312
+        },
+        {
+          "match": "AMAZON PRODUCTS|",
+          "veiculo": "AMAZON PRODUCTS",
+          "custo_total": 19508.25,
+          "impressoes": 1396602
+        }
+      ],
+      "all_rows": [
+        {
+          "match": "AMAZON DSP|",
+          "veiculo": "AMAZON DSP",
+          "custo_total": 28102.82,
+          "impressoes": 11708312
+        },
+        {
+          "match": "AMAZON PRODUCTS|",
+          "veiculo": "AMAZON PRODUCTS",
+          "custo_total": 19508.25,
+          "impressoes": 1396602
+        }
+      ]
+    },
+    "dimensions": [
+      "veiculo"
+    ],
+    "metrics": [
+      "custo_total",
+      "impressoes"
+    ],
+    "time_breakdown": "nao",
+    "order_by": "custo_total"
+  },
+  {
+    "number": 6,
+    "title": "Segment + Metric filters combined",
+    "user_input": "Show me Philips campaigns where CPC is less than R$2 in the last 7 days.",
+    "filtros": {
+      "segment": {
+        "filters": [
+          {
+            "groupType": "and_group",
+            "expressions": [
+              [
+                [
+                  {
+                    "chave": "campanha_externa_nome",
+                    "connective": "e",
+                    "estrutura": "segmento",
+                    "operador": "c",
+                    "needConvertToString": false,
+                    "valor": "philips"
+                  }
+                ]
+              ]
+            ]
+          }
+        ]
+      },
+      "metric": {
+        "filters": [
+          {
+            "groupType": "and_group",
+            "expressions": [
+              [
+                [
+                  {
+                    "chave": "cpc",
+                    "connective": "e",
+                    "estrutura": "metrica",
+                    "operador": "<",
+                    "needConvertToString": false,
+                    "valor": "2"
+                  }
+                ]
+              ]
+            ]
+          }
+        ]
+      }
+    },
+    "neodash_link": "https://tpv.neodash.ai/explorador/100?dti=16-03-2026&dtf=22-03-2026&template=%7B%22params%22%3A%7B%22segmentos%22%3A%22campanha_externa_nome%22%2C%22metricas%22%3A%22custo_total%2Ccliques%2Ccpc%22%2C%22segmentarPor%22%3A%22nao%22%2C%22order%22%3A%22desc%22%2C%22filtros%22%3A%7B%22segment%22%3A%7B%22filters%22%3A%5B%7B%22groupType%22%3A%22and_group%22%2C%22expressions%22%3A%5B%5B%5B%7B%22chave%22%3A%22campanha_externa_nome%22%2C%22connective%22%3A%22e%22%2C%22estrutura%22%3A%22segmento%22%2C%22operador%22%3A%22c%22%2C%22needConvertToString%22%3Afalse%2C%22valor%22%3A%22philips%22%7D%5D%5D%5D%7D%5D%7D%2C%22metric%22%3A%7B%22filters%22%3A%5B%7B%22groupType%22%3A%22and_group%22%2C%22expressions%22%3A%5B%5B%5B%7B%22chave%22%3A%22cpc%22%2C%22connective%22%3A%22e%22%2C%22estrutura%22%3A%22metrica%22%2C%22operador%22%3A%22%3C%22%2C%22needConvertToString%22%3Afalse%2C%22valor%22%3A%222%22%7D%5D%5D%5D%7D%5D%7D%7D%2C%22openGraphExplorador%22%3A0%2C%22totalPercent%22%3A1%2C%22showMetricsTotal%22%3A1%2C%22orderBy%22%3A%22custo_total%22%7D%7D",
+    "result": {
+      "row_count": 7,
+      "totals": [
+        {
+          "custo_total": 12126.52,
+          "cliques": 10901,
+          "cpc": 1.11
+        }
+      ],
+      "first_5_rows": [
+        {
+          "match": "NP_TV_PHILIPS-ALL_AON_CONV_SP|",
+          "campanha_externa_nome": "np_tv_philips-all_aon_conv_sp",
+          "custo_total": 3355.57,
+          "cliques": 3495,
+          "cpc": 0.96
+        },
+        {
+          "match": "NP_AMZ_AVA_PHILIPS-MIX_PT_AON_ROAS_DISPLAY_CONV_PERF_PLUS|",
+          "campanha_externa_nome": "np_amz_ava_philips-mix_pt_aon_roas_display_conv_perf_plus",
+          "custo_total": 3145.94,
+          "cliques": 1665,
+          "cpc": 1.89
+        },
+        {
+          "match": "NP_TV_PHILIPS-ALL_AON_CONV_SP_|",
+          "campanha_externa_nome": "np_tv_philips-all_aon_conv_sp_",
+          "custo_total": 2434,
+          "cliques": 1751,
+          "cpc": 1.39
+        },
+        {
+          "match": "NP_AVA_PHILIPS-ALL_BB_CONV_SP|",
+          "campanha_externa_nome": "np_ava_philips-all_bb_conv_sp",
+          "custo_total": 1707.97,
+          "cliques": 1092,
+          "cpc": 1.56
+        },
+        {
+          "match": "NP_AVA_PHILIPS-ALL_AON_CONV_SP|",
+          "campanha_externa_nome": "np_ava_philips-all_aon_conv_sp",
+          "custo_total": 845.42,
+          "cliques": 2434,
+          "cpc": 0.35
+        }
+      ],
+      "all_rows": [
+        {
+          "match": "NP_TV_PHILIPS-ALL_AON_CONV_SP|",
+          "campanha_externa_nome": "np_tv_philips-all_aon_conv_sp",
+          "custo_total": 3355.57,
+          "cliques": 3495,
+          "cpc": 0.96
+        },
+        {
+          "match": "NP_AMZ_AVA_PHILIPS-MIX_PT_AON_ROAS_DISPLAY_CONV_PERF_PLUS|",
+          "campanha_externa_nome": "np_amz_ava_philips-mix_pt_aon_roas_display_conv_perf_plus",
+          "custo_total": 3145.94,
+          "cliques": 1665,
+          "cpc": 1.89
+        },
+        {
+          "match": "NP_TV_PHILIPS-ALL_AON_CONV_SP_|",
+          "campanha_externa_nome": "np_tv_philips-all_aon_conv_sp_",
+          "custo_total": 2434,
+          "cliques": 1751,
+          "cpc": 1.39
+        },
+        {
+          "match": "NP_AVA_PHILIPS-ALL_BB_CONV_SP|",
+          "campanha_externa_nome": "np_ava_philips-all_bb_conv_sp",
+          "custo_total": 1707.97,
+          "cliques": 1092,
+          "cpc": 1.56
+        },
+        {
+          "match": "NP_AVA_PHILIPS-ALL_AON_CONV_SP|",
+          "campanha_externa_nome": "np_ava_philips-all_aon_conv_sp",
+          "custo_total": 845.42,
+          "cliques": 2434,
+          "cpc": 0.35
+        },
+        {
+          "match": "NP_AMZ_MONIT_PHILIPS-ALL_PT_AON_ROAS_CONV_SP_AUTO_ROAS|",
+          "campanha_externa_nome": "np_amz_monit_philips-all_pt_aon_roas_conv_sp_auto_roas",
+          "custo_total": 381.59,
+          "cliques": 317,
+          "cpc": 1.2
+        },
+        {
+          "match": "NP_AMZ_AVA_PHILIPS-MIX_PT_AON_ROAS_CONV_SP_AUTO_ROAS|",
+          "campanha_externa_nome": "np_amz_ava_philips-mix_pt_aon_roas_conv_sp_auto_roas",
+          "custo_total": 256.03,
+          "cliques": 147,
+          "cpc": 1.74
+        }
+      ]
+    },
+    "dimensions": [
+      "campanha_externa_nome"
+    ],
+    "metrics": [
+      "custo_total",
+      "cliques",
+      "cpc"
+    ],
+    "time_breakdown": "nao",
+    "order_by": "custo_total"
+  },
+  {
+    "number": 7,
+    "title": "AND group with multiple dimension conditions",
+    "user_input": "Show me Spend and CPC by External Campaign for AOC brand campaigns on KABUM vehicle.",
+    "filtros": {
+      "segment": {
+        "filters": [
+          {
+            "groupType": "and_group",
+            "expressions": [
+              [
+                [
+                  {
+                    "chave": "slug_dimensao",
+                    "connective": "e",
+                    "estrutura": "segmento",
+                    "operador": "=",
+                    "needConvertToString": false,
+                    "valor": "AOC"
+                  }
+                ],
+                [
+                  {
+                    "chave": "veiculo",
+                    "connective": "e",
+                    "estrutura": "segmento",
+                    "operador": "=",
+                    "needConvertToString": false,
+                    "valor": "KABUM"
+                  }
+                ]
+              ]
+            ]
+          }
+        ]
+      }
+    },
+    "neodash_link": "https://tpv.neodash.ai/explorador/100?dti=16-03-2026&dtf=22-03-2026&template=%7B%22params%22%3A%7B%22segmentos%22%3A%22campanha_externa_nome%22%2C%22metricas%22%3A%22custo_total%2Ccpc%22%2C%22segmentarPor%22%3A%22nao%22%2C%22order%22%3A%22desc%22%2C%22filtros%22%3A%7B%22segment%22%3A%7B%22filters%22%3A%5B%7B%22groupType%22%3A%22and_group%22%2C%22expressions%22%3A%5B%5B%5B%7B%22chave%22%3A%22slug_dimensao%22%2C%22connective%22%3A%22e%22%2C%22estrutura%22%3A%22segmento%22%2C%22operador%22%3A%22%3D%22%2C%22needConvertToString%22%3Afalse%2C%22valor%22%3A%22AOC%22%7D%5D%2C%5B%7B%22chave%22%3A%22veiculo%22%2C%22connective%22%3A%22e%22%2C%22estrutura%22%3A%22segmento%22%2C%22operador%22%3A%22%3D%22%2C%22needConvertToString%22%3Afalse%2C%22valor%22%3A%22KABUM%22%7D%5D%5D%5D%7D%5D%7D%7D%2C%22openGraphExplorador%22%3A0%2C%22totalPercent%22%3A1%2C%22showMetricsTotal%22%3A1%2C%22orderBy%22%3A%22custo_total%22%7D%7D",
+    "result": {
+      "row_count": 4,
+      "totals": [
+        {
+          "custo_total": 7103.56,
+          "cpc": 3.66
+        }
+      ],
+      "first_5_rows": [
+        {
+          "match": "ADS_AOC_MONITORES_MAR26_PADS|",
+          "campanha_externa_nome": "ADS_AOC_MONITORES_MAR26_PADS",
+          "custo_total": 5849,
+          "cpc": 3.1
+        },
+        {
+          "match": "ADS_AOC_MONITORES_MAR26_DISPLAY_TESTEA|",
+          "campanha_externa_nome": "ADS_AOC_MONITORES_MAR26_DISPLAY_TESTEA",
+          "custo_total": 791.5,
+          "cpc": 25.53
+        },
+        {
+          "match": "ADS_AOC_MONITORES_MAR26_DISPLAY_TESTEB|",
+          "campanha_externa_nome": "ADS_AOC_MONITORES_MAR26_DISPLAY_TESTEB",
+          "custo_total": 366.7,
+          "cpc": 18.33
+        },
+        {
+          "match": "ADS_AOC_MONITORES_MAR26_AWARENESS|",
+          "campanha_externa_nome": "ADS_AOC_MONITORES_MAR26_AWARENESS",
+          "custo_total": 96.36,
+          "cpc": 48.18
+        }
+      ],
+      "all_rows": [
+        {
+          "match": "ADS_AOC_MONITORES_MAR26_PADS|",
+          "campanha_externa_nome": "ADS_AOC_MONITORES_MAR26_PADS",
+          "custo_total": 5849,
+          "cpc": 3.1
+        },
+        {
+          "match": "ADS_AOC_MONITORES_MAR26_DISPLAY_TESTEA|",
+          "campanha_externa_nome": "ADS_AOC_MONITORES_MAR26_DISPLAY_TESTEA",
+          "custo_total": 791.5,
+          "cpc": 25.53
+        },
+        {
+          "match": "ADS_AOC_MONITORES_MAR26_DISPLAY_TESTEB|",
+          "campanha_externa_nome": "ADS_AOC_MONITORES_MAR26_DISPLAY_TESTEB",
+          "custo_total": 366.7,
+          "cpc": 18.33
+        },
+        {
+          "match": "ADS_AOC_MONITORES_MAR26_AWARENESS|",
+          "campanha_externa_nome": "ADS_AOC_MONITORES_MAR26_AWARENESS",
+          "custo_total": 96.36,
+          "cpc": 48.18
+        }
+      ]
+    },
+    "dimensions": [
+      "campanha_externa_nome"
+    ],
+    "metrics": [
+      "custo_total",
+      "cpc"
+    ],
+    "time_breakdown": "nao",
+    "order_by": "custo_total"
+  },
+  {
+    "number": 8,
+    "title": "OR group (dimension contains A OR contains B)",
+    "user_input": "Show me campaigns that contain 'conv_sp' OR 'conv_perf' in the name, with Spend and ROAS.",
+    "filtros": {
+      "segment": {
+        "filters": [
+          {
+            "groupType": "or_group",
+            "expressions": [
+              [
+                [
+                  {
+                    "chave": "campanha_externa_nome",
+                    "connective": "e",
+                    "estrutura": "segmento",
+                    "operador": "c",
+                    "needConvertToString": false,
+                    "valor": "conv_sp"
+                  }
+                ]
+              ],
+              [
+                [
+                  {
+                    "chave": "campanha_externa_nome",
+                    "connective": "e",
+                    "estrutura": "segmento",
+                    "operador": "c",
+                    "needConvertToString": false,
+                    "valor": "conv_perf"
+                  }
+                ]
+              ]
+            ]
+          }
+        ]
+      }
+    },
+    "neodash_link": "https://tpv.neodash.ai/explorador/100?dti=16-03-2026&dtf=22-03-2026&template=%7B%22params%22%3A%7B%22segmentos%22%3A%22campanha_externa_nome%22%2C%22metricas%22%3A%22custo_total%2Croi%22%2C%22segmentarPor%22%3A%22nao%22%2C%22order%22%3A%22desc%22%2C%22filtros%22%3A%7B%22segment%22%3A%7B%22filters%22%3A%5B%7B%22groupType%22%3A%22or_group%22%2C%22expressions%22%3A%5B%5B%5B%7B%22chave%22%3A%22campanha_externa_nome%22%2C%22connective%22%3A%22e%22%2C%22estrutura%22%3A%22segmento%22%2C%22operador%22%3A%22c%22%2C%22needConvertToString%22%3Afalse%2C%22valor%22%3A%22conv_sp%22%7D%5D%5D%2C%5B%5B%7B%22chave%22%3A%22campanha_externa_nome%22%2C%22connective%22%3A%22e%22%2C%22estrutura%22%3A%22segmento%22%2C%22operador%22%3A%22c%22%2C%22needConvertToString%22%3Afalse%2C%22valor%22%3A%22conv_perf%22%7D%5D%5D%5D%7D%5D%7D%7D%2C%22openGraphExplorador%22%3A0%2C%22totalPercent%22%3A1%2C%22showMetricsTotal%22%3A1%2C%22orderBy%22%3A%22custo_total%22%7D%7D",
+    "result": {
+      "row_count": 18,
+      "totals": [
+        {
+          "custo_total": 66873.6,
+          "roi": 39.78
+        }
+      ],
+      "first_5_rows": [
+        {
+          "match": "NP_AMZ_TV_PHILIPS-ALL_PT_AON_ROAS_DISPLAY_CONV_PERF_PLUS|",
+          "campanha_externa_nome": "np_amz_tv_philips-all_pt_aon_roas_display_conv_perf_plus",
+          "custo_total": 14752.86,
+          "roi": 49.43
+        },
+        {
+          "match": "NP_MONIT_AOC-ALL_AON_CONV_SP|",
+          "campanha_externa_nome": "np_monit_aoc-all_aon_conv_sp",
+          "custo_total": 11682.23,
+          "roi": 45.13
+        },
+        {
+          "match": "NP_AMZ_MONIT_AOC-ALL_PT_AON_ROAS_DISPLAY_CONV_PERF_PLUS|",
+          "campanha_externa_nome": "np_amz_monit_aoc-all_pt_aon_roas_display_conv_perf_plus",
+          "custo_total": 9441.37,
+          "roi": 69.39
+        },
+        {
+          "match": "NP_AMZ_TV_PHILIPS-ALL_PT_AON_ROAS_CONV_SP_BRAN_ROAS|",
+          "campanha_externa_nome": "np_amz_tv_philips-all_pt_aon_roas_conv_sp_bran_roas",
+          "custo_total": 8081.28,
+          "roi": 25.88
+        },
+        {
+          "match": "NP_AMZ_MONIT_AOC-ALL_PT_AON_ROAS_CONV_SP_AUTO_ROAS|",
+          "campanha_externa_nome": "np_amz_monit_aoc-all_pt_aon_roas_conv_sp_auto_roas",
+          "custo_total": 5298.35,
+          "roi": 18.55
+        }
+      ],
+      "all_rows": [
+        {
+          "match": "NP_AMZ_TV_PHILIPS-ALL_PT_AON_ROAS_DISPLAY_CONV_PERF_PLUS|",
+          "campanha_externa_nome": "np_amz_tv_philips-all_pt_aon_roas_display_conv_perf_plus",
+          "custo_total": 14752.86,
+          "roi": 49.43
+        },
+        {
+          "match": "NP_MONIT_AOC-ALL_AON_CONV_SP|",
+          "campanha_externa_nome": "np_monit_aoc-all_aon_conv_sp",
+          "custo_total": 11682.23,
+          "roi": 45.13
+        },
+        {
+          "match": "NP_AMZ_MONIT_AOC-ALL_PT_AON_ROAS_DISPLAY_CONV_PERF_PLUS|",
+          "campanha_externa_nome": "np_amz_monit_aoc-all_pt_aon_roas_display_conv_perf_plus",
+          "custo_total": 9441.37,
+          "roi": 69.39
+        },
+        {
+          "match": "NP_AMZ_TV_PHILIPS-ALL_PT_AON_ROAS_CONV_SP_BRAN_ROAS|",
+          "campanha_externa_nome": "np_amz_tv_philips-all_pt_aon_roas_conv_sp_bran_roas",
+          "custo_total": 8081.28,
+          "roi": 25.88
+        },
+        {
+          "match": "NP_AMZ_MONIT_AOC-ALL_PT_AON_ROAS_CONV_SP_AUTO_ROAS|",
+          "campanha_externa_nome": "np_amz_monit_aoc-all_pt_aon_roas_conv_sp_auto_roas",
+          "custo_total": 5298.35,
+          "roi": 18.55
+        },
+        {
+          "match": "NP_TV_PHILIPS-ALL_AON_CONV_SP|",
+          "campanha_externa_nome": "np_tv_philips-all_aon_conv_sp",
+          "custo_total": 3355.57,
+          "roi": 43.06
+        },
+        {
+          "match": "NP_AMZ_AVA_PHILIPS-MIX_PT_AON_ROAS_DISPLAY_CONV_PERF_PLUS|",
+          "campanha_externa_nome": "np_amz_ava_philips-mix_pt_aon_roas_display_conv_perf_plus",
+          "custo_total": 3145.94,
+          "roi": 36.39
+        },
+        {
+          "match": "NP_TV_PHILIPS-ALL_AON_CONV_SP_|",
+          "campanha_externa_nome": "np_tv_philips-all_aon_conv_sp_",
+          "custo_total": 2434,
+          "roi": 35.59
+        },
+        {
+          "match": "NP_AMZ_TV_PHILIPS-ALL_PT_AON_ROAS_CONV_SP_AUTO_ROAS|",
+          "campanha_externa_nome": "np_amz_tv_philips-all_pt_aon_roas_conv_sp_auto_roas",
+          "custo_total": 1995.57,
+          "roi": 10.28
+        },
+        {
+          "match": "NP_AVA_PHILIPS-ALL_BB_CONV_SP|",
+          "campanha_externa_nome": "np_ava_philips-all_bb_conv_sp",
+          "custo_total": 1707.97,
+          "roi": 5.1
+        },
+        {
+          "match": "NP_AMZ_AVA_PHILIPS-MIX_PT_AON_ROAS_CONV_SP_BRAN_ROAS|",
+          "campanha_externa_nome": "np_amz_ava_philips-mix_pt_aon_roas_conv_sp_bran_roas",
+          "custo_total": 1372.18,
+          "roi": 3.8
+        },
+        {
+          "match": "NP_AMZ_MONIT_AOC_ALL_PT_AON_ROAS_CONV_SP_BRAN_ROAS|",
+          "campanha_externa_nome": "np_amz_monit_aoc_all_pt_aon_roas_conv_sp_bran_roas",
+          "custo_total": 1324.93,
+          "roi": 13.1
+        },
+        {
+          "match": "NP_AVA_PHILIPS-ALL_AON_CONV_SP|",
+          "campanha_externa_nome": "np_ava_philips-all_aon_conv_sp",
+          "custo_total": 845.42,
+          "roi": 45.27
+        },
+        {
+          "match": "NP_AMZ_MONIT_PHILIPS-ALL_PT_AON_ROAS_CONV_SP_AUTO_ROAS|",
+          "campanha_externa_nome": "np_amz_monit_philips-all_pt_aon_roas_conv_sp_auto_roas",
+          "custo_total": 381.59,
+          "roi": 0
+        },
+        {
+          "match": "NP_AMZ_MONIT_AOC-ALL_PT_AON_ROAS_CONV_SP_AUTO_ROAS_DEALS_3_3|",
+          "campanha_externa_nome": "np_amz_monit_aoc-all_pt_aon_roas_conv_sp_auto_roas_deals_3_3",
+          "custo_total": 371.37,
+          "roi": 9.37
+        },
+        {
+          "match": "NP_AMZ_TV_PHILIPS-ALL_PT_AON_ROAS_CONV_SP_AUTO_ROAS_DEALS_3_3|",
+          "campanha_externa_nome": "np_amz_tv_philips-all_pt_aon_roas_conv_sp_auto_roas_deals_3_3",
+          "custo_total": 337.92,
+          "roi": 0
+        },
+        {
+          "match": "NP_AMZ_AVA_PHILIPS-MIX_PT_AON_ROAS_CONV_SP_AUTO_ROAS|",
+          "campanha_externa_nome": "np_amz_ava_philips-mix_pt_aon_roas_conv_sp_auto_roas",
+          "custo_total": 256.03,
+          "roi": 6.16
+        },
+        {
+          "match": "NP_AMZ_AVA_PHILIPS-MIX_PT_AON_ROAS_CONV_SP_AUTO_ROAS_DEALS_3_3|",
+          "campanha_externa_nome": "np_amz_ava_philips-mix_pt_aon_roas_conv_sp_auto_roas_deals_3_3",
+          "custo_total": 89.03,
+          "roi": 1.75
+        }
+      ]
+    },
+    "dimensions": [
+      "campanha_externa_nome"
+    ],
+    "metrics": [
+      "custo_total",
+      "roi"
+    ],
+    "time_breakdown": "nao",
+    "order_by": "custo_total"
+  },
+  {
+    "number": 9,
+    "title": "Multiple filter groups (group1 AND group2)",
+    "user_input": "Show me Spend by External Campaign for Philips brand AND only on Amazon vehicles (AMAZON DSP, AMAZON PRODUCTS, AMAZON BRANDS).",
+    "filtros": {
+      "segment": {
+        "filters": [
+          {
+            "groupType": "and_group",
+            "expressions": [
+              [
+                [
+                  {
+                    "chave": "slug_dimensao",
+                    "connective": "e",
+                    "estrutura": "segmento",
+                    "operador": "=",
+                    "needConvertToString": false,
+                    "valor": "Philips"
+                  }
+                ]
+              ]
+            ]
+          },
+          {
+            "groupType": "and_group",
+            "expressions": [
+              [
+                [
+                  {
+                    "chave": "veiculo",
+                    "connective": "e",
+                    "estrutura": "segmento",
+                    "operador": "in",
+                    "needConvertToString": false,
+                    "valor": [
+                      "AMAZON DSP",
+                      "AMAZON PRODUCTS",
+                      "AMAZON BRANDS"
+                    ]
+                  }
+                ]
+              ]
+            ]
+          }
+        ]
+      }
+    },
+    "neodash_link": "https://tpv.neodash.ai/explorador/100?dti=16-03-2026&dtf=22-03-2026&template=%7B%22params%22%3A%7B%22segmentos%22%3A%22campanha_externa_nome%22%2C%22metricas%22%3A%22custo_total%2Ccliques%2Ccpc%2Cimpressoes%22%2C%22segmentarPor%22%3A%22nao%22%2C%22order%22%3A%22desc%22%2C%22filtros%22%3A%7B%22segment%22%3A%7B%22filters%22%3A%5B%7B%22groupType%22%3A%22and_group%22%2C%22expressions%22%3A%5B%5B%5B%7B%22chave%22%3A%22slug_dimensao%22%2C%22connective%22%3A%22e%22%2C%22estrutura%22%3A%22segmento%22%2C%22operador%22%3A%22%3D%22%2C%22needConvertToString%22%3Afalse%2C%22valor%22%3A%22Philips%22%7D%5D%5D%5D%7D%2C%7B%22groupType%22%3A%22and_group%22%2C%22expressions%22%3A%5B%5B%5B%7B%22chave%22%3A%22veiculo%22%2C%22connective%22%3A%22e%22%2C%22estrutura%22%3A%22segmento%22%2C%22operador%22%3A%22in%22%2C%22needConvertToString%22%3Afalse%2C%22valor%22%3A%5B%22AMAZON%20DSP%22%2C%22AMAZON%20PRODUCTS%22%2C%22AMAZON%20BRANDS%22%5D%7D%5D%5D%5D%7D%5D%7D%7D%2C%22openGraphExplorador%22%3A0%2C%22totalPercent%22%3A1%2C%22showMetricsTotal%22%3A1%2C%22orderBy%22%3A%22custo_total%22%7D%7D",
+    "result": {
+      "row_count": 15,
+      "totals": [
+        {
+          "custo_total": 34167.06,
+          "cliques": 11196,
+          "cpc": 3.05,
+          "impressoes": 2374255
+        }
+      ],
+      "first_5_rows": [
+        {
+          "match": "NP_AMZ_TV_PHILIPS-ALL_PT_AON_ROAS_DISPLAY_CONV_PERF_PLUS|",
+          "campanha_externa_nome": "np_amz_tv_philips-all_pt_aon_roas_display_conv_perf_plus",
+          "custo_total": 14752.86,
+          "cliques": 3834,
+          "cpc": 3.85,
+          "impressoes": 983413
+        },
+        {
+          "match": "NP_AMZ_TV_PHILIPS-ALL_PT_AON_ROAS_CONV_SP_BRAN_ROAS|",
+          "campanha_externa_nome": "np_amz_tv_philips-all_pt_aon_roas_conv_sp_bran_roas",
+          "custo_total": 8081.28,
+          "cliques": 3589,
+          "cpc": 2.25,
+          "impressoes": 575339
+        },
+        {
+          "match": "NP_AMZ_AVA_PHILIPS-MIX_PT_AON_ROAS_DISPLAY_CONV_PERF_PLUS|",
+          "campanha_externa_nome": "np_amz_ava_philips-mix_pt_aon_roas_display_conv_perf_plus",
+          "custo_total": 3145.94,
+          "cliques": 1665,
+          "cpc": 1.89,
+          "impressoes": 394905
+        },
+        {
+          "match": "NP_AMZ_TV_PHILIPS-ALL_PT_AON_CPC_CONSID_SB_BRAN_CPC_INST|",
+          "campanha_externa_nome": "np_amz_tv_philips-all_pt_aon_cpc_consid_sb_bran_cpc_inst",
+          "custo_total": 2065.85,
+          "cliques": 474,
+          "cpc": 4.36,
+          "impressoes": 60860
+        },
+        {
+          "match": "NP_AMZ_TV_PHILIPS-ALL_PT_AON_ROAS_CONV_SP_AUTO_ROAS|",
+          "campanha_externa_nome": "np_amz_tv_philips-all_pt_aon_roas_conv_sp_auto_roas",
+          "custo_total": 1995.57,
+          "cliques": 329,
+          "cpc": 6.07,
+          "impressoes": 59553
+        }
+      ],
+      "all_rows": [
+        {
+          "match": "NP_AMZ_TV_PHILIPS-ALL_PT_AON_ROAS_DISPLAY_CONV_PERF_PLUS|",
+          "campanha_externa_nome": "np_amz_tv_philips-all_pt_aon_roas_display_conv_perf_plus",
+          "custo_total": 14752.86,
+          "cliques": 3834,
+          "cpc": 3.85,
+          "impressoes": 983413
+        },
+        {
+          "match": "NP_AMZ_TV_PHILIPS-ALL_PT_AON_ROAS_CONV_SP_BRAN_ROAS|",
+          "campanha_externa_nome": "np_amz_tv_philips-all_pt_aon_roas_conv_sp_bran_roas",
+          "custo_total": 8081.28,
+          "cliques": 3589,
+          "cpc": 2.25,
+          "impressoes": 575339
+        },
+        {
+          "match": "NP_AMZ_AVA_PHILIPS-MIX_PT_AON_ROAS_DISPLAY_CONV_PERF_PLUS|",
+          "campanha_externa_nome": "np_amz_ava_philips-mix_pt_aon_roas_display_conv_perf_plus",
+          "custo_total": 3145.94,
+          "cliques": 1665,
+          "cpc": 1.89,
+          "impressoes": 394905
+        },
+        {
+          "match": "NP_AMZ_TV_PHILIPS-ALL_PT_AON_CPC_CONSID_SB_BRAN_CPC_INST|",
+          "campanha_externa_nome": "np_amz_tv_philips-all_pt_aon_cpc_consid_sb_bran_cpc_inst",
+          "custo_total": 2065.85,
+          "cliques": 474,
+          "cpc": 4.36,
+          "impressoes": 60860
+        },
+        {
+          "match": "NP_AMZ_TV_PHILIPS-ALL_PT_AON_ROAS_CONV_SP_AUTO_ROAS|",
+          "campanha_externa_nome": "np_amz_tv_philips-all_pt_aon_roas_conv_sp_auto_roas",
+          "custo_total": 1995.57,
+          "cliques": 329,
+          "cpc": 6.07,
+          "impressoes": 59553
+        },
+        {
+          "match": "NP_AMZ_AVA_PHILIPS-MIX_PT_AON_ROAS_CONV_SP_BRAN_ROAS|",
+          "campanha_externa_nome": "np_amz_ava_philips-mix_pt_aon_roas_conv_sp_bran_roas",
+          "custo_total": 1372.18,
+          "cliques": 375,
+          "cpc": 3.66,
+          "impressoes": 55842
+        },
+        {
+          "match": "NP_AMZ_TV_PHILIPS-ALL_PT_AON_CPC_CONSID_SB_BRAN_CPC_GENERIC|",
+          "campanha_externa_nome": "np_amz_tv_philips-all_pt_aon_cpc_consid_sb_bran_cpc_generic",
+          "custo_total": 774.96,
+          "cliques": 139,
+          "cpc": 5.58,
+          "impressoes": 18260
+        },
+        {
+          "match": "NP_AMZ_AVA_PHILIPS-ALL_PT_AON_CPC_CONSID_SB_BRAN_CPC_GENERIC|",
+          "campanha_externa_nome": "np_amz_ava_philips-all_pt_aon_cpc_consid_sb_bran_cpc_generic",
+          "custo_total": 479.78,
+          "cliques": 126,
+          "cpc": 3.81,
+          "impressoes": 32163
+        },
+        {
+          "match": "NP_AMZ_AVA_PHILIPS-ALL_PT_AON_CPC_CONSID_SB_BRAN_CPC_INST|",
+          "campanha_externa_nome": "np_amz_ava_philips-all_pt_aon_cpc_consid_sb_bran_cpc_inst",
+          "custo_total": 434.07,
+          "cliques": 91,
+          "cpc": 4.77,
+          "impressoes": 24253
+        },
+        {
+          "match": "NP_AMZ_MONIT_PHILIPS-ALL_PT_AON_ROAS_CONV_SP_AUTO_ROAS|",
+          "campanha_externa_nome": "np_amz_monit_philips-all_pt_aon_roas_conv_sp_auto_roas",
+          "custo_total": 381.59,
+          "cliques": 317,
+          "cpc": 1.2,
+          "impressoes": 128914
+        },
+        {
+          "match": "NP_AMZ_TV_PHILIPS-ALL_PT_AON_ROAS_CONV_SP_AUTO_ROAS_DEALS_3_3|",
+          "campanha_externa_nome": "np_amz_tv_philips-all_pt_aon_roas_conv_sp_auto_roas_deals_3_3",
+          "custo_total": 337.92,
+          "cliques": 76,
+          "cpc": 4.45,
+          "impressoes": 11342
+        },
+        {
+          "match": "NP_AMZ_AVA_PHILIPS-MIX_PT_AON_ROAS_CONV_SP_AUTO_ROAS|",
+          "campanha_externa_nome": "np_amz_ava_philips-mix_pt_aon_roas_conv_sp_auto_roas",
+          "custo_total": 256.03,
+          "cliques": 147,
+          "cpc": 1.74,
+          "impressoes": 24258
+        },
+        {
+          "match": "NP_AMZ_AVA_PHILIPS-MIX_PT_AON_ROAS_CONV_SP_AUTO_ROAS_DEALS_3_3|",
+          "campanha_externa_nome": "np_amz_ava_philips-mix_pt_aon_roas_conv_sp_auto_roas_deals_3_3",
+          "custo_total": 89.03,
+          "cliques": 34,
+          "cpc": 2.62,
+          "impressoes": 5153
+        },
+        {
+          "match": "TV-1|",
+          "campanha_externa_nome": "TV-1",
+          "custo_total": 0,
+          "cliques": 0,
+          "cpc": 0,
+          "impressoes": 0
+        },
+        {
+          "match": "AVA-1|",
+          "campanha_externa_nome": "AVA-1",
+          "custo_total": 0,
+          "cliques": 0,
+          "cpc": 0,
+          "impressoes": 0
+        }
+      ]
+    },
+    "dimensions": [
+      "campanha_externa_nome"
+    ],
+    "metrics": [
+      "custo_total",
+      "cliques",
+      "cpc",
+      "impressoes"
+    ],
+    "time_breakdown": "nao",
+    "order_by": "custo_total"
+  },
+  {
+    "number": 10,
+    "title": "Complex: OR segment + metric filter + field comparison + time breakdown",
+    "user_input": "Show me daily Spend, Clicks, and CPC for campaigns containing 'meli' OR 'amz', but only where Spend is greater than Clicks (comparing metric to metric field), and CPC is less than R$5.",
+    "filtros": {
+      "segment": {
+        "filters": [
+          {
+            "groupType": "or_group",
+            "expressions": [
+              [
+                [
+                  {
+                    "chave": "campanha_externa_nome",
+                    "connective": "e",
+                    "estrutura": "segmento",
+                    "operador": "c",
+                    "needConvertToString": false,
+                    "valor": "meli"
+                  }
+                ]
+              ],
+              [
+                [
+                  {
+                    "chave": "campanha_externa_nome",
+                    "connective": "e",
+                    "estrutura": "segmento",
+                    "operador": "c",
+                    "needConvertToString": false,
+                    "valor": "amz"
+                  }
+                ]
+              ]
+            ]
+          }
+        ]
+      },
+      "metric": {
+        "filters": [
+          {
+            "groupType": "and_group",
+            "expressions": [
+              [
+                [
+                  {
+                    "chave": "custo_total",
+                    "connective": "e",
+                    "estrutura": "metrica",
+                    "operador": ">",
+                    "needConvertToString": false,
+                    "valor": "cliques",
+                    "tipo": "field"
+                  }
+                ]
+              ],
+              [
+                [
+                  {
+                    "chave": "cpc",
+                    "connective": "e",
+                    "estrutura": "metrica",
+                    "operador": "<",
+                    "needConvertToString": false,
+                    "valor": "5"
+                  }
+                ]
+              ]
+            ]
+          }
+        ]
+      }
+    },
+    "neodash_link": "https://tpv.neodash.ai/explorador/100?dti=16-03-2026&dtf=22-03-2026&template=%7B%22params%22%3A%7B%22segmentos%22%3A%22campanha_externa_nome%22%2C%22metricas%22%3A%22custo_total%2Ccliques%2Ccpc%22%2C%22segmentarPor%22%3A%22dia%22%2C%22order%22%3A%22desc%22%2C%22filtros%22%3A%7B%22segment%22%3A%7B%22filters%22%3A%5B%7B%22groupType%22%3A%22or_group%22%2C%22expressions%22%3A%5B%5B%5B%7B%22chave%22%3A%22campanha_externa_nome%22%2C%22connective%22%3A%22e%22%2C%22estrutura%22%3A%22segmento%22%2C%22operador%22%3A%22c%22%2C%22needConvertToString%22%3Afalse%2C%22valor%22%3A%22meli%22%7D%5D%5D%2C%5B%5B%7B%22chave%22%3A%22campanha_externa_nome%22%2C%22connective%22%3A%22e%22%2C%22estrutura%22%3A%22segmento%22%2C%22operador%22%3A%22c%22%2C%22needConvertToString%22%3Afalse%2C%22valor%22%3A%22amz%22%7D%5D%5D%5D%7D%5D%7D%2C%22metric%22%3A%7B%22filters%22%3A%5B%7B%22groupType%22%3A%22and_group%22%2C%22expressions%22%3A%5B%5B%5B%7B%22chave%22%3A%22custo_total%22%2C%22connective%22%3A%22e%22%2C%22estrutura%22%3A%22metrica%22%2C%22operador%22%3A%22%3E%22%2C%22needConvertToString%22%3Afalse%2C%22valor%22%3A%22cliques%22%2C%22tipo%22%3A%22field%22%7D%5D%5D%2C%5B%5B%7B%22chave%22%3A%22cpc%22%2C%22connective%22%3A%22e%22%2C%22estrutura%22%3A%22metrica%22%2C%22operador%22%3A%22%3C%22%2C%22needConvertToString%22%3Afalse%2C%22valor%22%3A%225%22%7D%5D%5D%5D%7D%5D%7D%7D%2C%22openGraphExplorador%22%3A0%2C%22totalPercent%22%3A1%2C%22showMetricsTotal%22%3A1%2C%22orderBy%22%3A%22custo_total%22%7D%7D",
+    "result": {
+      "row_count": 130,
+      "totals": [
+        {
+          "custo_total": 62308.09,
+          "cliques": 23264,
+          "cpc": 2.68
+        }
+      ],
+      "first_5_rows": [
+        {
+          "match": "2026-03-22|2026-03-22|NP_AMZ_TV_PHILIPS-ALL_PT_AON_ROAS_DISPLAY_CONV_PERF_PLUS|",
+          "data": "2026-03-22",
+          "mes": "2026-03-22",
+          "mes_ordinal": 3,
+          "ano": "2026-03-22",
+          "campanha_externa_nome": "np_amz_tv_philips-all_pt_aon_roas_display_conv_perf_plus",
+          "custo_total": 2033.49,
+          "cliques": 445,
+          "cpc": 4.57
+        },
+        {
+          "match": "2026-03-22|2026-03-22|NP_MELI_MONIT_AOC-ALL_PT_AON_ROAS_SCA_CONV_DADS_DC|",
+          "data": "2026-03-22",
+          "mes": "2026-03-22",
+          "mes_ordinal": 3,
+          "ano": "2026-03-22",
+          "campanha_externa_nome": "np_meli_monit_aoc-all_pt_aon_roas_sca_conv_dads_dc",
+          "custo_total": 439.99,
+          "cliques": 364,
+          "cpc": 1.21
+        },
+        {
+          "match": "2026-03-22|2026-03-22|NP_AMZ_MONIT_AOC-ALL_PT_AON_CPC_CONSID_SB_BRAN_CPC_GENERIC|",
+          "data": "2026-03-22",
+          "mes": "2026-03-22",
+          "mes_ordinal": 3,
+          "ano": "2026-03-22",
+          "campanha_externa_nome": "np_amz_monit_aoc-all_pt_aon_cpc_consid_sb_bran_cpc_generic",
+          "custo_total": 158.47,
+          "cliques": 34,
+          "cpc": 4.66
+        },
+        {
+          "match": "2026-03-22|2026-03-22|NP_AMZ_AVA_PHILIPS-ALL_PT_AON_CPC_CONSID_SB_BRAN_CPC_GENERIC|",
+          "data": "2026-03-22",
+          "mes": "2026-03-22",
+          "mes_ordinal": 3,
+          "ano": "2026-03-22",
+          "campanha_externa_nome": "np_amz_ava_philips-all_pt_aon_cpc_consid_sb_bran_cpc_generic",
+          "custo_total": 92.88,
+          "cliques": 26,
+          "cpc": 3.57
+        },
+        {
+          "match": "2026-03-22|2026-03-22|NP_AMZ_TV_PHILIPS-ALL_PT_AON_ROAS_CONV_SP_BRAN_ROAS|",
+          "data": "2026-03-22",
+          "mes": "2026-03-22",
+          "mes_ordinal": 3,
+          "ano": "2026-03-22",
+          "campanha_externa_nome": "np_amz_tv_philips-all_pt_aon_roas_conv_sp_bran_roas",
+          "custo_total": 1086.93,
+          "cliques": 528,
+          "cpc": 2.06
+        }
+      ],
+      "all_rows": [
+        {
+          "match": "2026-03-22|2026-03-22|NP_AMZ_TV_PHILIPS-ALL_PT_AON_ROAS_DISPLAY_CONV_PERF_PLUS|",
+          "data": "2026-03-22",
+          "mes": "2026-03-22",
+          "mes_ordinal": 3,
+          "ano": "2026-03-22",
+          "campanha_externa_nome": "np_amz_tv_philips-all_pt_aon_roas_display_conv_perf_plus",
+          "custo_total": 2033.49,
+          "cliques": 445,
+          "cpc": 4.57
+        },
+        {
+          "match": "2026-03-22|2026-03-22|NP_MELI_MONIT_AOC-ALL_PT_AON_ROAS_SCA_CONV_DADS_DC|",
+          "data": "2026-03-22",
+          "mes": "2026-03-22",
+          "mes_ordinal": 3,
+          "ano": "2026-03-22",
+          "campanha_externa_nome": "np_meli_monit_aoc-all_pt_aon_roas_sca_conv_dads_dc",
+          "custo_total": 439.99,
+          "cliques": 364,
+          "cpc": 1.21
+        },
+        {
+          "match": "2026-03-22|2026-03-22|NP_AMZ_MONIT_AOC-ALL_PT_AON_CPC_CONSID_SB_BRAN_CPC_GENERIC|",
+          "data": "2026-03-22",
+          "mes": "2026-03-22",
+          "mes_ordinal": 3,
+          "ano": "2026-03-22",
+          "campanha_externa_nome": "np_amz_monit_aoc-all_pt_aon_cpc_consid_sb_bran_cpc_generic",
+          "custo_total": 158.47,
+          "cliques": 34,
+          "cpc": 4.66
+        },
+        {
+          "match": "2026-03-22|2026-03-22|NP_AMZ_AVA_PHILIPS-ALL_PT_AON_CPC_CONSID_SB_BRAN_CPC_GENERIC|",
+          "data": "2026-03-22",
+          "mes": "2026-03-22",
+          "mes_ordinal": 3,
+          "ano": "2026-03-22",
+          "campanha_externa_nome": "np_amz_ava_philips-all_pt_aon_cpc_consid_sb_bran_cpc_generic",
+          "custo_total": 92.88,
+          "cliques": 26,
+          "cpc": 3.57
+        },
+        {
+          "match": "2026-03-22|2026-03-22|NP_AMZ_TV_PHILIPS-ALL_PT_AON_ROAS_CONV_SP_BRAN_ROAS|",
+          "data": "2026-03-22",
+          "mes": "2026-03-22",
+          "mes_ordinal": 3,
+          "ano": "2026-03-22",
+          "campanha_externa_nome": "np_amz_tv_philips-all_pt_aon_roas_conv_sp_bran_roas",
+          "custo_total": 1086.93,
+          "cliques": 528,
+          "cpc": 2.06
+        },
+        {
+          "match": "2026-03-22|2026-03-22|NP_MELI_TV_PHILIPS-ALL_PT_AON_ROAS_SCA_CONV_DADS_DCA|",
+          "data": "2026-03-22",
+          "mes": "2026-03-22",
+          "mes_ordinal": 3,
+          "ano": "2026-03-22",
+          "campanha_externa_nome": "np_meli_tv_philips-all_pt_aon_roas_sca_conv_dads_dca",
+          "custo_total": 339.42,
+          "cliques": 95,
+          "cpc": 3.57
+        },
+        {
+          "match": "2026-03-22|2026-03-22|NP_AMZ_AVA_PHILIPS-MIX_PT_AON_ROAS_CONV_SP_BRAN_ROAS|",
+          "data": "2026-03-22",
+          "mes": "2026-03-22",
+          "mes_ordinal": 3,
+          "ano": "2026-03-22",
+          "campanha_externa_nome": "np_amz_ava_philips-mix_pt_aon_roas_conv_sp_bran_roas",
+          "custo_total": 150,
+          "cliques": 47,
+          "cpc": 3.19
+        },
+        {
+          "match": "2026-03-22|2026-03-22|NP_AMZ_MONIT_AOC-ALL_PT_AON_ROAS_CONV_SP_AUTO_ROAS|",
+          "data": "2026-03-22",
+          "mes": "2026-03-22",
+          "mes_ordinal": 3,
+          "ano": "2026-03-22",
+          "campanha_externa_nome": "np_amz_monit_aoc-all_pt_aon_roas_conv_sp_auto_roas",
+          "custo_total": 367.02,
+          "cliques": 185,
+          "cpc": 1.98
+        },
+        {
+          "match": "2026-03-22|2026-03-22|NP_AMZ_AVA_PHILIPS-MIX_PT_AON_ROAS_DISPLAY_CONV_PERF_PLUS|",
+          "data": "2026-03-22",
+          "mes": "2026-03-22",
+          "mes_ordinal": 3,
+          "ano": "2026-03-22",
+          "campanha_externa_nome": "np_amz_ava_philips-mix_pt_aon_roas_display_conv_perf_plus",
+          "custo_total": 447.18,
+          "cliques": 196,
+          "cpc": 2.28
+        },
+        {
+          "match": "2026-03-22|2026-03-22|NP_MELI_ALL_PHILIPS-ALL_PT_AON_ROAS_SCA_CONV_DADS_DCA|",
+          "data": "2026-03-22",
+          "mes": "2026-03-22",
+          "mes_ordinal": 3,
+          "ano": "2026-03-22",
+          "campanha_externa_nome": "np_meli_all_philips-all_pt_aon_roas_sca_conv_dads_dca",
+          "custo_total": 543.8,
+          "cliques": 226,
+          "cpc": 2.41
+        },
+        {
+          "match": "2026-03-22|2026-03-22|NP_AMZ_AVA_PHILIPS-ALL_PT_AON_CPC_CONSID_SB_BRAN_CPC_INST|",
+          "data": "2026-03-22",
+          "mes": "2026-03-22",
+          "mes_ordinal": 3,
+          "ano": "2026-03-22",
+          "campanha_externa_nome": "np_amz_ava_philips-all_pt_aon_cpc_consid_sb_bran_cpc_inst",
+          "custo_total": 63.36,
+          "cliques": 15,
+          "cpc": 4.22
+        },
+        {
+          "match": "2026-03-22|2026-03-22|NP_AMZ_MONIT_AOC-ALL_PT_AON_ROAS_DISPLAY_CONV_PERF_PLUS|",
+          "data": "2026-03-22",
+          "mes": "2026-03-22",
+          "mes_ordinal": 3,
+          "ano": "2026-03-22",
+          "campanha_externa_nome": "np_amz_monit_aoc-all_pt_aon_roas_display_conv_perf_plus",
+          "custo_total": 1259.58,
+          "cliques": 384,
+          "cpc": 3.28
+        },
+        {
+          "match": "2026-03-22|2026-03-22|NP_AMZ_TV_PHILIPS-ALL_PT_AON_CPC_CONSID_SB_BRAN_CPC_GENERIC|",
+          "data": "2026-03-22",
+          "mes": "2026-03-22",
+          "mes_ordinal": 3,
+          "ano": "2026-03-22",
+          "campanha_externa_nome": "np_amz_tv_philips-all_pt_aon_cpc_consid_sb_bran_cpc_generic",
+          "custo_total": 188.24,
+          "cliques": 39,
+          "cpc": 4.83
+        },
+        {
+          "match": "2026-03-22|2026-03-22|NP_AMZ_MONIT_AOC-ALL_PT_AON_CPC_CONSID_SB_BRAN_CPC_INST|",
+          "data": "2026-03-22",
+          "mes": "2026-03-22",
+          "mes_ordinal": 3,
+          "ano": "2026-03-22",
+          "campanha_externa_nome": "np_amz_monit_aoc-all_pt_aon_cpc_consid_sb_bran_cpc_inst",
+          "custo_total": 200.7,
+          "cliques": 56,
+          "cpc": 3.58
+        },
+        {
+          "match": "2026-03-22|2026-03-22|NP_AMZ_MONIT_AOC_ALL_PT_AON_ROAS_CONV_SP_BRAN_ROAS|",
+          "data": "2026-03-22",
+          "mes": "2026-03-22",
+          "mes_ordinal": 3,
+          "ano": "2026-03-22",
+          "campanha_externa_nome": "np_amz_monit_aoc_all_pt_aon_roas_conv_sp_bran_roas",
+          "custo_total": 90.2,
+          "cliques": 40,
+          "cpc": 2.25
+        },
+        {
+          "match": "2026-03-22|2026-03-22|NP_AMZ_TV_PHILIPS-ALL_PT_AON_CPC_CONSID_SB_BRAN_CPC_INST|",
+          "data": "2026-03-22",
+          "mes": "2026-03-22",
+          "mes_ordinal": 3,
+          "ano": "2026-03-22",
+          "campanha_externa_nome": "np_amz_tv_philips-all_pt_aon_cpc_consid_sb_bran_cpc_inst",
+          "custo_total": 511.65,
+          "cliques": 121,
+          "cpc": 4.23
+        },
+        {
+          "match": "2026-03-22|2026-03-22|NP_AMZ_MONIT_PHILIPS-ALL_PT_AON_ROAS_CONV_SP_AUTO_ROAS|",
+          "data": "2026-03-22",
+          "mes": "2026-03-22",
+          "mes_ordinal": 3,
+          "ano": "2026-03-22",
+          "campanha_externa_nome": "np_amz_monit_philips-all_pt_aon_roas_conv_sp_auto_roas",
+          "custo_total": 50.08,
+          "cliques": 39,
+          "cpc": 1.28
+        },
+        {
+          "match": "2026-03-22|2026-03-22|NP_MELI_AVA_PHILIPS-ALL_PT_AON_ROAS_SCA_CONV_DADS_DC|",
+          "data": "2026-03-22",
+          "mes": "2026-03-22",
+          "mes_ordinal": 3,
+          "ano": "2026-03-22",
+          "campanha_externa_nome": "np_meli_ava_philips-all_pt_aon_roas_sca_conv_dads_dc",
+          "custo_total": 58.73,
+          "cliques": 15,
+          "cpc": 3.92
+        },
+        {
+          "match": "2026-03-22|2026-03-22|NP_AMZ_AVA_PHILIPS-MIX_PT_AON_ROAS_CONV_SP_AUTO_ROAS|",
+          "data": "2026-03-22",
+          "mes": "2026-03-22",
+          "mes_ordinal": 3,
+          "ano": "2026-03-22",
+          "campanha_externa_nome": "np_amz_ava_philips-mix_pt_aon_roas_conv_sp_auto_roas",
+          "custo_total": 24.83,
+          "cliques": 15,
+          "cpc": 1.66
+        },
+        {
+          "match": "2026-03-22|2026-03-22|NP_MELI_MONIT_AOC-ALL_PT_AON_ROAS_SCA_CONV_DADS_DP|",
+          "data": "2026-03-22",
+          "mes": "2026-03-22",
+          "mes_ordinal": 3,
+          "ano": "2026-03-22",
+          "campanha_externa_nome": "np_meli_monit_aoc-all_pt_aon_roas_sca_conv_dads_dp",
+          "custo_total": 267.66,
+          "cliques": 103,
+          "cpc": 2.6
+        },
+        {
+          "match": "2026-03-22|2026-03-22|NP_MELI_AVA_PHILIPS-ALL_PT_BB_ROAS_SCA_CONV_DADS_DC|",
+          "data": "2026-03-22",
+          "mes": "2026-03-22",
+          "mes_ordinal": 3,
+          "ano": "2026-03-22",
+          "campanha_externa_nome": "np_meli_ava_philips-all_pt_bb_roas_sca_conv_dads_dc",
+          "custo_total": 408.17,
+          "cliques": 198,
+          "cpc": 2.06
+        },
+        {
+          "match": "2026-03-21|2026-03-21|NP_AMZ_TV_PHILIPS-ALL_PT_AON_ROAS_DISPLAY_CONV_PERF_PLUS|",
+          "data": "2026-03-21",
+          "mes": "2026-03-21",
+          "mes_ordinal": 3,
+          "ano": "2026-03-21",
+          "campanha_externa_nome": "np_amz_tv_philips-all_pt_aon_roas_display_conv_perf_plus",
+          "custo_total": 1857.31,
+          "cliques": 411,
+          "cpc": 4.52
+        },
+        {
+          "match": "2026-03-21|2026-03-21|NP_AMZ_MONIT_AOC-ALL_PT_AON_ROAS_DISPLAY_CONV_PERF_PLUS|",
+          "data": "2026-03-21",
+          "mes": "2026-03-21",
+          "mes_ordinal": 3,
+          "ano": "2026-03-21",
+          "campanha_externa_nome": "np_amz_monit_aoc-all_pt_aon_roas_display_conv_perf_plus",
+          "custo_total": 1128.28,
+          "cliques": 360,
+          "cpc": 3.13
+        },
+        {
+          "match": "2026-03-21|2026-03-21|NP_AMZ_AVA_PHILIPS-MIX_PT_AON_ROAS_CONV_SP_BRAN_ROAS|",
+          "data": "2026-03-21",
+          "mes": "2026-03-21",
+          "mes_ordinal": 3,
+          "ano": "2026-03-21",
+          "campanha_externa_nome": "np_amz_ava_philips-mix_pt_aon_roas_conv_sp_bran_roas",
+          "custo_total": 151.54,
+          "cliques": 52,
+          "cpc": 2.91
+        },
+        {
+          "match": "2026-03-21|2026-03-21|NP_AMZ_MONIT_PHILIPS-ALL_PT_AON_ROAS_CONV_SP_AUTO_ROAS|",
+          "data": "2026-03-21",
+          "mes": "2026-03-21",
+          "mes_ordinal": 3,
+          "ano": "2026-03-21",
+          "campanha_externa_nome": "np_amz_monit_philips-all_pt_aon_roas_conv_sp_auto_roas",
+          "custo_total": 50.34,
+          "cliques": 36,
+          "cpc": 1.4
+        },
+        {
+          "match": "2026-03-21|2026-03-21|NP_MELI_AVA_PHILIPS-ALL_PT_AON_ROAS_SCA_CONV_DADS_DC|",
+          "data": "2026-03-21",
+          "mes": "2026-03-21",
+          "mes_ordinal": 3,
+          "ano": "2026-03-21",
+          "campanha_externa_nome": "np_meli_ava_philips-all_pt_aon_roas_sca_conv_dads_dc",
+          "custo_total": 49.56,
+          "cliques": 26,
+          "cpc": 1.91
+        },
+        {
+          "match": "2026-03-21|2026-03-21|NP_MELI_ALL_PHILIPS-ALL_PT_AON_ROAS_SCA_CONV_DADS_DP|",
+          "data": "2026-03-21",
+          "mes": "2026-03-21",
+          "mes_ordinal": 3,
+          "ano": "2026-03-21",
+          "campanha_externa_nome": "np_meli_all_philips-all_pt_aon_roas_sca_conv_dads_dp",
+          "custo_total": 456.94,
+          "cliques": 152,
+          "cpc": 3.01
+        },
+        {
+          "match": "2026-03-21|2026-03-21|NP_MELI_ALL_PHILIPS-ALL_PT_AON_ROAS_SCA_CONV_DADS_DCA|",
+          "data": "2026-03-21",
+          "mes": "2026-03-21",
+          "mes_ordinal": 3,
+          "ano": "2026-03-21",
+          "campanha_externa_nome": "np_meli_all_philips-all_pt_aon_roas_sca_conv_dads_dca",
+          "custo_total": 565.53,
+          "cliques": 220,
+          "cpc": 2.57
+        },
+        {
+          "match": "2026-03-21|2026-03-21|NP_AMZ_TV_PHILIPS-ALL_PT_AON_CPC_CONSID_SB_BRAN_CPC_INST|",
+          "data": "2026-03-21",
+          "mes": "2026-03-21",
+          "mes_ordinal": 3,
+          "ano": "2026-03-21",
+          "campanha_externa_nome": "np_amz_tv_philips-all_pt_aon_cpc_consid_sb_bran_cpc_inst",
+          "custo_total": 513.92,
+          "cliques": 128,
+          "cpc": 4.01
+        },
+        {
+          "match": "2026-03-21|2026-03-21|NP_AMZ_AVA_PHILIPS-MIX_PT_AON_ROAS_DISPLAY_CONV_PERF_PLUS|",
+          "data": "2026-03-21",
+          "mes": "2026-03-21",
+          "mes_ordinal": 3,
+          "ano": "2026-03-21",
+          "campanha_externa_nome": "np_amz_ava_philips-mix_pt_aon_roas_display_conv_perf_plus",
+          "custo_total": 398.86,
+          "cliques": 176,
+          "cpc": 2.27
+        },
+        {
+          "match": "2026-03-21|2026-03-21|NP_AMZ_AVA_PHILIPS-ALL_PT_AON_CPC_CONSID_SB_BRAN_CPC_INST|",
+          "data": "2026-03-21",
+          "mes": "2026-03-21",
+          "mes_ordinal": 3,
+          "ano": "2026-03-21",
+          "campanha_externa_nome": "np_amz_ava_philips-all_pt_aon_cpc_consid_sb_bran_cpc_inst",
+          "custo_total": 66.15,
+          "cliques": 15,
+          "cpc": 4.41
+        },
+        {
+          "match": "2026-03-21|2026-03-21|NP_MELI_MONIT_AOC-ALL_PT_AON_ROAS_SCA_CONV_DADS_DC|",
+          "data": "2026-03-21",
+          "mes": "2026-03-21",
+          "mes_ordinal": 3,
+          "ano": "2026-03-21",
+          "campanha_externa_nome": "np_meli_monit_aoc-all_pt_aon_roas_sca_conv_dads_dc",
+          "custo_total": 454.64,
+          "cliques": 93,
+          "cpc": 4.89
+        },
+        {
+          "match": "2026-03-21|2026-03-21|NP_MELI_MONIT_AOC-ALL_PT_AON_ROAS_SCA_CONV_DADS_DP|",
+          "data": "2026-03-21",
+          "mes": "2026-03-21",
+          "mes_ordinal": 3,
+          "ano": "2026-03-21",
+          "campanha_externa_nome": "np_meli_monit_aoc-all_pt_aon_roas_sca_conv_dads_dp",
+          "custo_total": 266.74,
+          "cliques": 96,
+          "cpc": 2.78
+        },
+        {
+          "match": "2026-03-21|2026-03-21|NP_AMZ_AVA_PHILIPS-MIX_PT_AON_ROAS_CONV_SP_AUTO_ROAS|",
+          "data": "2026-03-21",
+          "mes": "2026-03-21",
+          "mes_ordinal": 3,
+          "ano": "2026-03-21",
+          "campanha_externa_nome": "np_amz_ava_philips-mix_pt_aon_roas_conv_sp_auto_roas",
+          "custo_total": 25.44,
+          "cliques": 14,
+          "cpc": 1.82
+        },
+        {
+          "match": "2026-03-21|2026-03-21|NP_AMZ_MONIT_AOC_ALL_PT_AON_ROAS_CONV_SP_BRAN_ROAS|",
+          "data": "2026-03-21",
+          "mes": "2026-03-21",
+          "mes_ordinal": 3,
+          "ano": "2026-03-21",
+          "campanha_externa_nome": "np_amz_monit_aoc_all_pt_aon_roas_conv_sp_bran_roas",
+          "custo_total": 92.32,
+          "cliques": 31,
+          "cpc": 2.98
+        },
+        {
+          "match": "2026-03-21|2026-03-21|NP_AMZ_MONIT_AOC-ALL_PT_AON_ROAS_CONV_SP_AUTO_ROAS|",
+          "data": "2026-03-21",
+          "mes": "2026-03-21",
+          "mes_ordinal": 3,
+          "ano": "2026-03-21",
+          "campanha_externa_nome": "np_amz_monit_aoc-all_pt_aon_roas_conv_sp_auto_roas",
+          "custo_total": 368.44,
+          "cliques": 178,
+          "cpc": 2.07
+        },
+        {
+          "match": "2026-03-21|2026-03-21|NP_AMZ_AVA_PHILIPS-ALL_PT_AON_CPC_CONSID_SB_BRAN_CPC_GENERIC|",
+          "data": "2026-03-21",
+          "mes": "2026-03-21",
+          "mes_ordinal": 3,
+          "ano": "2026-03-21",
+          "campanha_externa_nome": "np_amz_ava_philips-all_pt_aon_cpc_consid_sb_bran_cpc_generic",
+          "custo_total": 92.58,
+          "cliques": 27,
+          "cpc": 3.43
+        },
+        {
+          "match": "2026-03-21|2026-03-21|NP_AMZ_TV_PHILIPS-ALL_PT_AON_ROAS_CONV_SP_BRAN_ROAS|",
+          "data": "2026-03-21",
+          "mes": "2026-03-21",
+          "mes_ordinal": 3,
+          "ano": "2026-03-21",
+          "campanha_externa_nome": "np_amz_tv_philips-all_pt_aon_roas_conv_sp_bran_roas",
+          "custo_total": 1106.32,
+          "cliques": 541,
+          "cpc": 2.04
+        },
+        {
+          "match": "2026-03-21|2026-03-21|NP_MELI_TV_PHILIPS-ALL_PT_AON_ROAS_SCA_CONV_DADS_DCA|",
+          "data": "2026-03-21",
+          "mes": "2026-03-21",
+          "mes_ordinal": 3,
+          "ano": "2026-03-21",
+          "campanha_externa_nome": "np_meli_tv_philips-all_pt_aon_roas_sca_conv_dads_dca",
+          "custo_total": 259.3,
+          "cliques": 90,
+          "cpc": 2.88
+        },
+        {
+          "match": "2026-03-21|2026-03-21|NP_AMZ_MONIT_AOC-ALL_PT_AON_CPC_CONSID_SB_BRAN_CPC_INST|",
+          "data": "2026-03-21",
+          "mes": "2026-03-21",
+          "mes_ordinal": 3,
+          "ano": "2026-03-21",
+          "campanha_externa_nome": "np_amz_monit_aoc-all_pt_aon_cpc_consid_sb_bran_cpc_inst",
+          "custo_total": 271.3,
+          "cliques": 79,
+          "cpc": 3.43
+        },
+        {
+          "match": "2026-03-21|2026-03-21|NP_MELI_AVA_PHILIPS-ALL_PT_BB_ROAS_SCA_CONV_DADS_DC|",
+          "data": "2026-03-21",
+          "mes": "2026-03-21",
+          "mes_ordinal": 3,
+          "ano": "2026-03-21",
+          "campanha_externa_nome": "np_meli_ava_philips-all_pt_bb_roas_sca_conv_dads_dc",
+          "custo_total": 412.75,
+          "cliques": 205,
+          "cpc": 2.01
+        },
+        {
+          "match": "2026-03-20|2026-03-20|NP_MELI_AVA_PHILIPS-ALL_PT_AON_ROAS_SCA_CONV_DADS_DC|",
+          "data": "2026-03-20",
+          "mes": "2026-03-20",
+          "mes_ordinal": 3,
+          "ano": "2026-03-20",
+          "campanha_externa_nome": "np_meli_ava_philips-all_pt_aon_roas_sca_conv_dads_dc",
+          "custo_total": 59.64,
+          "cliques": 43,
+          "cpc": 1.39
+        },
+        {
+          "match": "2026-03-20|2026-03-20|NP_AMZ_AVA_PHILIPS-MIX_PT_AON_ROAS_CONV_SP_BRAN_ROAS|",
+          "data": "2026-03-20",
+          "mes": "2026-03-20",
+          "mes_ordinal": 3,
+          "ano": "2026-03-20",
+          "campanha_externa_nome": "np_amz_ava_philips-mix_pt_aon_roas_conv_sp_bran_roas",
+          "custo_total": 187.69,
+          "cliques": 48,
+          "cpc": 3.91
+        },
+        {
+          "match": "2026-03-20|2026-03-20|NP_AMZ_MONIT_AOC-ALL_PT_AON_CPC_CONSID_SB_BRAN_CPC_INST|",
+          "data": "2026-03-20",
+          "mes": "2026-03-20",
+          "mes_ordinal": 3,
+          "ano": "2026-03-20",
+          "campanha_externa_nome": "np_amz_monit_aoc-all_pt_aon_cpc_consid_sb_bran_cpc_inst",
+          "custo_total": 296.83,
+          "cliques": 91,
+          "cpc": 3.26
+        },
+        {
+          "match": "2026-03-20|2026-03-20|NP_AMZ_TV_PHILIPS-ALL_PT_AON_ROAS_DISPLAY_CONV_PERF_PLUS|",
+          "data": "2026-03-20",
+          "mes": "2026-03-20",
+          "mes_ordinal": 3,
+          "ano": "2026-03-20",
+          "campanha_externa_nome": "np_amz_tv_philips-all_pt_aon_roas_display_conv_perf_plus",
+          "custo_total": 2021.29,
+          "cliques": 445,
+          "cpc": 4.54
+        },
+        {
+          "match": "2026-03-20|2026-03-20|NP_AMZ_AVA_PHILIPS-MIX_PT_AON_ROAS_DISPLAY_CONV_PERF_PLUS|",
+          "data": "2026-03-20",
+          "mes": "2026-03-20",
+          "mes_ordinal": 3,
+          "ano": "2026-03-20",
+          "campanha_externa_nome": "np_amz_ava_philips-mix_pt_aon_roas_display_conv_perf_plus",
+          "custo_total": 446.14,
+          "cliques": 205,
+          "cpc": 2.18
+        },
+        {
+          "match": "2026-03-20|2026-03-20|NP_AMZ_MONIT_AOC-ALL_PT_AON_CPC_CONSID_SB_BRAN_CPC_GENERIC|",
+          "data": "2026-03-20",
+          "mes": "2026-03-20",
+          "mes_ordinal": 3,
+          "ano": "2026-03-20",
+          "campanha_externa_nome": "np_amz_monit_aoc-all_pt_aon_cpc_consid_sb_bran_cpc_generic",
+          "custo_total": 185.09,
+          "cliques": 41,
+          "cpc": 4.51
+        },
+        {
+          "match": "2026-03-20|2026-03-20|NP_AMZ_MONIT_PHILIPS-ALL_PT_AON_ROAS_CONV_SP_AUTO_ROAS|",
+          "data": "2026-03-20",
+          "mes": "2026-03-20",
+          "mes_ordinal": 3,
+          "ano": "2026-03-20",
+          "campanha_externa_nome": "np_amz_monit_philips-all_pt_aon_roas_conv_sp_auto_roas",
+          "custo_total": 48.99,
+          "cliques": 39,
+          "cpc": 1.26
+        },
+        {
+          "match": "2026-03-20|2026-03-20|NP_AMZ_MONIT_AOC-ALL_PT_AON_ROAS_DISPLAY_CONV_PERF_PLUS|",
+          "data": "2026-03-20",
+          "mes": "2026-03-20",
+          "mes_ordinal": 3,
+          "ano": "2026-03-20",
+          "campanha_externa_nome": "np_amz_monit_aoc-all_pt_aon_roas_display_conv_perf_plus",
+          "custo_total": 1260.27,
+          "cliques": 443,
+          "cpc": 2.84
+        },
+        {
+          "match": "2026-03-20|2026-03-20|NP_AMZ_AVA_PHILIPS-ALL_PT_AON_CPC_CONSID_SB_BRAN_CPC_GENERIC|",
+          "data": "2026-03-20",
+          "mes": "2026-03-20",
+          "mes_ordinal": 3,
+          "ano": "2026-03-20",
+          "campanha_externa_nome": "np_amz_ava_philips-all_pt_aon_cpc_consid_sb_bran_cpc_generic",
+          "custo_total": 100.7,
+          "cliques": 26,
+          "cpc": 3.87
+        },
+        {
+          "match": "2026-03-20|2026-03-20|NP_AMZ_AVA_PHILIPS-MIX_PT_AON_ROAS_CONV_SP_AUTO_ROAS|",
+          "data": "2026-03-20",
+          "mes": "2026-03-20",
+          "mes_ordinal": 3,
+          "ano": "2026-03-20",
+          "campanha_externa_nome": "np_amz_ava_philips-mix_pt_aon_roas_conv_sp_auto_roas",
+          "custo_total": 36.37,
+          "cliques": 27,
+          "cpc": 1.35
+        },
+        {
+          "match": "2026-03-20|2026-03-20|NP_MELI_TV_PHILIPS-ALL_PT_AON_ROAS_SCA_CONV_DADS_DCA|",
+          "data": "2026-03-20",
+          "mes": "2026-03-20",
+          "mes_ordinal": 3,
+          "ano": "2026-03-20",
+          "campanha_externa_nome": "np_meli_tv_philips-all_pt_aon_roas_sca_conv_dads_dca",
+          "custo_total": 364.53,
+          "cliques": 161,
+          "cpc": 2.26
+        },
+        {
+          "match": "2026-03-20|2026-03-20|NP_MELI_ALL_PHILIPS-ALL_PT_AON_ROAS_SCA_CONV_DADS_DCA|",
+          "data": "2026-03-20",
+          "mes": "2026-03-20",
+          "mes_ordinal": 3,
+          "ano": "2026-03-20",
+          "campanha_externa_nome": "np_meli_all_philips-all_pt_aon_roas_sca_conv_dads_dca",
+          "custo_total": 591.21,
+          "cliques": 252,
+          "cpc": 2.35
+        },
+        {
+          "match": "2026-03-20|2026-03-20|NP_AMZ_TV_PHILIPS-ALL_PT_AON_ROAS_CONV_SP_BRAN_ROAS|",
+          "data": "2026-03-20",
+          "mes": "2026-03-20",
+          "mes_ordinal": 3,
+          "ano": "2026-03-20",
+          "campanha_externa_nome": "np_amz_tv_philips-all_pt_aon_roas_conv_sp_bran_roas",
+          "custo_total": 1094.69,
+          "cliques": 562,
+          "cpc": 1.95
+        },
+        {
+          "match": "2026-03-20|2026-03-20|NP_AMZ_TV_PHILIPS-ALL_PT_AON_CPC_CONSID_SB_BRAN_CPC_INST|",
+          "data": "2026-03-20",
+          "mes": "2026-03-20",
+          "mes_ordinal": 3,
+          "ano": "2026-03-20",
+          "campanha_externa_nome": "np_amz_tv_philips-all_pt_aon_cpc_consid_sb_bran_cpc_inst",
+          "custo_total": 534.31,
+          "cliques": 131,
+          "cpc": 4.08
+        },
+        {
+          "match": "2026-03-20|2026-03-20|NP_AMZ_MONIT_AOC-ALL_PT_AON_ROAS_CONV_SP_AUTO_ROAS|",
+          "data": "2026-03-20",
+          "mes": "2026-03-20",
+          "mes_ordinal": 3,
+          "ano": "2026-03-20",
+          "campanha_externa_nome": "np_amz_monit_aoc-all_pt_aon_roas_conv_sp_auto_roas",
+          "custo_total": 623.61,
+          "cliques": 299,
+          "cpc": 2.09
+        },
+        {
+          "match": "2026-03-20|2026-03-20|NP_AMZ_MONIT_AOC_ALL_PT_AON_ROAS_CONV_SP_BRAN_ROAS|",
+          "data": "2026-03-20",
+          "mes": "2026-03-20",
+          "mes_ordinal": 3,
+          "ano": "2026-03-20",
+          "campanha_externa_nome": "np_amz_monit_aoc_all_pt_aon_roas_conv_sp_bran_roas",
+          "custo_total": 269.16,
+          "cliques": 93,
+          "cpc": 2.89
+        },
+        {
+          "match": "2026-03-20|2026-03-20|NP_AMZ_AVA_PHILIPS-ALL_PT_AON_CPC_CONSID_SB_BRAN_CPC_INST|",
+          "data": "2026-03-20",
+          "mes": "2026-03-20",
+          "mes_ordinal": 3,
+          "ano": "2026-03-20",
+          "campanha_externa_nome": "np_amz_ava_philips-all_pt_aon_cpc_consid_sb_bran_cpc_inst",
+          "custo_total": 69.86,
+          "cliques": 14,
+          "cpc": 4.99
+        },
+        {
+          "match": "2026-03-20|2026-03-20|NP_MELI_MONIT_AOC-ALL_PT_AON_ROAS_SCA_CONV_DADS_DP|",
+          "data": "2026-03-20",
+          "mes": "2026-03-20",
+          "mes_ordinal": 3,
+          "ano": "2026-03-20",
+          "campanha_externa_nome": "np_meli_monit_aoc-all_pt_aon_roas_sca_conv_dads_dp",
+          "custo_total": 163.37,
+          "cliques": 35,
+          "cpc": 4.67
+        },
+        {
+          "match": "2026-03-20|2026-03-20|NP_MELI_AVA_PHILIPS-ALL_PT_BB_ROAS_SCA_CONV_DADS_DC|",
+          "data": "2026-03-20",
+          "mes": "2026-03-20",
+          "mes_ordinal": 3,
+          "ano": "2026-03-20",
+          "campanha_externa_nome": "np_meli_ava_philips-all_pt_bb_roas_sca_conv_dads_dc",
+          "custo_total": 421.74,
+          "cliques": 180,
+          "cpc": 2.34
+        },
+        {
+          "match": "2026-03-20|2026-03-20|NP_MELI_ALL_PHILIPS-ALL_PT_AON_ROAS_SCA_CONV_DADS_DP|",
+          "data": "2026-03-20",
+          "mes": "2026-03-20",
+          "mes_ordinal": 3,
+          "ano": "2026-03-20",
+          "campanha_externa_nome": "np_meli_all_philips-all_pt_aon_roas_sca_conv_dads_dp",
+          "custo_total": 471.33,
+          "cliques": 141,
+          "cpc": 3.34
+        },
+        {
+          "match": "2026-03-19|2026-03-19|NP_AMZ_TV_PHILIPS-ALL_PT_AON_ROAS_CONV_SP_BRAN_ROAS|",
+          "data": "2026-03-19",
+          "mes": "2026-03-19",
+          "mes_ordinal": 3,
+          "ano": "2026-03-19",
+          "campanha_externa_nome": "np_amz_tv_philips-all_pt_aon_roas_conv_sp_bran_roas",
+          "custo_total": 1169.87,
+          "cliques": 520,
+          "cpc": 2.25
+        },
+        {
+          "match": "2026-03-19|2026-03-19|NP_AMZ_AVA_PHILIPS-MIX_PT_AON_ROAS_CONV_SP_AUTO_ROAS|",
+          "data": "2026-03-19",
+          "mes": "2026-03-19",
+          "mes_ordinal": 3,
+          "ano": "2026-03-19",
+          "campanha_externa_nome": "np_amz_ava_philips-mix_pt_aon_roas_conv_sp_auto_roas",
+          "custo_total": 34.21,
+          "cliques": 16,
+          "cpc": 2.14
+        },
+        {
+          "match": "2026-03-19|2026-03-19|NP_MELI_ALL_PHILIPS-ALL_PT_AON_ROAS_SCA_CONV_DADS_DCA|",
+          "data": "2026-03-19",
+          "mes": "2026-03-19",
+          "mes_ordinal": 3,
+          "ano": "2026-03-19",
+          "campanha_externa_nome": "np_meli_all_philips-all_pt_aon_roas_sca_conv_dads_dca",
+          "custo_total": 531.52,
+          "cliques": 179,
+          "cpc": 2.97
+        },
+        {
+          "match": "2026-03-19|2026-03-19|NP_AMZ_MONIT_PHILIPS-ALL_PT_AON_ROAS_CONV_SP_AUTO_ROAS|",
+          "data": "2026-03-19",
+          "mes": "2026-03-19",
+          "mes_ordinal": 3,
+          "ano": "2026-03-19",
+          "campanha_externa_nome": "np_amz_monit_philips-all_pt_aon_roas_conv_sp_auto_roas",
+          "custo_total": 50.2,
+          "cliques": 43,
+          "cpc": 1.17
+        },
+        {
+          "match": "2026-03-19|2026-03-19|NP_AMZ_MONIT_AOC-ALL_PT_AON_ROAS_CONV_SP_AUTO_ROAS|",
+          "data": "2026-03-19",
+          "mes": "2026-03-19",
+          "mes_ordinal": 3,
+          "ano": "2026-03-19",
+          "campanha_externa_nome": "np_amz_monit_aoc-all_pt_aon_roas_conv_sp_auto_roas",
+          "custo_total": 640.87,
+          "cliques": 309,
+          "cpc": 2.07
+        },
+        {
+          "match": "2026-03-19|2026-03-19|NP_MELI_MONIT_AOC-ALL_PT_AON_ROAS_SCA_CONV_DADS_DC|",
+          "data": "2026-03-19",
+          "mes": "2026-03-19",
+          "mes_ordinal": 3,
+          "ano": "2026-03-19",
+          "campanha_externa_nome": "np_meli_monit_aoc-all_pt_aon_roas_sca_conv_dads_dc",
+          "custo_total": 209.62,
+          "cliques": 43,
+          "cpc": 4.87
+        },
+        {
+          "match": "2026-03-19|2026-03-19|NP_AMZ_AVA_PHILIPS-ALL_PT_AON_CPC_CONSID_SB_BRAN_CPC_GENERIC|",
+          "data": "2026-03-19",
+          "mes": "2026-03-19",
+          "mes_ordinal": 3,
+          "ano": "2026-03-19",
+          "campanha_externa_nome": "np_amz_ava_philips-all_pt_aon_cpc_consid_sb_bran_cpc_generic",
+          "custo_total": 45.03,
+          "cliques": 10,
+          "cpc": 4.5
+        },
+        {
+          "match": "2026-03-19|2026-03-19|NP_AMZ_AVA_PHILIPS-MIX_PT_AON_ROAS_DISPLAY_CONV_PERF_PLUS|",
+          "data": "2026-03-19",
+          "mes": "2026-03-19",
+          "mes_ordinal": 3,
+          "ano": "2026-03-19",
+          "campanha_externa_nome": "np_amz_ava_philips-mix_pt_aon_roas_display_conv_perf_plus",
+          "custo_total": 521.56,
+          "cliques": 301,
+          "cpc": 1.73
+        },
+        {
+          "match": "2026-03-19|2026-03-19|NP_AMZ_MONIT_AOC-ALL_PT_AON_CPC_CONSID_SB_BRAN_CPC_INST|",
+          "data": "2026-03-19",
+          "mes": "2026-03-19",
+          "mes_ordinal": 3,
+          "ano": "2026-03-19",
+          "campanha_externa_nome": "np_amz_monit_aoc-all_pt_aon_cpc_consid_sb_bran_cpc_inst",
+          "custo_total": 91.04,
+          "cliques": 30,
+          "cpc": 3.03
+        },
+        {
+          "match": "2026-03-19|2026-03-19|NP_AMZ_TV_PHILIPS-ALL_PT_AON_CPC_CONSID_SB_BRAN_CPC_INST|",
+          "data": "2026-03-19",
+          "mes": "2026-03-19",
+          "mes_ordinal": 3,
+          "ano": "2026-03-19",
+          "campanha_externa_nome": "np_amz_tv_philips-all_pt_aon_cpc_consid_sb_bran_cpc_inst",
+          "custo_total": 90.97,
+          "cliques": 19,
+          "cpc": 4.79
+        },
+        {
+          "match": "2026-03-19|2026-03-19|NP_MELI_MONIT_AOC_ALL_PT_AON_NTB_SCA_AW_DADS|",
+          "data": "2026-03-19",
+          "mes": "2026-03-19",
+          "mes_ordinal": 3,
+          "ano": "2026-03-19",
+          "campanha_externa_nome": "np_meli_monit_aoc_all_pt_aon_ntb_sca_aw_dads",
+          "custo_total": 158.44,
+          "cliques": 38,
+          "cpc": 4.17
+        },
+        {
+          "match": "2026-03-19|2026-03-19|NP_MELI_AVA_PHILIPS-ALL_PT_BB_ROAS_SCA_CONV_DADS_DC|",
+          "data": "2026-03-19",
+          "mes": "2026-03-19",
+          "mes_ordinal": 3,
+          "ano": "2026-03-19",
+          "campanha_externa_nome": "np_meli_ava_philips-all_pt_bb_roas_sca_conv_dads_dc",
+          "custo_total": 376.54,
+          "cliques": 149,
+          "cpc": 2.53
+        },
+        {
+          "match": "2026-03-19|2026-03-19|NP_AMZ_TV_PHILIPS-ALL_PT_AON_ROAS_DISPLAY_CONV_PERF_PLUS|",
+          "data": "2026-03-19",
+          "mes": "2026-03-19",
+          "mes_ordinal": 3,
+          "ano": "2026-03-19",
+          "campanha_externa_nome": "np_amz_tv_philips-all_pt_aon_roas_display_conv_perf_plus",
+          "custo_total": 2382.31,
+          "cliques": 624,
+          "cpc": 3.82
+        },
+        {
+          "match": "2026-03-19|2026-03-19|NP_AMZ_MONIT_AOC-ALL_PT_AON_ROAS_DISPLAY_CONV_PERF_PLUS|",
+          "data": "2026-03-19",
+          "mes": "2026-03-19",
+          "mes_ordinal": 3,
+          "ano": "2026-03-19",
+          "campanha_externa_nome": "np_amz_monit_aoc-all_pt_aon_roas_display_conv_perf_plus",
+          "custo_total": 1549.14,
+          "cliques": 517,
+          "cpc": 3
+        },
+        {
+          "match": "2026-03-19|2026-03-19|NP_MELI_MONIT_AOC-ALL_PT_AON_ROAS_SCA_CONV_DADS_DP|",
+          "data": "2026-03-19",
+          "mes": "2026-03-19",
+          "mes_ordinal": 3,
+          "ano": "2026-03-19",
+          "campanha_externa_nome": "np_meli_monit_aoc-all_pt_aon_roas_sca_conv_dads_dp",
+          "custo_total": 94.8,
+          "cliques": 66,
+          "cpc": 1.44
+        },
+        {
+          "match": "2026-03-19|2026-03-19|NP_MELI_AVA_PHILIPS-ALL_PT_AON_ROAS_SCA_CONV_DADS_DC|",
+          "data": "2026-03-19",
+          "mes": "2026-03-19",
+          "mes_ordinal": 3,
+          "ano": "2026-03-19",
+          "campanha_externa_nome": "np_meli_ava_philips-all_pt_aon_roas_sca_conv_dads_dc",
+          "custo_total": 7.9,
+          "cliques": 4,
+          "cpc": 1.97
+        },
+        {
+          "match": "2026-03-19|2026-03-19|NP_AMZ_MONIT_AOC_ALL_PT_AON_ROAS_CONV_SP_BRAN_ROAS|",
+          "data": "2026-03-19",
+          "mes": "2026-03-19",
+          "mes_ordinal": 3,
+          "ano": "2026-03-19",
+          "campanha_externa_nome": "np_amz_monit_aoc_all_pt_aon_roas_conv_sp_bran_roas",
+          "custo_total": 270.18,
+          "cliques": 92,
+          "cpc": 2.94
+        },
+        {
+          "match": "2026-03-19|2026-03-19|NP_MELI_ALL_PHILIPS-ALL_PT_AON_ROAS_SCA_CONV_DADS_DP|",
+          "data": "2026-03-19",
+          "mes": "2026-03-19",
+          "mes_ordinal": 3,
+          "ano": "2026-03-19",
+          "campanha_externa_nome": "np_meli_all_philips-all_pt_aon_roas_sca_conv_dads_dp",
+          "custo_total": 451.57,
+          "cliques": 148,
+          "cpc": 3.05
+        },
+        {
+          "match": "2026-03-18|2026-03-18|NP_AMZ_MONIT_PHILIPS-ALL_PT_AON_ROAS_CONV_SP_AUTO_ROAS|",
+          "data": "2026-03-18",
+          "mes": "2026-03-18",
+          "mes_ordinal": 3,
+          "ano": "2026-03-18",
+          "campanha_externa_nome": "np_amz_monit_philips-all_pt_aon_roas_conv_sp_auto_roas",
+          "custo_total": 49.68,
+          "cliques": 40,
+          "cpc": 1.24
+        },
+        {
+          "match": "2026-03-18|2026-03-18|NP_MELI_AVA_PHILIPS-ALL_PT_BB_ROAS_SCA_CONV_DADS_DC|",
+          "data": "2026-03-18",
+          "mes": "2026-03-18",
+          "mes_ordinal": 3,
+          "ano": "2026-03-18",
+          "campanha_externa_nome": "np_meli_ava_philips-all_pt_bb_roas_sca_conv_dads_dc",
+          "custo_total": 400.9,
+          "cliques": 101,
+          "cpc": 3.97
+        },
+        {
+          "match": "2026-03-18|2026-03-18|NP_AMZ_AVA_PHILIPS-ALL_PT_AON_CPC_CONSID_SB_BRAN_CPC_GENERIC|",
+          "data": "2026-03-18",
+          "mes": "2026-03-18",
+          "mes_ordinal": 3,
+          "ano": "2026-03-18",
+          "campanha_externa_nome": "np_amz_ava_philips-all_pt_aon_cpc_consid_sb_bran_cpc_generic",
+          "custo_total": 52.74,
+          "cliques": 13,
+          "cpc": 4.06
+        },
+        {
+          "match": "2026-03-18|2026-03-18|NP_AMZ_TV_PHILIPS-ALL_PT_AON_ROAS_DISPLAY_CONV_PERF_PLUS|",
+          "data": "2026-03-18",
+          "mes": "2026-03-18",
+          "mes_ordinal": 3,
+          "ano": "2026-03-18",
+          "campanha_externa_nome": "np_amz_tv_philips-all_pt_aon_roas_display_conv_perf_plus",
+          "custo_total": 2361.74,
+          "cliques": 592,
+          "cpc": 3.99
+        },
+        {
+          "match": "2026-03-18|2026-03-18|NP_AMZ_TV_PHILIPS-ALL_PT_AON_CPC_CONSID_SB_BRAN_CPC_GENERIC|",
+          "data": "2026-03-18",
+          "mes": "2026-03-18",
+          "mes_ordinal": 3,
+          "ano": "2026-03-18",
+          "campanha_externa_nome": "np_amz_tv_philips-all_pt_aon_cpc_consid_sb_bran_cpc_generic",
+          "custo_total": 49.85,
+          "cliques": 10,
+          "cpc": 4.98
+        },
+        {
+          "match": "2026-03-18|2026-03-18|NP_AMZ_MONIT_AOC-ALL_PT_AON_CPC_CONSID_SB_BRAN_CPC_INST|",
+          "data": "2026-03-18",
+          "mes": "2026-03-18",
+          "mes_ordinal": 3,
+          "ano": "2026-03-18",
+          "campanha_externa_nome": "np_amz_monit_aoc-all_pt_aon_cpc_consid_sb_bran_cpc_inst",
+          "custo_total": 91.9,
+          "cliques": 34,
+          "cpc": 2.7
+        },
+        {
+          "match": "2026-03-18|2026-03-18|NP_AMZ_MONIT_AOC-ALL_PT_AON_CPC_CONSID_SB_BRAN_CPC_GENERIC|",
+          "data": "2026-03-18",
+          "mes": "2026-03-18",
+          "mes_ordinal": 3,
+          "ano": "2026-03-18",
+          "campanha_externa_nome": "np_amz_monit_aoc-all_pt_aon_cpc_consid_sb_bran_cpc_generic",
+          "custo_total": 43.84,
+          "cliques": 12,
+          "cpc": 3.65
+        },
+        {
+          "match": "2026-03-18|2026-03-18|NP_AMZ_AVA_PHILIPS-MIX_PT_AON_ROAS_CONV_SP_AUTO_ROAS|",
+          "data": "2026-03-18",
+          "mes": "2026-03-18",
+          "mes_ordinal": 3,
+          "ano": "2026-03-18",
+          "campanha_externa_nome": "np_amz_ava_philips-mix_pt_aon_roas_conv_sp_auto_roas",
+          "custo_total": 40.44,
+          "cliques": 22,
+          "cpc": 1.84
+        },
+        {
+          "match": "2026-03-18|2026-03-18|NP_MELI_TV_PHILIPS-ALL_PT_AON_ROAS_SCA_CONV_DADS_DCA|",
+          "data": "2026-03-18",
+          "mes": "2026-03-18",
+          "mes_ordinal": 3,
+          "ano": "2026-03-18",
+          "campanha_externa_nome": "np_meli_tv_philips-all_pt_aon_roas_sca_conv_dads_dca",
+          "custo_total": 454.98,
+          "cliques": 101,
+          "cpc": 4.5
+        },
+        {
+          "match": "2026-03-18|2026-03-18|NP_AMZ_MONIT_AOC-ALL_PT_AON_ROAS_CONV_SP_AUTO_ROAS|",
+          "data": "2026-03-18",
+          "mes": "2026-03-18",
+          "mes_ordinal": 3,
+          "ano": "2026-03-18",
+          "campanha_externa_nome": "np_amz_monit_aoc-all_pt_aon_roas_conv_sp_auto_roas",
+          "custo_total": 626.79,
+          "cliques": 318,
+          "cpc": 1.97
+        },
+        {
+          "match": "2026-03-18|2026-03-18|NP_AMZ_MONIT_AOC-ALL_PT_AON_ROAS_DISPLAY_CONV_PERF_PLUS|",
+          "data": "2026-03-18",
+          "mes": "2026-03-18",
+          "mes_ordinal": 3,
+          "ano": "2026-03-18",
+          "campanha_externa_nome": "np_amz_monit_aoc-all_pt_aon_roas_display_conv_perf_plus",
+          "custo_total": 1551.62,
+          "cliques": 515,
+          "cpc": 3.01
+        },
+        {
+          "match": "2026-03-18|2026-03-18|NP_AMZ_AVA_PHILIPS-MIX_PT_AON_ROAS_DISPLAY_CONV_PERF_PLUS|",
+          "data": "2026-03-18",
+          "mes": "2026-03-18",
+          "mes_ordinal": 3,
+          "ano": "2026-03-18",
+          "campanha_externa_nome": "np_amz_ava_philips-mix_pt_aon_roas_display_conv_perf_plus",
+          "custo_total": 521.1,
+          "cliques": 315,
+          "cpc": 1.65
+        },
+        {
+          "match": "2026-03-18|2026-03-18|NP_MELI_ALL_PHILIPS-ALL_PT_AON_ROAS_SCA_CONV_DADS_DCA|",
+          "data": "2026-03-18",
+          "mes": "2026-03-18",
+          "mes_ordinal": 3,
+          "ano": "2026-03-18",
+          "campanha_externa_nome": "np_meli_all_philips-all_pt_aon_roas_sca_conv_dads_dca",
+          "custo_total": 297.13,
+          "cliques": 89,
+          "cpc": 3.34
+        },
+        {
+          "match": "2026-03-18|2026-03-18|NP_AMZ_MONIT_AOC_ALL_PT_AON_ROAS_CONV_SP_BRAN_ROAS|",
+          "data": "2026-03-18",
+          "mes": "2026-03-18",
+          "mes_ordinal": 3,
+          "ano": "2026-03-18",
+          "campanha_externa_nome": "np_amz_monit_aoc_all_pt_aon_roas_conv_sp_bran_roas",
+          "custo_total": 280.2,
+          "cliques": 59,
+          "cpc": 4.75
+        },
+        {
+          "match": "2026-03-18|2026-03-18|NP_MELI_MONIT_AOC-ALL_PT_AON_ROAS_SCA_CONV_DADS_DP|",
+          "data": "2026-03-18",
+          "mes": "2026-03-18",
+          "mes_ordinal": 3,
+          "ano": "2026-03-18",
+          "campanha_externa_nome": "np_meli_monit_aoc-all_pt_aon_roas_sca_conv_dads_dp",
+          "custo_total": 405.58,
+          "cliques": 258,
+          "cpc": 1.57
+        },
+        {
+          "match": "2026-03-18|2026-03-18|NP_AMZ_TV_PHILIPS-ALL_PT_AON_ROAS_CONV_SP_BRAN_ROAS|",
+          "data": "2026-03-18",
+          "mes": "2026-03-18",
+          "mes_ordinal": 3,
+          "ano": "2026-03-18",
+          "campanha_externa_nome": "np_amz_tv_philips-all_pt_aon_roas_conv_sp_bran_roas",
+          "custo_total": 1225.8,
+          "cliques": 431,
+          "cpc": 2.84
+        },
+        {
+          "match": "2026-03-18|2026-03-18|NP_AMZ_AVA_PHILIPS-ALL_PT_AON_CPC_CONSID_SB_BRAN_CPC_INST|",
+          "data": "2026-03-18",
+          "mes": "2026-03-18",
+          "mes_ordinal": 3,
+          "ano": "2026-03-18",
+          "campanha_externa_nome": "np_amz_ava_philips-all_pt_aon_cpc_consid_sb_bran_cpc_inst",
+          "custo_total": 47.14,
+          "cliques": 10,
+          "cpc": 4.71
+        },
+        {
+          "match": "2026-03-17|2026-03-17|NP_MELI_ALL_PHILIPS-ALL_PT_AON_ROAS_SCA_CONV_DADS_DCA|",
+          "data": "2026-03-17",
+          "mes": "2026-03-17",
+          "mes_ordinal": 3,
+          "ano": "2026-03-17",
+          "campanha_externa_nome": "np_meli_all_philips-all_pt_aon_roas_sca_conv_dads_dca",
+          "custo_total": 579.07,
+          "cliques": 281,
+          "cpc": 2.06
+        },
+        {
+          "match": "2026-03-17|2026-03-17|NP_AMZ_MONIT_AOC-ALL_PT_AON_CPC_CONSID_SB_BRAN_CPC_INST|",
+          "data": "2026-03-17",
+          "mes": "2026-03-17",
+          "mes_ordinal": 3,
+          "ano": "2026-03-17",
+          "campanha_externa_nome": "np_amz_monit_aoc-all_pt_aon_cpc_consid_sb_bran_cpc_inst",
+          "custo_total": 99.67,
+          "cliques": 32,
+          "cpc": 3.11
+        },
+        {
+          "match": "2026-03-17|2026-03-17|NP_MELI_MONIT_AOC-ALL_PT_AON_ROAS_SCA_CONV_DADS_DP|",
+          "data": "2026-03-17",
+          "mes": "2026-03-17",
+          "mes_ordinal": 3,
+          "ano": "2026-03-17",
+          "campanha_externa_nome": "np_meli_monit_aoc-all_pt_aon_roas_sca_conv_dads_dp",
+          "custo_total": 405.35,
+          "cliques": 249,
+          "cpc": 1.63
+        },
+        {
+          "match": "2026-03-17|2026-03-17|NP_AMZ_AVA_PHILIPS-MIX_PT_AON_ROAS_CONV_SP_AUTO_ROAS|",
+          "data": "2026-03-17",
+          "mes": "2026-03-17",
+          "mes_ordinal": 3,
+          "ano": "2026-03-17",
+          "campanha_externa_nome": "np_amz_ava_philips-mix_pt_aon_roas_conv_sp_auto_roas",
+          "custo_total": 33.34,
+          "cliques": 21,
+          "cpc": 1.59
+        },
+        {
+          "match": "2026-03-17|2026-03-17|NP_AMZ_MONIT_AOC-ALL_PT_AON_ROAS_DISPLAY_CONV_PERF_PLUS|",
+          "data": "2026-03-17",
+          "mes": "2026-03-17",
+          "mes_ordinal": 3,
+          "ano": "2026-03-17",
+          "campanha_externa_nome": "np_amz_monit_aoc-all_pt_aon_roas_display_conv_perf_plus",
+          "custo_total": 1548.63,
+          "cliques": 553,
+          "cpc": 2.8
+        },
+        {
+          "match": "2026-03-17|2026-03-17|NP_AMZ_AVA_PHILIPS-ALL_PT_AON_CPC_CONSID_SB_BRAN_CPC_GENERIC|",
+          "data": "2026-03-17",
+          "mes": "2026-03-17",
+          "mes_ordinal": 3,
+          "ano": "2026-03-17",
+          "campanha_externa_nome": "np_amz_ava_philips-all_pt_aon_cpc_consid_sb_bran_cpc_generic",
+          "custo_total": 48.16,
+          "cliques": 11,
+          "cpc": 4.38
+        },
+        {
+          "match": "2026-03-17|2026-03-17|NP_AMZ_MONIT_AOC-ALL_PT_AON_ROAS_CONV_SP_AUTO_ROAS|",
+          "data": "2026-03-17",
+          "mes": "2026-03-17",
+          "mes_ordinal": 3,
+          "ano": "2026-03-17",
+          "campanha_externa_nome": "np_amz_monit_aoc-all_pt_aon_roas_conv_sp_auto_roas",
+          "custo_total": 639.7,
+          "cliques": 306,
+          "cpc": 2.09
+        },
+        {
+          "match": "2026-03-17|2026-03-17|NP_AMZ_TV_PHILIPS-ALL_PT_AON_ROAS_CONV_SP_BRAN_ROAS|",
+          "data": "2026-03-17",
+          "mes": "2026-03-17",
+          "mes_ordinal": 3,
+          "ano": "2026-03-17",
+          "campanha_externa_nome": "np_amz_tv_philips-all_pt_aon_roas_conv_sp_bran_roas",
+          "custo_total": 1178.05,
+          "cliques": 409,
+          "cpc": 2.88
+        },
+        {
+          "match": "2026-03-17|2026-03-17|NP_AMZ_AVA_PHILIPS-MIX_PT_AON_ROAS_CONV_SP_BRAN_ROAS|",
+          "data": "2026-03-17",
+          "mes": "2026-03-17",
+          "mes_ordinal": 3,
+          "ano": "2026-03-17",
+          "campanha_externa_nome": "np_amz_ava_philips-mix_pt_aon_roas_conv_sp_bran_roas",
+          "custo_total": 203.3,
+          "cliques": 42,
+          "cpc": 4.84
+        },
+        {
+          "match": "2026-03-17|2026-03-17|NP_AMZ_MONIT_AOC-ALL_PT_AON_CPC_CONSID_SB_BRAN_CPC_GENERIC|",
+          "data": "2026-03-17",
+          "mes": "2026-03-17",
+          "mes_ordinal": 3,
+          "ano": "2026-03-17",
+          "campanha_externa_nome": "np_amz_monit_aoc-all_pt_aon_cpc_consid_sb_bran_cpc_generic",
+          "custo_total": 49.36,
+          "cliques": 10,
+          "cpc": 4.94
+        },
+        {
+          "match": "2026-03-17|2026-03-17|NP_AMZ_TV_PHILIPS-ALL_PT_AON_ROAS_DISPLAY_CONV_PERF_PLUS|",
+          "data": "2026-03-17",
+          "mes": "2026-03-17",
+          "mes_ordinal": 3,
+          "ano": "2026-03-17",
+          "campanha_externa_nome": "np_amz_tv_philips-all_pt_aon_roas_display_conv_perf_plus",
+          "custo_total": 2354.09,
+          "cliques": 714,
+          "cpc": 3.3
+        },
+        {
+          "match": "2026-03-17|2026-03-17|NP_MELI_TV_PHILIPS-ALL_PT_AON_ROAS_SCA_CONV_DADS_DCA|",
+          "data": "2026-03-17",
+          "mes": "2026-03-17",
+          "mes_ordinal": 3,
+          "ano": "2026-03-17",
+          "campanha_externa_nome": "np_meli_tv_philips-all_pt_aon_roas_sca_conv_dads_dca",
+          "custo_total": 524.02,
+          "cliques": 135,
+          "cpc": 3.88
+        },
+        {
+          "match": "2026-03-17|2026-03-17|NP_AMZ_AVA_PHILIPS-MIX_PT_AON_ROAS_DISPLAY_CONV_PERF_PLUS|",
+          "data": "2026-03-17",
+          "mes": "2026-03-17",
+          "mes_ordinal": 3,
+          "ano": "2026-03-17",
+          "campanha_externa_nome": "np_amz_ava_philips-mix_pt_aon_roas_display_conv_perf_plus",
+          "custo_total": 516.11,
+          "cliques": 273,
+          "cpc": 1.89
+        },
+        {
+          "match": "2026-03-17|2026-03-17|NP_AMZ_MONIT_PHILIPS-ALL_PT_AON_ROAS_CONV_SP_AUTO_ROAS|",
+          "data": "2026-03-17",
+          "mes": "2026-03-17",
+          "mes_ordinal": 3,
+          "ano": "2026-03-17",
+          "campanha_externa_nome": "np_amz_monit_philips-all_pt_aon_roas_conv_sp_auto_roas",
+          "custo_total": 51.19,
+          "cliques": 44,
+          "cpc": 1.16
+        },
+        {
+          "match": "2026-03-16|2026-03-16|NP_AMZ_TV_PHILIPS-ALL_PT_AON_ROAS_CONV_SP_BRAN_ROAS|",
+          "data": "2026-03-16",
+          "mes": "2026-03-16",
+          "mes_ordinal": 3,
+          "ano": "2026-03-16",
+          "campanha_externa_nome": "np_amz_tv_philips-all_pt_aon_roas_conv_sp_bran_roas",
+          "custo_total": 1219.62,
+          "cliques": 598,
+          "cpc": 2.04
+        },
+        {
+          "match": "2026-03-16|2026-03-16|NP_AMZ_AVA_PHILIPS-MIX_PT_AON_ROAS_CONV_SP_AUTO_ROAS_DEALS_3_3|",
+          "data": "2026-03-16",
+          "mes": "2026-03-16",
+          "mes_ordinal": 3,
+          "ano": "2026-03-16",
+          "campanha_externa_nome": "np_amz_ava_philips-mix_pt_aon_roas_conv_sp_auto_roas_deals_3_3",
+          "custo_total": 89.03,
+          "cliques": 34,
+          "cpc": 2.62
+        },
+        {
+          "match": "2026-03-16|2026-03-16|NP_AMZ_AVA_PHILIPS-ALL_PT_AON_CPC_CONSID_SB_BRAN_CPC_INST|",
+          "data": "2026-03-16",
+          "mes": "2026-03-16",
+          "mes_ordinal": 3,
+          "ano": "2026-03-16",
+          "campanha_externa_nome": "np_amz_ava_philips-all_pt_aon_cpc_consid_sb_bran_cpc_inst",
+          "custo_total": 93.14,
+          "cliques": 19,
+          "cpc": 4.9
+        },
+        {
+          "match": "2026-03-16|2026-03-16|NP_AMZ_MONIT_AOC-ALL_PT_AON_CPC_CONSID_SB_BRAN_CPC_INST|",
+          "data": "2026-03-16",
+          "mes": "2026-03-16",
+          "mes_ordinal": 3,
+          "ano": "2026-03-16",
+          "campanha_externa_nome": "np_amz_monit_aoc-all_pt_aon_cpc_consid_sb_bran_cpc_inst",
+          "custo_total": 93.25,
+          "cliques": 23,
+          "cpc": 4.05
+        },
+        {
+          "match": "2026-03-16|2026-03-16|NP_MELI_TV_PHILIPS-ALL_PT_AON_ROAS_SCA_CONV_DADS_DCA|",
+          "data": "2026-03-16",
+          "mes": "2026-03-16",
+          "mes_ordinal": 3,
+          "ano": "2026-03-16",
+          "campanha_externa_nome": "np_meli_tv_philips-all_pt_aon_roas_sca_conv_dads_dca",
+          "custo_total": 458.01,
+          "cliques": 148,
+          "cpc": 3.09
+        },
+        {
+          "match": "2026-03-16|2026-03-16|NP_AMZ_MONIT_AOC-ALL_PT_AON_ROAS_CONV_SP_AUTO_ROAS_DEALS_3_3|",
+          "data": "2026-03-16",
+          "mes": "2026-03-16",
+          "mes_ordinal": 3,
+          "ano": "2026-03-16",
+          "campanha_externa_nome": "np_amz_monit_aoc-all_pt_aon_roas_conv_sp_auto_roas_deals_3_3",
+          "custo_total": 371.37,
+          "cliques": 181,
+          "cpc": 2.05
+        },
+        {
+          "match": "2026-03-16|2026-03-16|NP_AMZ_MONIT_AOC-ALL_PT_AON_ROAS_CONV_SP_AUTO_ROAS|",
+          "data": "2026-03-16",
+          "mes": "2026-03-16",
+          "mes_ordinal": 3,
+          "ano": "2026-03-16",
+          "campanha_externa_nome": "np_amz_monit_aoc-all_pt_aon_roas_conv_sp_auto_roas",
+          "custo_total": 2031.92,
+          "cliques": 962,
+          "cpc": 2.11
+        },
+        {
+          "match": "2026-03-16|2026-03-16|NP_AMZ_TV_PHILIPS-ALL_PT_AON_ROAS_DISPLAY_CONV_PERF_PLUS|",
+          "data": "2026-03-16",
+          "mes": "2026-03-16",
+          "mes_ordinal": 3,
+          "ano": "2026-03-16",
+          "campanha_externa_nome": "np_amz_tv_philips-all_pt_aon_roas_display_conv_perf_plus",
+          "custo_total": 1742.63,
+          "cliques": 603,
+          "cpc": 2.89
+        },
+        {
+          "match": "2026-03-16|2026-03-16|NP_AMZ_MONIT_AOC-ALL_PT_AON_CPC_CONSID_SB_BRAN_CPC_GENERIC|",
+          "data": "2026-03-16",
+          "mes": "2026-03-16",
+          "mes_ordinal": 3,
+          "ano": "2026-03-16",
+          "campanha_externa_nome": "np_amz_monit_aoc-all_pt_aon_cpc_consid_sb_bran_cpc_generic",
+          "custo_total": 47.38,
+          "cliques": 10,
+          "cpc": 4.74
+        },
+        {
+          "match": "2026-03-16|2026-03-16|NP_MELI_MONIT_AOC-ALL_PT_AON_ROAS_SCA_CONV_DADS_DP|",
+          "data": "2026-03-16",
+          "mes": "2026-03-16",
+          "mes_ordinal": 3,
+          "ano": "2026-03-16",
+          "campanha_externa_nome": "np_meli_monit_aoc-all_pt_aon_roas_sca_conv_dads_dp",
+          "custo_total": 651.7,
+          "cliques": 398,
+          "cpc": 1.64
+        },
+        {
+          "match": "2026-03-16|2026-03-16|NP_AMZ_MONIT_PHILIPS-ALL_PT_AON_ROAS_CONV_SP_AUTO_ROAS|",
+          "data": "2026-03-16",
+          "mes": "2026-03-16",
+          "mes_ordinal": 3,
+          "ano": "2026-03-16",
+          "campanha_externa_nome": "np_amz_monit_philips-all_pt_aon_roas_conv_sp_auto_roas",
+          "custo_total": 81.11,
+          "cliques": 76,
+          "cpc": 1.07
+        },
+        {
+          "match": "2026-03-16|2026-03-16|NP_AMZ_AVA_PHILIPS-MIX_PT_AON_ROAS_CONV_SP_BRAN_ROAS|",
+          "data": "2026-03-16",
+          "mes": "2026-03-16",
+          "mes_ordinal": 3,
+          "ano": "2026-03-16",
+          "campanha_externa_nome": "np_amz_ava_philips-mix_pt_aon_roas_conv_sp_bran_roas",
+          "custo_total": 257.55,
+          "cliques": 108,
+          "cpc": 2.38
+        },
+        {
+          "match": "2026-03-16|2026-03-16|NP_AMZ_MONIT_AOC-ALL_PT_AON_ROAS_DISPLAY_CONV_PERF_PLUS|",
+          "data": "2026-03-16",
+          "mes": "2026-03-16",
+          "mes_ordinal": 3,
+          "ano": "2026-03-16",
+          "campanha_externa_nome": "np_amz_monit_aoc-all_pt_aon_roas_display_conv_perf_plus",
+          "custo_total": 1143.85,
+          "cliques": 472,
+          "cpc": 2.42
+        },
+        {
+          "match": "2026-03-16|2026-03-16|NP_MELI_ALL_PHILIPS-ALL_PT_AON_ROAS_SCA_CONV_DADS_DCA|",
+          "data": "2026-03-16",
+          "mes": "2026-03-16",
+          "mes_ordinal": 3,
+          "ano": "2026-03-16",
+          "campanha_externa_nome": "np_meli_all_philips-all_pt_aon_roas_sca_conv_dads_dca",
+          "custo_total": 463.61,
+          "cliques": 224,
+          "cpc": 2.07
+        },
+        {
+          "match": "2026-03-16|2026-03-16|NP_MELI_AVA_PHILIPS-ALL_PT_AON_ROAS_SCA_CONV_DADS_DC|",
+          "data": "2026-03-16",
+          "mes": "2026-03-16",
+          "mes_ordinal": 3,
+          "ano": "2026-03-16",
+          "campanha_externa_nome": "np_meli_ava_philips-all_pt_aon_roas_sca_conv_dads_dc",
+          "custo_total": 127.92,
+          "cliques": 33,
+          "cpc": 3.88
+        },
+        {
+          "match": "2026-03-16|2026-03-16|NP_AMZ_TV_PHILIPS-ALL_PT_AON_ROAS_CONV_SP_AUTO_ROAS_DEALS_3_3|",
+          "data": "2026-03-16",
+          "mes": "2026-03-16",
+          "mes_ordinal": 3,
+          "ano": "2026-03-16",
+          "campanha_externa_nome": "np_amz_tv_philips-all_pt_aon_roas_conv_sp_auto_roas_deals_3_3",
+          "custo_total": 337.92,
+          "cliques": 76,
+          "cpc": 4.45
+        },
+        {
+          "match": "2026-03-16|2026-03-16|NP_AMZ_AVA_PHILIPS-MIX_PT_AON_ROAS_CONV_SP_AUTO_ROAS|",
+          "data": "2026-03-16",
+          "mes": "2026-03-16",
+          "mes_ordinal": 3,
+          "ano": "2026-03-16",
+          "campanha_externa_nome": "np_amz_ava_philips-mix_pt_aon_roas_conv_sp_auto_roas",
+          "custo_total": 61.4,
+          "cliques": 32,
+          "cpc": 1.92
+        },
+        {
+          "match": "2026-03-16|2026-03-16|NP_MELI_MONIT_AOC-ALL_PT_AON_ROAS_SCA_CONV_DADS_DC|",
+          "data": "2026-03-16",
+          "mes": "2026-03-16",
+          "mes_ordinal": 3,
+          "ano": "2026-03-16",
+          "campanha_externa_nome": "np_meli_monit_aoc-all_pt_aon_roas_sca_conv_dads_dc",
+          "custo_total": 669.31,
+          "cliques": 570,
+          "cpc": 1.17
+        },
+        {
+          "match": "2026-03-16|2026-03-16|NP_AMZ_AVA_PHILIPS-ALL_PT_AON_CPC_CONSID_SB_BRAN_CPC_GENERIC|",
+          "data": "2026-03-16",
+          "mes": "2026-03-16",
+          "mes_ordinal": 3,
+          "ano": "2026-03-16",
+          "campanha_externa_nome": "np_amz_ava_philips-all_pt_aon_cpc_consid_sb_bran_cpc_generic",
+          "custo_total": 47.69,
+          "cliques": 13,
+          "cpc": 3.67
+        },
+        {
+          "match": "2026-03-16|2026-03-16|NP_AMZ_AVA_PHILIPS-MIX_PT_AON_ROAS_DISPLAY_CONV_PERF_PLUS|",
+          "data": "2026-03-16",
+          "mes": "2026-03-16",
+          "mes_ordinal": 3,
+          "ano": "2026-03-16",
+          "campanha_externa_nome": "np_amz_ava_philips-mix_pt_aon_roas_display_conv_perf_plus",
+          "custo_total": 294.99,
+          "cliques": 199,
+          "cpc": 1.48
+        }
+      ]
+    },
+    "dimensions": [
+      "campanha_externa_nome"
+    ],
+    "metrics": [
+      "custo_total",
+      "cliques",
+      "cpc"
+    ],
+    "time_breakdown": "dia",
+    "order_by": "custo_total"
+  }
+]
