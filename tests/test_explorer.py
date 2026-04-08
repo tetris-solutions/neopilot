@@ -245,3 +245,183 @@ class TestNeoDashLinkBuilder:
         params = json.loads(template_str)["params"]
 
         assert params["orderBy"] == "custo_total"
+
+
+class TestFromNeoDashLink:
+    """Tests for ExplorerQuery.from_neodash_link() — reverse link parsing."""
+
+    def test_simple_link_no_filters(self):
+        """Parse a basic explorer link without filters."""
+        url = (
+            "https://tpv.neodash.ai/explorador/100"
+            "?dti=16-03-2026&dtf=22-03-2026"
+            "&template=%7B%22params%22%3A%7B%22segmentos%22%3A%22campanha_externa_nome%22"
+            "%2C%22metricas%22%3A%22custo_total%2Ccliques%22"
+            "%2C%22segmentarPor%22%3A%22nao%22"
+            "%2C%22order%22%3A%22desc%22"
+            "%2C%22filtros%22%3A%7B%7D%7D%7D"
+        )
+        query = ExplorerQuery.from_neodash_link(url)
+        assert query.dimensions == ["campanha_externa_nome"]
+        assert query.metrics == ["custo_total", "cliques"]
+        assert query.date_start == "2026-03-16"
+        assert query.date_end == "2026-03-22"
+        assert query.time_breakdown == "nao"
+        assert query.order_sort == "desc"
+        assert query.filters.is_empty()
+
+    def test_link_with_filtro_usuario(self):
+        """Parse a link with user-applied filters (filtroUsuario)."""
+        url = (
+            "https://tpv.neodash.ai/explorador/100"
+            "?dti=10-03-2026&dtf=08-04-2026"
+            "&filtroUsuario=%7B%22segment%22%3A%7B%22filters%22%3A%5B%7B"
+            "%22groupType%22%3A%22and_group%22%2C%22expressions%22%3A%5B%5B%5B%7B"
+            "%22chave%22%3A%22canal%22%2C%22connective%22%3A%22e%22%2C"
+            "%22estrutura%22%3A%22segmento%22%2C%22operador%22%3A%22%3D%22%2C"
+            "%22needConvertToString%22%3Afalse%2C%22valor%22%3A%22AMAZON%22"
+            "%7D%5D%5D%5D%7D%5D%7D%7D"
+            "&template=%7B%22params%22%3A%7B%22segmentos%22%3A%22veiculo%2C"
+            "campanha_externa_nome%22%2C%22metricas%22%3A%22custo_total%2C"
+            "valor_conversoes%2Croi%22%2C%22segmentarPor%22%3A%22nao%22%2C"
+            "%22order%22%3A%22desc%22%2C%22filtros%22%3Anull%7D%7D"
+        )
+        query = ExplorerQuery.from_neodash_link(url)
+        assert query.dimensions == ["veiculo", "campanha_externa_nome"]
+        assert query.metrics == ["custo_total", "valor_conversoes", "roi"]
+        assert query.date_start == "2026-03-10"
+        assert query.date_end == "2026-04-08"
+        # Should have the canal=AMAZON filter from filtroUsuario
+        assert not query.filters.is_empty()
+        api_dict = query.filters.to_api_dict()
+        assert "segment" in api_dict
+
+    def test_link_with_template_filters(self):
+        """Parse a link with template-level filters (no filtroUsuario)."""
+        url = (
+            "https://tpv.neodash.ai/explorador/1009"
+            "?dti=10-03-2026&dtf=08-04-2026"
+            "&template=%7B%22params%22%3A%7B%22segmentos%22%3A%22ad_url_thumb_externa%22"
+            "%2C%22metricas%22%3A%22custo_total%2Cimpressoes%22"
+            "%2C%22segmentarPor%22%3A%22nao%22%2C%22order%22%3A%22desc%22"
+            "%2C%22filtros%22%3A%7B%22segment%22%3A%7B%22filters%22%3A%5B%7B"
+            "%22groupType%22%3A%22and_group%22%2C%22expressions%22%3A%5B%5B%5B%7B"
+            "%22chave%22%3A%22fonte%22%2C%22operador%22%3A%22%3D%22%2C"
+            "%22valor%22%3A%22Mercado%20Livre%20Ads%22%2C%22estrutura%22%3A%22segmento%22"
+            "%7D%5D%5D%5D%7D%5D%7D%7D%7D%7D"
+        )
+        query = ExplorerQuery.from_neodash_link(url)
+        assert query.dimensions == ["ad_url_thumb_externa"]
+        assert not query.filters.is_empty()
+        api_dict = query.filters.to_api_dict()
+        seg_filters = api_dict["segment"]["filters"]
+        assert seg_filters[0]["expressions"][0][0][0]["chave"] == "fonte"
+
+    def test_link_with_all_three_filter_sources(self):
+        """Parse a link with template filters + filtroUsuario + filtroLocal."""
+        url = (
+            "https://tpv.neodash.ai/explorador/1009"
+            "?dti=10-03-2026&dtf=08-04-2026"
+            # filtroLocal: veiculo in [MERCADO LIVRE BRANDS]
+            "&filtroLocal=%7B%22veiculo%22%3A%7B%22chave%22%3A%22veiculo%22%2C"
+            "%22tipo%22%3A%22string%22%2C%22operador%22%3A%22in%22%2C"
+            "%22valor%22%3A%5B%22MERCADO%20LIVRE%20BRANDS%22%5D%7D%7D"
+            # filtroUsuario: custo_total > 100
+            "&filtroUsuario=%7B%22segment%22%3A%7B%22filters%22%3A%5B%5D%7D%2C"
+            "%22metric%22%3A%7B%22filters%22%3A%5B%7B%22groupType%22%3A%22and_group%22%2C"
+            "%22expressions%22%3A%5B%5B%5B%7B%22chave%22%3A%22custo_total%22%2C"
+            "%22estrutura%22%3A%22metrica%22%2C%22operador%22%3A%22%3E%22%2C"
+            "%22valor%22%3A%22100%22%7D%5D%5D%5D%7D%5D%7D%7D"
+            # template.params.filtros: fonte = Mercado Livre Ads
+            "&template=%7B%22params%22%3A%7B%22segmentos%22%3A%22ad_url_thumb_externa%22"
+            "%2C%22metricas%22%3A%22custo_total%2Cimpressoes%22"
+            "%2C%22segmentarPor%22%3A%22nao%22%2C%22order%22%3A%22desc%22"
+            "%2C%22filtros%22%3A%7B%22segment%22%3A%7B%22filters%22%3A%5B%7B"
+            "%22groupType%22%3A%22and_group%22%2C%22expressions%22%3A%5B%5B%5B%7B"
+            "%22chave%22%3A%22fonte%22%2C%22operador%22%3A%22%3D%22%2C"
+            "%22valor%22%3A%22Mercado%20Livre%20Ads%22%2C%22estrutura%22%3A%22segmento%22"
+            "%7D%5D%5D%5D%7D%5D%7D%7D%7D%7D"
+        )
+        query = ExplorerQuery.from_neodash_link(url)
+        api_dict = query.filters.to_api_dict()
+        # Should have segment filters from template + filtroLocal
+        assert "segment" in api_dict
+        seg_groups = api_dict["segment"]["filters"]
+        assert len(seg_groups) >= 2  # template fonte + filtroLocal veiculo
+        # Should have metric filters from filtroUsuario
+        assert "metric" in api_dict
+
+    def test_date_flipping(self):
+        """Dates should be flipped from DD-MM-YYYY to YYYY-MM-DD."""
+        url = (
+            "https://tpv.neodash.ai/explorador/100"
+            "?dti=01-01-2026&dtf=31-01-2026"
+            "&dtic=01-12-2025&dtfc=31-12-2025"
+            "&template=%7B%22params%22%3A%7B%22segmentos%22%3A%22campanha%22"
+            "%2C%22metricas%22%3A%22custo_total%22"
+            "%2C%22segmentarPor%22%3A%22nao%22%2C%22order%22%3A%22desc%22"
+            "%2C%22filtros%22%3A%7B%7D%7D%7D"
+        )
+        query = ExplorerQuery.from_neodash_link(url)
+        assert query.date_start == "2026-01-01"
+        assert query.date_end == "2026-01-31"
+        assert query.compare_date_start == "2025-12-01"
+        assert query.compare_date_end == "2025-12-31"
+
+    def test_round_trip(self):
+        """from_neodash_link(to_neodash_link(query)) should preserve key fields."""
+        from neopilot.models.filters import FilterExpression, FilterGroup, Filters
+
+        original = ExplorerQuery(
+            dimensions=["veiculo", "campanha_externa_nome"],
+            metrics=["custo_total", "roi"],
+            date_start="2026-03-10",
+            date_end="2026-04-08",
+            time_breakdown="dia",
+            order_by="custo_total",
+            order_sort="desc",
+            filters=Filters(
+                segment=[FilterGroup(
+                    group_type="and_group",
+                    expressions=[[[FilterExpression(chave="canal", operador="=", valor="AMAZON")]]]
+                )]
+            ),
+        )
+        link = original.to_neodash_link("tpv")
+        parsed = ExplorerQuery.from_neodash_link(link)
+
+        assert parsed.dimensions == original.dimensions
+        assert parsed.metrics == original.metrics
+        assert parsed.date_start == original.date_start
+        assert parsed.date_end == original.date_end
+        assert parsed.time_breakdown == original.time_breakdown
+        assert parsed.order_sort == original.order_sort
+
+
+class TestResolveNeoDashLink:
+    """Tests for resolve_neodash_link() — URL validation."""
+
+    def test_full_explorer_url(self):
+        from neopilot.models.explorer import resolve_neodash_link
+
+        slug, resolved = resolve_neodash_link(
+            "https://tpv.neodash.ai/explorador/100?dti=01-01-2026&dtf=31-01-2026"
+        )
+        assert slug == "tpv"
+        assert resolved == "https://tpv.neodash.ai/explorador/100?dti=01-01-2026&dtf=31-01-2026"
+
+    def test_non_explorer_link_rejected(self):
+        import pytest
+
+        from neopilot.models.explorer import resolve_neodash_link
+
+        with pytest.raises(ValueError, match="not an Explorer link"):
+            resolve_neodash_link("https://tpv.neodash.ai/campanha/123")
+
+    def test_non_neodash_host_rejected(self):
+        import pytest
+
+        from neopilot.models.explorer import resolve_neodash_link
+
+        with pytest.raises(ValueError, match="Unrecognized NeoDash host"):
+            resolve_neodash_link("https://example.com/explorador/100")

@@ -12,7 +12,12 @@ from neopilot.app import mcp
 from neopilot.infra.debug import debug_block
 from neopilot.infra.env import is_debug
 from neopilot.infra.version import enforce_version
-from neopilot.models.explorer import MAX_LIMIT, TIME_BREAKDOWNS, ExplorerQuery
+from neopilot.models.explorer import (
+    MAX_LIMIT,
+    TIME_BREAKDOWNS,
+    ExplorerQuery,
+    resolve_neodash_link,
+)
 from neopilot.models.filters import FilterExpression, FilterGroup, Filters
 from neopilot.models.instance import InstanceInfo
 from neopilot.storage.local_store import InstanceStore
@@ -176,6 +181,10 @@ def query_data(
     1. First call with ``confirmed=false`` (default) to preview the query.
        Show the preview to the user and ask them to confirm.
     2. Then call again with ``confirmed=true`` to execute the query.
+
+    **Tip:** If the user shares a NeoDash Explorer link or a neod.ai short link,
+    use ``fetch_explorer_link`` instead. You can tell the user: "You can throw
+    an explorer link to me (short or full!) and I can start some analyses for you."
 
     **CRITICAL: Before calling this tool, you MUST first call ``list_metrics``
     and ``list_dimensions`` to get the exact IDs available in this instance.**
@@ -358,6 +367,123 @@ def query_data(
     # NeoDash link — with explicit instruction for the LLM to always show it
     neodash_link = query.to_neodash_link(active.slug)
     link_label = _NEODASH_LINK_LABEL.get(active.language, _NEODASH_LINK_LABEL["en-US"])
+    lines.append("")
+    lines.append(f"[{link_label}]({neodash_link})")
+    lines.append("")
+    lines.append(
+        "IMPORTANT: You MUST always include the NeoDash link above in your "
+        "response to the user, even when summarizing or formatting the data "
+        "as a report. The link lets the user see this exact query on NeoDash."
+    )
+
+    if is_debug():
+        lines.append(debug_block(endpoints._client))
+
+    return "\n".join(lines)
+
+
+@mcp.tool()
+def fetch_explorer_link(url: str) -> str:
+    """Fetch data from a NeoDash Explorer link (full or short).
+
+    Accepts a NeoDash Explorer URL or a ``neod.ai`` compressed short link.
+    Resolves the link, parses the query parameters (dimensions, metrics,
+    filters, dates), and executes the query to bring data into the
+    conversation.
+
+    **Tip:** You can tell the user: "You can throw an explorer link to me
+    (short or full!) and I can start some analyses for you."
+
+    Parameters
+    ----------
+    url:
+        A NeoDash Explorer URL (e.g., ``https://tpv.neodash.ai/explorador/100?...``)
+        or a short link (e.g., ``https://neod.ai/fs1r96jz0e``).
+    """
+    blocked = enforce_version()
+    if blocked:
+        return blocked
+
+    # --- Resolve the link ---
+    try:
+        slug, full_url = resolve_neodash_link(url)
+    except ValueError as e:
+        return str(e)
+
+    # --- Verify the instance matches the active one ---
+    store = InstanceStore()
+    active = store.get_active()
+    if slug != active.slug:
+        return (
+            f"This link is for the **{slug}** instance, but you are "
+            f"currently connected to **{active.slug}**. "
+            f"Please switch instances first with `switch_instance`."
+        )
+
+    # --- Parse the link into an ExplorerQuery ---
+    try:
+        query = ExplorerQuery.from_neodash_link(full_url)
+    except Exception as e:
+        return f"Failed to parse the Explorer link: {e}"
+
+    # --- Execute the query ---
+    client = NeoDashClient(active.slug, active.api_token)
+    endpoints = NeoDashEndpoints(client)
+    result = endpoints.query_explorer(query)
+
+    # --- Build response (same format as query_data) ---
+    lines: list[str] = []
+
+    lines.append(f"**Query Results** ({result.row_count} rows)")
+    lines.append(f"- Period: {query.date_start} to {query.date_end}")
+    if query.compare_date_start and query.compare_date_end:
+        lines.append(
+            f"- Comparison: {query.compare_date_start} to {query.compare_date_end}"
+        )
+    lines.append(f"- Dimensions: {', '.join(query.dimensions)}")
+    lines.append(f"- Metrics: {', '.join(query.metrics)}")
+    if query.time_breakdown != "nao":
+        lines.append(
+            f"- Time breakdown: {TIME_BREAKDOWNS.get(query.time_breakdown, query.time_breakdown)}"
+        )
+    if not query.filters.is_empty():
+        lines.append(f"- Filters: {query.filters.to_summary()}")
+    lines.append("")
+
+    if result.was_truncated and result.truncation_message:
+        lines.append(f"\u26a0\ufe0f {result.truncation_message}")
+        lines.append("")
+
+    if result.totals:
+        lines.append("**Totals:**")
+        lines.append(
+            f"```json\n{json.dumps(result.totals, indent=2, ensure_ascii=False)}\n```"
+        )
+        lines.append("")
+
+    if result.results:
+        lines.append("**Data:**")
+        lines.append(
+            f"```json\n{json.dumps(result.results, indent=2, ensure_ascii=False)}\n```"
+        )
+
+    if result.comparison_results:
+        lines.append("")
+        lines.append("**Comparison Data:**")
+        if result.comparison_totals:
+            lines.append("Comparison Totals:")
+            lines.append(
+                f"```json\n{json.dumps(result.comparison_totals, indent=2, ensure_ascii=False)}\n```"
+            )
+        lines.append(
+            f"```json\n{json.dumps(result.comparison_results, indent=2, ensure_ascii=False)}\n```"
+        )
+
+    # NeoDash link
+    neodash_link = query.to_neodash_link(active.slug)
+    link_label = _NEODASH_LINK_LABEL.get(
+        active.language, _NEODASH_LINK_LABEL["en-US"]
+    )
     lines.append("")
     lines.append(f"[{link_label}]({neodash_link})")
     lines.append("")

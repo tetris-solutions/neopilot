@@ -1,6 +1,6 @@
 {
-  "latest": "0.6.0",
-  "minimum": "0.6.0",
+  "latest": "0.7.0",
+  "minimum": "0.7.0",
   "update_url": "https://github.com/tetris-solutions/neopilot?tab=readme-ov-file#updating-neopilot",
-  "message": "Mandatory: Explorer filter support for dimensions and metrics."
+  "message": "Mandatory: Reverse Explorer link parser — paste a NeoDash link to fetch data."
 }

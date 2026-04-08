@@ -174,6 +174,92 @@ class Filters(BaseModel):
             }
         return result
 
+    @classmethod
+    def from_api_dict(cls, data: dict[str, Any]) -> Filters:
+        """Reconstruct a ``Filters`` object from a raw NeoDash API dict.
+
+        This is the inverse of ``to_api_dict()`` — it parses the ``filtros``
+        JSON structure returned by NeoDash URLs and API responses.
+        """
+        if not data:
+            return cls()
+
+        def _parse_groups(raw_groups: list[dict[str, Any]]) -> list[FilterGroup]:
+            groups: list[FilterGroup] = []
+            for raw_group in raw_groups:
+                group_type = raw_group.get("groupType", "and_group")
+                raw_expressions = raw_group.get("expressions", [])
+                expressions: list[list[list[FilterExpression]]] = []
+                for or_branch in raw_expressions:
+                    parsed_branch: list[list[FilterExpression]] = []
+                    for and_block in or_branch:
+                        parsed_block: list[FilterExpression] = []
+                        for raw_expr in and_block:
+                            tipo = raw_expr.get("tipo") or None
+                            # Normalize empty string tipo to None
+                            if tipo == "":
+                                tipo = None
+                            parsed_block.append(FilterExpression(
+                                chave=raw_expr["chave"],
+                                operador=raw_expr["operador"],
+                                valor=raw_expr.get("valor", ""),
+                                estrutura=raw_expr.get("estrutura", "segmento"),
+                                tipo=tipo,
+                            ))
+                        parsed_branch.append(parsed_block)
+                    expressions.append(parsed_branch)
+                groups.append(FilterGroup(
+                    group_type=group_type,
+                    expressions=expressions,
+                ))
+            return groups
+
+        segment_groups: list[FilterGroup] = []
+        metric_groups: list[FilterGroup] = []
+
+        seg_data = data.get("segment", {})
+        if seg_data and seg_data.get("filters"):
+            segment_groups = _parse_groups(seg_data["filters"])
+
+        met_data = data.get("metric", {})
+        if met_data and met_data.get("filters"):
+            metric_groups = _parse_groups(met_data["filters"])
+
+        return cls(segment=segment_groups, metric=metric_groups)
+
+    @classmethod
+    def from_filtro_local(cls, data: dict[str, Any]) -> Filters:
+        """Build ``Filters`` from a ``filtroLocal`` URL parameter.
+
+        ``filtroLocal`` is a dict of ``{dimension_id: null | filter_obj}``.
+        Non-null entries become segment filter groups.
+        """
+        if not data:
+            return cls()
+
+        groups: list[FilterGroup] = []
+        for _dim_id, entry in data.items():
+            if entry is None:
+                continue
+            expr = FilterExpression(
+                chave=entry["chave"],
+                operador=entry.get("operador", "="),
+                valor=entry.get("valor", ""),
+                estrutura="segmento",
+            )
+            groups.append(FilterGroup(
+                group_type="and_group",
+                expressions=[[[expr]]],
+            ))
+        return cls(segment=groups)
+
+    def merge(self, other: Filters) -> Filters:
+        """Merge another ``Filters`` into this one (AND logic between groups)."""
+        return Filters(
+            segment=self.segment + other.segment,
+            metric=self.metric + other.metric,
+        )
+
     def to_summary(self, language: str = "en-US") -> str:
         """Return a human-readable summary of the active filters."""
         parts: list[str] = []

@@ -429,3 +429,166 @@ class TestParseFilters:
         result = _parse_filters(None, None)
         assert result.is_empty()
         assert result.to_api_dict() == {}
+
+
+# ---------------------------------------------------------------------------
+# Filters.from_api_dict() — reverse parsing
+# ---------------------------------------------------------------------------
+
+
+class TestFiltersFromApiDict:
+    def test_empty_dict(self):
+        f = Filters.from_api_dict({})
+        assert f.is_empty()
+
+    def test_none_input(self):
+        f = Filters.from_api_dict(None)
+        assert f.is_empty()
+
+    def test_segment_only(self):
+        raw = {
+            "segment": {
+                "filters": [
+                    {
+                        "groupType": "and_group",
+                        "expressions": [
+                            [
+                                [
+                                    {
+                                        "chave": "slug_dimensao",
+                                        "connective": "e",
+                                        "estrutura": "segmento",
+                                        "operador": "=",
+                                        "needConvertToString": False,
+                                        "valor": "AOC",
+                                    }
+                                ]
+                            ]
+                        ],
+                    }
+                ]
+            }
+        }
+        f = Filters.from_api_dict(raw)
+        assert len(f.segment) == 1
+        assert f.segment[0].group_type == "and_group"
+        assert f.segment[0].expressions[0][0][0].chave == "slug_dimensao"
+        assert f.segment[0].expressions[0][0][0].valor == "AOC"
+
+    def test_metric_with_field_type(self):
+        raw = {
+            "metric": {
+                "filters": [
+                    {
+                        "groupType": "and_group",
+                        "expressions": [
+                            [
+                                [
+                                    {
+                                        "chave": "custo_total",
+                                        "connective": "e",
+                                        "estrutura": "metrica",
+                                        "operador": ">",
+                                        "valor": "cliques",
+                                        "tipo": "field",
+                                    }
+                                ]
+                            ]
+                        ],
+                    }
+                ]
+            }
+        }
+        f = Filters.from_api_dict(raw)
+        assert len(f.metric) == 1
+        assert f.metric[0].expressions[0][0][0].tipo == "field"
+
+    def test_empty_tipo_normalized_to_none(self):
+        """NeoDash sometimes sends tipo="" — should be normalized to None."""
+        raw = {
+            "segment": {
+                "filters": [
+                    {
+                        "groupType": "and_group",
+                        "expressions": [
+                            [[{"chave": "fonte", "operador": "=", "valor": "X", "tipo": ""}]]
+                        ],
+                    }
+                ]
+            }
+        }
+        f = Filters.from_api_dict(raw)
+        assert f.segment[0].expressions[0][0][0].tipo is None
+
+    def test_round_trip(self):
+        """from_api_dict(to_api_dict(filters)) should produce equivalent filters."""
+        expr = FilterExpression(chave="cpc", operador=">", valor="3", estrutura="metrica")
+        original = Filters(
+            metric=[FilterGroup(group_type="and_group", expressions=[[[expr]]])]
+        )
+        round_tripped = Filters.from_api_dict(original.to_api_dict())
+        assert round_tripped.to_api_dict() == original.to_api_dict()
+
+    def test_empty_filters_array(self):
+        """filtroUsuario sometimes has segment.filters=[] — should be handled."""
+        raw = {
+            "segment": {"filters": []},
+            "metric": {
+                "filters": [
+                    {
+                        "groupType": "and_group",
+                        "expressions": [
+                            [[{"chave": "custo_total", "estrutura": "metrica", "operador": ">", "valor": "100"}]]
+                        ],
+                    }
+                ]
+            },
+        }
+        f = Filters.from_api_dict(raw)
+        assert len(f.segment) == 0
+        assert len(f.metric) == 1
+
+
+class TestFiltersFromFiltroLocal:
+    def test_all_null(self):
+        raw = {"agencia": None, "canal": None, "veiculo": None}
+        f = Filters.from_filtro_local(raw)
+        assert f.is_empty()
+
+    def test_one_active_filter(self):
+        raw = {
+            "agencia": None,
+            "veiculo": {
+                "chave": "veiculo",
+                "tipo": "string",
+                "operador": "in",
+                "valor": ["MERCADO LIVRE BRANDS"],
+            },
+        }
+        f = Filters.from_filtro_local(raw)
+        assert len(f.segment) == 1
+        assert f.segment[0].expressions[0][0][0].chave == "veiculo"
+        assert f.segment[0].expressions[0][0][0].operador == "in"
+
+    def test_empty_dict(self):
+        f = Filters.from_filtro_local({})
+        assert f.is_empty()
+
+
+class TestFiltersMerge:
+    def test_merge_two_filters(self):
+        f1 = Filters(
+            segment=[FilterGroup(
+                group_type="and_group",
+                expressions=[[[FilterExpression(chave="a", operador="=", valor="1")]]]
+            )]
+        )
+        f2 = Filters(
+            metric=[FilterGroup(
+                group_type="and_group",
+                expressions=[[[FilterExpression(chave="b", operador=">", valor="2", estrutura="metrica")]]]
+            )]
+        )
+        merged = f1.merge(f2)
+        assert len(merged.segment) == 1
+        assert len(merged.metric) == 1
