@@ -397,6 +397,60 @@ class TestFromNeoDashLink:
         assert parsed.time_breakdown == original.time_breakdown
         assert parsed.order_sort == original.order_sort
 
+    def test_real_url_with_pipe_chars_and_null_valor(self):
+        """Real-world URL: filtroLocal with null valor + pipe chars in values."""
+        url = (
+            "https://loreal.neodash.ai/explorador/1379"
+            "?dtf=08-04-2026&dti=06-04-2026"
+            # filtroLocal: cliente=["LBD | LDB"], marca has valor:null
+            "&filtroLocal=%7B%22agencia%22%3Anull%2C%22cliente%22%3A%7B%22chave%22"
+            "%3A%22cliente%22%2C%22tipo%22%3A%22string%22%2C%22operador%22%3A%22in%22"
+            "%2C%22valor%22%3A%5B%22LBD+%7C+LDB%22%5D%7D%2C%22marca%22%3A%7B%22chave"
+            "%22%3A%22marca%22%2C%22tipo%22%3A%22string%22%2C%22operador%22%3A%22in%22"
+            "%2C%22valor%22%3Anull%7D%2C%22fase_campanha%22%3Anull%7D"
+            # filtroUsuario: marca in ["Vichy | vic", "La Roche-Posay | lrp"]
+            "&filtroUsuario=%7B%22segment%22%3A%7B%22filters%22%3A%5B%7B%22groupType"
+            "%22%3A%22and_group%22%2C%22expressions%22%3A%5B%5B%5B%7B%22chave%22%3A"
+            "%22marca%22%2C%22connective%22%3A%22e%22%2C%22estrutura%22%3A%22segmento"
+            "%22%2C%22operador%22%3A%22in%22%2C%22needConvertToString%22%3Afalse%2C"
+            "%22valor%22%3A%5B%22Vichy+%7C+vic%22%2C%22La+Roche-Posay+%7C+lrp%22%5D"
+            "%7D%5D%5D%5D%7D%5D%7D%7D"
+            # template with basic params
+            "&template=%7B%22params%22%3A%7B%22segmentos%22%3A%22veiculo%2Cmarca%22"
+            "%2C%22metricas%22%3A%22custo_total%2Cimpressoes%22"
+            "%2C%22segmentarPor%22%3A%22nao%22%2C%22order%22%3A%22desc%22"
+            "%2C%22filtros%22%3A%7B%7D%7D%7D"
+        )
+        query = ExplorerQuery.from_neodash_link(url)
+
+        assert query.dimensions == ["veiculo", "marca"]
+        assert query.metrics == ["custo_total", "impressoes"]
+        assert query.date_start == "2026-04-06"
+        assert query.date_end == "2026-04-08"
+        assert not query.filters.is_empty()
+
+        api = query.filters.to_api_dict()
+        # Should have segment filters from filtroUsuario + filtroLocal
+        seg_filters = api["segment"]["filters"]
+
+        # Verify pipe chars survived parsing
+        all_valores = []
+        for group in seg_filters:
+            for branch in group["expressions"]:
+                for block in branch:
+                    for expr in block:
+                        v = expr["valor"]
+                        all_valores.extend(v if isinstance(v, list) else [v])
+
+        assert "LBD | LDB" in all_valores
+        assert "Vichy | vic" in all_valores
+        assert "La Roche-Posay | lrp" in all_valores
+
+        # Round-trip: build link and parse back
+        link = query.to_neodash_link("loreal")
+        reparsed = ExplorerQuery.from_neodash_link(link)
+        assert json.dumps(query.filters.to_api_dict()) == json.dumps(reparsed.filters.to_api_dict())
+
 
 class TestResolveNeoDashLink:
     """Tests for resolve_neodash_link() — URL validation."""

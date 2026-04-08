@@ -575,6 +575,180 @@ class TestFiltersFromFiltroLocal:
         assert f.is_empty()
 
 
+class TestFiltroLocalNullValor:
+    """filtroLocal entries can have a dict with valor: null (unset combo box)."""
+
+    def test_skip_entry_with_null_valor(self):
+        raw = {
+            "agencia": None,
+            "cliente": {
+                "chave": "cliente",
+                "tipo": "string",
+                "operador": "in",
+                "valor": ["LBD | LDB"],
+            },
+            "marca": {
+                "chave": "marca",
+                "tipo": "string",
+                "operador": "in",
+                "valor": None,  # unset combo box
+            },
+        }
+        f = Filters.from_filtro_local(raw)
+        assert len(f.segment) == 1
+        assert f.segment[0].expressions[0][0][0].chave == "cliente"
+        assert f.segment[0].expressions[0][0][0].valor == ["LBD | LDB"]
+
+    def test_all_entries_null_valor(self):
+        raw = {
+            "marca": {
+                "chave": "marca",
+                "tipo": "string",
+                "operador": "in",
+                "valor": None,
+            },
+            "veiculo": None,
+        }
+        f = Filters.from_filtro_local(raw)
+        assert f.is_empty()
+
+
+class TestSpecialCharactersInFilters:
+    """Filter values with special characters (|, &, =, accents) must survive
+    serialization, URL encoding, and round-trip parsing."""
+
+    def test_pipe_in_filter_value(self):
+        expr = FilterExpression(
+            chave="marca", operador="in", valor=["Vichy | vic", "La Roche-Posay | lrp"]
+        )
+        d = expr.to_api_dict()
+        assert d["valor"] == ["Vichy | vic", "La Roche-Posay | lrp"]
+
+    def test_pipe_in_filtro_local(self):
+        raw = {
+            "cliente": {
+                "chave": "cliente",
+                "tipo": "string",
+                "operador": "in",
+                "valor": ["LBD | LDB"],
+            },
+        }
+        f = Filters.from_filtro_local(raw)
+        assert f.segment[0].expressions[0][0][0].valor == ["LBD | LDB"]
+
+    def test_pipe_in_from_api_dict(self):
+        raw = {
+            "segment": {
+                "filters": [{
+                    "groupType": "and_group",
+                    "expressions": [[[{
+                        "chave": "marca",
+                        "operador": "in",
+                        "valor": ["Vichy | vic"],
+                        "estrutura": "segmento",
+                    }]]],
+                }],
+            },
+        }
+        f = Filters.from_api_dict(raw)
+        assert f.segment[0].expressions[0][0][0].valor == ["Vichy | vic"]
+
+    def test_special_chars_round_trip_via_link(self):
+        """Build a NeoDash link with special chars in filter values, parse it back."""
+        filters = Filters(
+            segment=[FilterGroup(
+                group_type="and_group",
+                expressions=[[[FilterExpression(
+                    chave="marca",
+                    operador="in",
+                    valor=["Vichy | vic", "La Roche-Posay | lrp"],
+                )]]]
+            )]
+        )
+        query = ExplorerQuery(
+            dimensions=["veiculo", "marca"],
+            metrics=["custo_total"],
+            date_start="2026-03-01",
+            date_end="2026-03-31",
+            filters=filters,
+        )
+        link = query.to_neodash_link("test")
+        parsed = ExplorerQuery.from_neodash_link(link)
+
+        api_orig = query.filters.to_api_dict()
+        api_parsed = parsed.filters.to_api_dict()
+        assert json.dumps(api_orig) == json.dumps(api_parsed)
+
+    def test_ampersand_in_filter_value_round_trip(self):
+        """Values with & must not break URL parsing."""
+        filters = Filters(
+            segment=[FilterGroup(
+                group_type="and_group",
+                expressions=[[[FilterExpression(
+                    chave="campanha",
+                    operador="c",
+                    valor="Brand & Performance",
+                )]]]
+            )]
+        )
+        query = ExplorerQuery(
+            dimensions=["campanha"],
+            metrics=["custo_total"],
+            date_start="2026-01-01",
+            date_end="2026-01-31",
+            filters=filters,
+        )
+        link = query.to_neodash_link("test")
+        parsed = ExplorerQuery.from_neodash_link(link)
+        assert parsed.filters.segment[0].expressions[0][0][0].valor == "Brand & Performance"
+
+    def test_accented_chars_round_trip(self):
+        """Portuguese accented characters must survive round-trip."""
+        filters = Filters(
+            segment=[FilterGroup(
+                group_type="and_group",
+                expressions=[[[FilterExpression(
+                    chave="produto",
+                    operador="c",
+                    valor="Proteção Solar",
+                )]]]
+            )]
+        )
+        query = ExplorerQuery(
+            dimensions=["produto"],
+            metrics=["custo_total"],
+            date_start="2026-01-01",
+            date_end="2026-01-31",
+            filters=filters,
+        )
+        link = query.to_neodash_link("test")
+        parsed = ExplorerQuery.from_neodash_link(link)
+        assert parsed.filters.segment[0].expressions[0][0][0].valor == "Proteção Solar"
+
+    def test_equals_in_filter_value_round_trip(self):
+        """Values with = must not break URL query string parsing."""
+        filters = Filters(
+            segment=[FilterGroup(
+                group_type="and_group",
+                expressions=[[[FilterExpression(
+                    chave="tag",
+                    operador="c",
+                    valor="key=value",
+                )]]]
+            )]
+        )
+        query = ExplorerQuery(
+            dimensions=["tag"],
+            metrics=["custo_total"],
+            date_start="2026-01-01",
+            date_end="2026-01-31",
+            filters=filters,
+        )
+        link = query.to_neodash_link("test")
+        parsed = ExplorerQuery.from_neodash_link(link)
+        assert parsed.filters.segment[0].expressions[0][0][0].valor == "key=value"
+
+
 class TestFiltersMerge:
     def test_merge_two_filters(self):
         f1 = Filters(

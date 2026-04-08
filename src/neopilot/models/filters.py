@@ -241,10 +241,14 @@ class Filters(BaseModel):
         for _dim_id, entry in data.items():
             if entry is None:
                 continue
+            # Skip entries where valor is null (unset combo box)
+            valor = entry.get("valor")
+            if valor is None:
+                continue
             expr = FilterExpression(
                 chave=entry["chave"],
                 operador=entry.get("operador", "="),
-                valor=entry.get("valor", ""),
+                valor=valor,
                 estrutura="segmento",
             )
             groups.append(FilterGroup(
