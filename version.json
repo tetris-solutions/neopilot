@@ -1,6 +1,6 @@
 {
-  "latest": "0.8.0",
-  "minimum": "0.8.0",
+  "latest": "0.8.1",
+  "minimum": "0.8.1",
   "update_url": "https://github.com/tetris-solutions/neopilot?tab=readme-ov-file#updating-neopilot",
   "message": "Bugfix: handle special characters (|, &, accents) in filter values and null filtroLocal entries."
 }

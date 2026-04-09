@@ -197,7 +197,8 @@ class TestNeoDashLinkBuilder:
         assert params["metricas"] == "custo_total,cpa"
         assert params["segmentarPor"] == "nao"
         assert params["order"] == "desc"
-        assert params["filtros"] == {}  # empty when no filters set
+        assert params["filtros"] == {}  # always empty in template
+        assert "filtroUsuario" not in link  # no filters = no filtroUsuario param
         assert params["openGraphExplorador"] == 0
         assert params["totalPercent"] == 1
         assert params["showMetricsTotal"] == 1
@@ -231,6 +232,37 @@ class TestNeoDashLinkBuilder:
 
         assert "dtic=04-03-2026" in link
         assert "dtfc=10-03-2026" in link
+
+    def test_filters_go_in_filtro_usuario(self):
+        """Filters must be in the filtroUsuario param, not inside template."""
+        from neopilot.models.filters import FilterExpression, FilterGroup, Filters
+
+        query = ExplorerQuery(
+            dimensions=["canal"],
+            metrics=["custo_total"],
+            date_start="2026-03-11",
+            date_end="2026-03-17",
+            filters=Filters(
+                segment=[FilterGroup(
+                    group_type="and_group",
+                    expressions=[[[FilterExpression(chave="marca", operador="in", valor=["Vichy | vic"])]]]
+                )]
+            ),
+        )
+        link = query.to_neodash_link("tpv")
+
+        parsed = urllib.parse.urlparse(link)
+        qs = urllib.parse.parse_qs(parsed.query)
+
+        # filtroUsuario should contain the filters
+        assert "filtroUsuario" in qs
+        filtro = json.loads(qs["filtroUsuario"][0])
+        assert "segment" in filtro
+        assert filtro["segment"]["filters"][0]["expressions"][0][0][0]["valor"] == ["Vichy | vic"]
+
+        # template.params.filtros should be empty
+        template = json.loads(qs["template"][0])
+        assert template["params"]["filtros"] == {}
 
     def test_link_with_order_by(self):
         query = ExplorerQuery(

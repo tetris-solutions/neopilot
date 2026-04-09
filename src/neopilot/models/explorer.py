@@ -105,7 +105,7 @@ class ExplorerQuery(BaseModel):
             "metricas": ",".join(self.metrics),
             "segmentarPor": self.time_breakdown,
             "order": self.order_sort,
-            "filtros": self.filters.to_api_dict(),
+            "filtros": {},
             "openGraphExplorador": 0,
             "totalPercent": 1,
             "showMetricsTotal": 1,
@@ -125,6 +125,13 @@ class ExplorerQuery(BaseModel):
         if self.compare_date_start and self.compare_date_end:
             url += f"&dtic={_flip_date(self.compare_date_start)}"
             url += f"&dtfc={_flip_date(self.compare_date_end)}"
+
+        # Filters go in filtroUsuario, not inside the template
+        if not self.filters.is_empty():
+            filtro_json = json.dumps(
+                self.filters.to_api_dict(), ensure_ascii=False, separators=(",", ":")
+            )
+            url += f"&filtroUsuario={urllib.parse.quote(filtro_json, safe='')}"
 
         url += f"&template={urllib.parse.quote(template_json, safe='')}"
         return url
