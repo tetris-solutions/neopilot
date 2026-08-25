@@ -1,0 +1,6 @@
+{
+  "latest": "0.9.0",
+  "minimum": "0.9.0",
+  "update_url": "https://github.com/tetris-solutions/neopilot?tab=readme-ov-file#updating-neopilot",
+  "message": "Upgrade to MCP SDK 2.0. Please update: cd ~/.neopilot/app && git pull && .venv/bin/pip install -e ."
+}

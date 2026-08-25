@@ -26,7 +26,7 @@ class TestResolveLabel:
         assert resolve_label({}, "pt-BR") == ""
 
     def test_none_label(self):
-        assert resolve_label(None) == "None"
+        assert resolve_label(None) == ""
 
     def test_numeric_label(self):
         assert resolve_label(42) == "42"

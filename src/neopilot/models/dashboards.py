@@ -32,9 +32,9 @@ class ComponentSummary(BaseModel):
     """A component entry from /ai/allComponents."""
 
     id: str
-    title: str = ""
+    title: str | None = ""
     subtitle: str | None = None
-    component: str = ""  # Type: BigNumbers, Chart, ExplorerTable, etc.
+    component: str | None = ""  # Type: BigNumbers, Chart, ExplorerTable, etc.
 
     model_config = {"extra": "allow"}
 

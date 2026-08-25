@@ -14,6 +14,23 @@ os.environ["LANGCHAIN_TRACING_V2"] = "false"
 os.environ.pop("LANGSMITH_API_KEY", None)
 os.environ.pop("LANGSMITH_BASE_URL", None)
 
+# Load .env.test for integration test credentials (if it exists).
+# This keeps test credentials separate from the MCP runtime .env.
+_ENV_TEST = Path(__file__).parent.parent / ".env.test"
+if _ENV_TEST.exists():
+    try:
+        from dotenv import load_dotenv
+
+        load_dotenv(_ENV_TEST, override=False)
+    except ImportError:
+        # python-dotenv is optional; fall back to manual parsing
+        with open(_ENV_TEST) as f:
+            for line in f:
+                line = line.strip()
+                if line and not line.startswith("#") and "=" in line:
+                    key, _, value = line.partition("=")
+                    os.environ.setdefault(key.strip(), value.strip())
+
 FIXTURES_DIR = Path(__file__).parent / "fixtures"
 
 

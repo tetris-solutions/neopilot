@@ -4,49 +4,80 @@ MCP server that connects LLMs (Claude, Gemini, OpenAI) to **NeoDash** marketing 
 
 NeoPilot lets users conversationally query their advertising data, get insights, list dashboards, explore metrics, and generate visualizations — all through their preferred AI tool.
 
-## Quick Start
+Install, connect with your instance and ask:
+`What can NeoPilot do for me?`
 
-### 1. Install
+## Requirements
 
+- **Python 3.11 or newer** — Check with `python3 --version` (macOS/Linux) or `python --version` (Windows)
+- **Git** — macOS includes it by default; Windows users: download from [git-scm.com](https://git-scm.com/download/win) (keep "Add Git to PATH" checked during install, then restart PowerShell)
+
+If you need to install or update Python:
+
+| OS | Command |
+|----|---------|
+| **macOS** (Homebrew) | `brew install python@3.13` |
+| **macOS** (installer) | Download from [python.org](https://www.python.org/downloads/) |
+| **Ubuntu/Debian** | `sudo apt update && sudo apt install python3.13` |
+| **Windows** | Download from [python.org](https://www.python.org/downloads/) |
+
+After installing a new Python version, you may need to re-run the NeoPilot installer.
+
+
+## Install for Claude (1 command)
+
+**macOS / Linux:**
 ```bash
-# Navigate to the NeoPilot project folder
-cd /Users/beterraba/Documents/Workgit/neodash-ai/neopilot
-
-# Create a Python virtual environment (use "python3" on macOS)
-python3 -m venv .venv
-
-# Activate the virtual environment
-source .venv/bin/activate
-
-# Install NeoPilot and its dependencies
-pip install -e ".[dev]"
+curl -fsSL https://raw.githubusercontent.com/tetris-solutions/neopilot/main/install.sh | bash
 ```
 
-> **Note:** On macOS, use `python3` — the `python` command may not exist.
-> After activating the virtual environment, both `python` and `python3` will work.
-
-### 2. Connect to Claude Desktop
-
-Add to your `claude_desktop_config.json`:
-
-```json
-{
-  "mcpServers": {
-    "neopilot": {
-      "command": "/path/to/neopilot/.venv/bin/python",
-      "args": ["-m", "neopilot.server"]
-    }
-  }
-}
+**Windows (PowerShell):**
+```powershell
+irm https://raw.githubusercontent.com/tetris-solutions/neopilot/main/install.ps1 | iex
 ```
 
-### 3. Connect a NeoDash Instance
+This will:
+1. Clone NeoPilot to `~/.neopilot/app/`
+2. Create a Python virtual environment and install dependencies
+3. Automatically configure Claude Desktop
 
-Once NeoPilot is running in your LLM, use the `connect_instance` tool:
+**After running, restart Claude Desktop** (quit and reopen).
+
+### Manual Install
+
+If you prefer to install manually, see [docs/SETUP.md](docs/SETUP.md).
+
+## Getting Started
+
+Once Claude Desktop is restarted with NeoPilot, just say:
 
 ```
-Connect to my NeoDash instance "loreal" with API token "your_token_here"
+Connect to my NeoDash instance "yourslug" with API token "your_token_here"
 ```
+
+Follow the instructions in [this video](https://neod.ai/getneodashapitoken) to get your API token.
+You need a token for each instance.
+
+Then try:
+```
+List my dashboards
+Show me Spend and CPC for the last 7 days
+What metrics are available?
+```
+
+## Updating NeoPilot
+
+**macOS / Linux:**
+```bash
+cd ~/.neopilot/app && git pull && .venv/bin/pip install -e .
+```
+
+**Windows (PowerShell):**
+```powershell
+cd $env:USERPROFILE\.neopilot\app; git pull; .venv\Scripts\pip.exe install -e .
+```
+
+Then restart Claude Desktop. NeoPilot will also notify you when updates are available.
 
 ## Available Tools
 
@@ -86,7 +117,7 @@ Connect to my NeoDash instance "loreal" with API token "your_token_here"
 
 ## Multi-Instance Support
 
-NeoPilot supports connecting to multiple NeoDash instances simultaneously. Each instance is identified by its slug (e.g., `loreal`, `mdlz`, `tpv`).
+NeoPilot supports connecting to multiple NeoDash instances simultaneously. Each instance is identified by its slug. The slug is the word before `.neodash.ai` (e.g., `neoperformance.neodash.ai` will have the slug `neoperformance`).
 
 ```
 Connect to "loreal" with token "token_a"
@@ -105,14 +136,34 @@ Instance connections and user preferences are stored locally in `~/.neopilot/`:
 - **Labels, not IDs**: Metrics and dimensions are always shown with their human-readable labels
 - **Totals by NeoDash**: Totals are always calculated by NeoDash, never by NeoPilot
 - **Truncation warnings**: When query results hit the row limit, NeoPilot warns you
-- **Bilingual**: Supports pt-BR and en-US labels (auto-detected from user settings)
+- **Bilingual**: Supports pt-BR and en-US labels (set via `set_language`)
 - **Filters**: Custom filters on demand are coming in a future update
+
+## Debug Mode
+
+Just say "Activate debug mode" in your chat. NeoPilot will show the actual API request URLs and raw responses in every tool output. Say "Deactivate debug mode" to turn it off.
+
+Alternatively, set `NEOPILOT_DEBUG=1` in the MCP server env config to enable it permanently.
 
 ## Development
 
 ```bash
-# Run tests
-python3 -m pytest tests/ -v
+# Clone the repo
+git clone https://github.com/tetris-solutions/neopilot.git
+cd neopilot
+
+# Setup
+python3 -m venv .venv
+source .venv/bin/activate
+pip install -e ".[dev]"
+
+# Run tests (unit only)
+python3 -m pytest tests/ -v --ignore=tests/test_integration.py
+
+# Run integration tests (requires real NeoDash credentials)
+# First time: copy .env.test.example → .env.test and fill in your credentials
+cp .env.test.example .env.test   # then edit with your slug & token
+python3 -m pytest tests/test_integration.py -v
 
 # Lint
 ruff check src/ tests/
@@ -123,6 +174,69 @@ mypy src/neopilot
 # MCP Inspector (interactive testing)
 mcp dev src/neopilot/server.py
 ```
+
+## Version Management
+
+NeoPilot checks for updates via a remote `version.json` file:
+
+- **Optional update**: Users see a notice when connecting — "v0.1.0 → v0.2.0 available"
+- **Forced update**: If `minimum` version is raised, tools refuse to run until updated
+
+To push a forced update to all users, edit `version.json` in the repo:
+```json
+{
+  "latest": "0.2.0",
+  "minimum": "0.2.0",
+  "update_url": "https://github.com/tetris-solutions/neopilot#updating-neopilot",
+  "message": "Important security fix. Please update."
+}
+```
+
+## Troubleshooting
+
+### SSL Certificate Error when connecting
+
+If you see an error like `SSL: CERTIFICATE_VERIFY_FAILED` when connecting to your NeoDash instance, this is a Python certificates issue (common on macOS), not a server problem.
+
+**Fix for macOS (python.org installer):**
+```bash
+/Applications/Python\ 3.*/Install\ Certificates.command
+```
+
+**Fix for any system (install certificates in the venv):**
+```bash
+~/.neopilot/app/.venv/bin/pip install certifi
+```
+
+**Fix for macOS (Homebrew):**
+```bash
+brew install ca-certificates
+```
+
+After fixing, restart Claude Desktop.
+
+### NeoPilot tools not showing in Claude Desktop
+
+1. Make sure you ran the install script and restarted Claude Desktop
+2. Check that the config exists:
+   - **macOS:** `cat ~/Library/Application\ Support/Claude/claude_desktop_config.json`
+   - **Windows:** `type $env:APPDATA\Claude\claude_desktop_config.json`
+3. Verify the Python path is correct in the config:
+   - **macOS / Linux:** `~/.neopilot/app/.venv/bin/python`
+   - **Windows:** `C:\Users\<you>\.neopilot\app\.venv\Scripts\python.exe`
+
+### "No NeoDash instance connected" error
+
+You need to connect first. Say:
+```
+Connect to my NeoDash instance "yourslug" with API token "your_token_here"
+```
+
+### Empty query results
+
+1. Say "Activate debug mode" to see the actual API request and response
+2. Make sure you called `list_metrics` and `list_dimensions` first — NeoPilot needs the exact IDs from your instance
+3. Check that your date range has data in NeoDash
 
 ## Architecture
 

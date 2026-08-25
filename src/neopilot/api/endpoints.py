@@ -165,8 +165,13 @@ class NeoDashEndpoints:
         if not isinstance(data, dict):
             return ExplorerResult()
 
-        # Parse main results
-        results_init = data.get("resultsInit", {})
+        # The API wraps everything in a "retorno" key
+        retorno = data.get("retorno", data)
+        if not isinstance(retorno, dict):
+            return ExplorerResult()
+
+        # Parse main results from retorno.resultsInit
+        results_init = retorno.get("resultsInit", {})
         results = []
         totals: dict[str, Any] = {}
         if isinstance(results_init, dict):
@@ -175,10 +180,10 @@ class NeoDashEndpoints:
             if isinstance(totals, list) and len(totals) == 1:
                 totals = totals[0]
 
-        # Parse comparison results
+        # Parse comparison results from retorno.resultsCompare
         comparison_results = None
         comparison_totals = None
-        results_compare = data.get("resultsCompare")
+        results_compare = retorno.get("resultsCompare")
         if isinstance(results_compare, dict):
             comparison_results = results_compare.get("results", [])
             ct = results_compare.get("total", results_compare.get("totals", {}))
@@ -206,6 +211,43 @@ class NeoDashEndpoints:
             was_truncated=was_truncated,
             truncation_message=truncation_message,
         )
+
+    def create_short_link(self, url: str) -> str:
+        """Create a short link via ``/share/geturl``.
+
+        Parameters
+        ----------
+        url:
+            The full NeoDash URL to shorten.
+
+        Returns
+        -------
+        str
+            The shortened URL.
+
+        Raises
+        ------
+        NeoDashAPIError
+            If the API returns a non-success status.
+        """
+        from neopilot.api.errors import NeoDashAPIError
+
+        data = self._client.post_multipart("/share/geturl", {"url": url})
+        if not isinstance(data, dict):
+            raise NeoDashAPIError("Unexpected response from /share/geturl")
+
+        url_node = data.get("url", data)
+        if isinstance(url_node, dict):
+            # The API returns "success" for new links, but also returns the
+            # shorturl when the URL already exists (with a different status).
+            short = url_node.get("shorturl")
+            if short:
+                return short
+            raise NeoDashAPIError(
+                f"Short link creation failed: {url_node.get('message', url_node.get('status', ''))}"
+            )
+
+        raise NeoDashAPIError("Unexpected response format from /share/geturl")
 
     def get_dataset(self) -> DatasetInfo:
         """Fetch dataset metadata from ``/get/dataset?extended=1``."""

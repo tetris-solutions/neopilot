@@ -4,18 +4,28 @@ __pycache__/
 *.pyc
 *.pyo
 *.egg-info/
+*.egg
 dist/
 build/
+*.whl
 
 # Testing & linting caches
 .mypy_cache/
 .pytest_cache/
 .ruff_cache/
+htmlcov/
+.coverage
+coverage.xml
 
 # Environment & secrets
 .env
+.env.*
+!.env.example
+!.env.test.example
+*.pem
+*.key
 
-# NeoPilot local data
+# NeoPilot local data (user-specific instances & context)
 .neopilot/
 
 # Claude Code (personal per developer)
@@ -26,12 +36,17 @@ build/
 .idea/
 *.swp
 *.swo
+*~
 
 # macOS
 .DS_Store
+Thumbs.db
 
 # Data files
 *.parquet
 
 # Planning docs (local only)
 *.docx
+
+# Logs
+*.log

@@ -26,10 +26,14 @@ def resolve_label(label_data: Any, language: str = DEFAULT_LANGUAGE) -> str:
     if isinstance(label_data, str):
         return label_data
     if isinstance(label_data, dict):
-        if language in label_data:
-            return str(label_data[language])
-        if DEFAULT_LANGUAGE in label_data:
-            return str(label_data[DEFAULT_LANGUAGE])
-        values = list(label_data.values())
-        return str(values[0]) if values else ""
+        # Try requested language, then default, then any non-None value
+        val = label_data.get(language) or label_data.get(DEFAULT_LANGUAGE)
+        if val:
+            return str(val)
+        for v in label_data.values():
+            if v:
+                return str(v)
+        return ""
+    if label_data is None:
+        return ""
     return str(label_data)

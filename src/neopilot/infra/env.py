@@ -41,6 +41,20 @@ def get_data_dir() -> str:
     return data_dir
 
 
+_debug_override: bool | None = None
+
+
 def is_debug() -> bool:
-    """Return True if debug mode is enabled via NEOPILOT_DEBUG env var."""
+    """Return True if debug mode is enabled.
+
+    Checks runtime toggle first, then falls back to NEOPILOT_DEBUG env var.
+    """
+    if _debug_override is not None:
+        return _debug_override
     return os.environ.get("NEOPILOT_DEBUG", "").lower() in ("1", "true", "yes")
+
+
+def set_debug(enabled: bool) -> None:
+    """Toggle debug mode at runtime."""
+    global _debug_override
+    _debug_override = enabled
