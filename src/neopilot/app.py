@@ -1,4 +1,4 @@
-"""FastMCP application instance.
+"""MCPServer application instance.
 
 This module holds the ``mcp`` instance so that tool modules can import it
 without circular dependencies. The ``server`` module imports tool modules
@@ -7,10 +7,10 @@ without circular dependencies. The ``server`` module imports tool modules
 
 from __future__ import annotations
 
-from mcp.server.fastmcp import FastMCP
+from mcp.server.mcpserver import MCPServer
 from mcp.types import Icon
 
-mcp = FastMCP(
+mcp = MCPServer(
     name="NeoPilot",
     instructions=(
         "NeoPilot connects your LLM to NeoDash marketing analytics. "
@@ -20,7 +20,7 @@ mcp = FastMCP(
     icons=[
         Icon(
             src="https://raw.githubusercontent.com/tetris-solutions/neopilot/main/assets/icon.png",
-            mimeType="image/png",
+            mime_type="image/png",
         ),
     ],
 )

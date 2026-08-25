@@ -13,7 +13,7 @@ configure_logging()
 
 logger = logging.getLogger(__name__)
 
-# Import the FastMCP instance
+# Import the MCPServer instance
 # Import tool modules to trigger @mcp.tool() registration
 import neopilot.tools.components  # noqa: E402
 import neopilot.tools.context_tools  # noqa: E402
